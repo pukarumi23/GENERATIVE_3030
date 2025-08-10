@@ -94,7 +94,7 @@ Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en conta
     <img src="https://github.com/Brauliovh3.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
   </a>
   
-  <p><i>© Hatsune Miku / POR (ㅎㅊDEPOOLㅊㅎ)</i></p>
+  <p><i>© Hatsune Miku / POR ✧･ﾟCHASKI･ﾟ✧</i></p>
 </div>
 
 <div align="center">
