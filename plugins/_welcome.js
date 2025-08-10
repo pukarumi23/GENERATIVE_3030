@@ -1,4 +1,4 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys'
+/*import { WAMessageStubType } from '@whiskeysockets/baileys'
 import fetch from 'node-fetch'
 
 export async function before(m, { conn, participants, groupMetadata }) {
@@ -25,3 +25,4 @@ export async function before(m, { conn, participants, groupMetadata }) {
     let bye = `💫🎵 *¡Sayonara!* ${groupMetadata.subject} te extrañará 🎵💫\n\n💙 @${m.messageStubParameters[0].split`@`[0]} 💙\n\n🎤 ${global.welcom2} 🎤\n\n🌟 Ahora somos ${groupSize} fanáticos esperándote 🌟\n\n🎶 ¡Esperamos verte pronto en nuestro próximo concierto! (｡◕‿◕｡) 🎶\n\n> 🎵 ¡La música de Miku siempre te acompañará! ✨`
     await conn.sendMini(m.chat, txt1, dev, bye, img, img, redes, fkontak, m, rcanal)
   }}
+*/
