@@ -16,11 +16,11 @@ global.botNumber = ''
 
 global.owner = [
 // <-- Número @s.whatsapp.net -->
-  ['51939508653', '🎵 Brauliovh3 - Hatsune Miku Dev 🎵', true],
-  ['51939508653', '(ㅎㅊDEPOOLㅊㅎ)', true],
+  ['51939508653', '✧･ﾟCHASKI･ﾟ✧', true],
+  ['51939508653', '𝘾𝙃𝘼𝙎𝙆𝙄', true],
   
 // <-- Número @lid -->
-  ['54873039089749', '(ㅎㅊDEPOOLㅊㅎ)', true]
+  ['54873039089749', '✧･ﾟCHASKI･ﾟ✧', true]
 ];
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
@@ -45,7 +45,7 @@ global.yukiJadibts = true
 global.packname = '🎤✨ 𝙃𝘼𝙏𝙎𝙐𝙉𝙀 𝙈𝙄𝙆𝙐 𝘽𝙊𝙏 ✨🎤'
 global.botname = '🄷🄰🅃🅂🅄🄽🄴 🄼🄸🄺🅄'
 global.wm = '🎵◟Hαƚsυɳҽ Mιƙυ◞🎵'
-global.author = '© (ㅎㅊDEPOOLㅊㅎ)'
+global.author = '✧･ﾟCHASKI･ﾟ✧'
 global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 (ㅎㅊDEPOOLㅊㅎ)'
 global.textbot = '🎤✨ Hatsune Miku, la Diva Virtual del Futuro ✨🎤'
 global.etiqueta = '🎵 Ｍｉｋｕ Ｄｅｖ 🎵'
