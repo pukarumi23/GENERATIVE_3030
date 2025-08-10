@@ -1,3 +1,4 @@
+/*
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 
@@ -89,3 +90,4 @@ async function xnxxsearch(query) {
       .catch((err) => reject({code: 503, status: false, result: err}));
   });
 }
+*/
