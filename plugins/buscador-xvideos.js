@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+/* import fetch from 'node-fetch';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
@@ -60,3 +60,4 @@ async function xvideosSearch(query) {
         }
     });
 }
+*/
