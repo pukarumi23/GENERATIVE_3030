@@ -464,54 +464,6 @@ let txt = `╔════════════════╗
 🤔 *#think*
    ┗ 💭 Pensar en algo
 
-┏━━━━━━━━┓
-┃ 🔞 NSFW  ┃
-┗━━━━━━━━┛
-
-💙🔞 Comandos NSFW (Contenido para adultos) 🔞💙
-🍑 *#anal*
-   ┗ 🔥 Hacer sexo anal
-🌸 *#waifu*
-   ┗ 🎯 Buscar waifu aleatoria
-🛁 *#bath*
-   ┗ 💧 Bañarse juntos
-💋 *#blowjob • #mamada • #bj*
-   ┗ 👄 Hacer una mamada
-🍈 *#boobjob*
-   ┗ 💕 Hacer una rusa
-💦 *#cum*
-   ┗ 🌊 Venirse en alguien
-✊ *#fap*
-   ┗ 🍆 Hacerse una paja
-👫 *#ppcouple • #ppcp*
-   ┗ 💑 Imágenes para parejas
-🦶 *#footjob*
-   ┗ 👠 Paja con los pies
-🔥 *#fuck • #coger • #fuck2*
-   ┗ 💥 Follar a alguien
-☕ *#cafe • #coffee*
-   ┗ ☕ Tomar café juntos
-🔞 *#violar • #perra*
-   ┗ 💀 Violar a alguien
-👐 *#grabboobs*
-   ┗ 🍈 Agarrar pechos
-✋ *#grop*
-   ┗ 👋 Manosear a alguien
-👅 *#lickpussy*
-   ┗ 🐱 Lamer coño
-🎨 *#rule34 • #r34*
-   ┗ 🖼️ Buscar en Rule34
-🔄 *#sixnine • #69*
-   ┗ 6️⃣9️⃣ Hacer un 69
-🍑 *#spank • #nalgada*
-   ┗ ✋ Dar una nalgada
-👄 *#suckboobs*
-   ┗ 🍼 Chupar pechos
-👗 *#undress • #encuerar*
-   ┗ 👙 Desnudar a alguien
-👩‍❤️‍👩 *#yuri • #tijeras*
-   ┗ ✂️ Hacer tijeras lésbicas
-
 ┏━━━━━━━━━┓
 ┃ 🎮 JUEGOS ┃
 ┗━━━━━━━━━┛
