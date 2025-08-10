@@ -1,4 +1,4 @@
-import axios from 'axios';
+/*import axios from 'axios';
 
 const handler = async (m, { command, conn, usedPrefix }) => {
   
@@ -33,3 +33,4 @@ handler.group = true;
 handler.register = true;
 
 export default handler;
+*/
