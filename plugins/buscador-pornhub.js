@@ -1,5 +1,5 @@
-//Créditos del código DanielDiod 
-
+//Créditos del código DanielDiod (no gracias ahora esta chaski no depool)
+/*
 import cheerio from 'cheerio';
 import axios from 'axios';
 
@@ -59,3 +59,4 @@ async function searchPornhub(search) {
     return { result: [] };
   }
 }
+*/
