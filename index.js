@@ -47,7 +47,7 @@ align: 'center',
 colors: ['cyanBright']
 })
 
-say(`Powered  Brauliovh3`, {
+say(`Powered  𝘾𝙃𝘼𝙎𝙆𝙄`, {
 font: 'console',
 align: 'center',
 colors: ['magentaBright']
