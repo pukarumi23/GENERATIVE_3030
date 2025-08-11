@@ -1,7 +1,7 @@
 /* 
 
 🎤💙 https://github.com/Brauliovh3/HATSUNE-MIKU.git 
-*/
+
 
 import fs from 'fs'
 import path from 'path'
@@ -48,3 +48,4 @@ handler.command = ['undress', 'encuerar']
 handler.group = true
 
 export default handler
+*/
