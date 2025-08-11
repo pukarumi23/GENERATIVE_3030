@@ -36,7 +36,7 @@ global.namecomu = '💙HATSUNE MIKU CHANNEL💙'
 global.listo = '*Aquí tienes ฅ^•ﻌ•^ฅ*'
 global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://files.catbox.moe/x0n79u.webp')
 
-global.canalIdM = ["120363315369913363@newsletter", "120363315369913363@newsletter"]
+global.canalIdM = ["120363418348675041@newsletter", "120363418348675041@newsletter"]
 global.canalNombreM = ["💙HATSUNE MIKU CHANNEL💙"]
 global.channelRD = await getRandomChannel()
 
