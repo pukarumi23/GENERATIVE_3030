@@ -1,3 +1,4 @@
+/*
 import fetch from 'node-fetch';
 const handler = async (m, { conn, args, usedPrefix }) => {
     if (!db.data.chats[m.chat].nsfw && m.isGroup) {
@@ -30,3 +31,4 @@ handler.command = ['r34', 'rule34'];
 handler.tags = ['nsfw'];
 
 export default handler;
+*/
