@@ -2,10 +2,10 @@
   
 # 💙 HATSUNE MIKU CHANNEL 💙
 
-![Hatsune Miku Banner](https://telegra.ph/file/5e7042bf17cde23989e71.jpg)
+![Hatsune Miku Banner](https://thumbs.dreamstime.com/b/caricatura-anime-un-ni%C3%B1o-con-ojos-de-fuego-la-imagen-es-una-ilustraci%C3%B3n-chico-color-generada-por-ai-304260237.jpg)
 
-[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/Brauliovh3/HATSUNE-MIKU)
-[![Author](https://img.shields.io/badge/Author-(ㅎㅊDEPOOLㅊㅎ)-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
+[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030)
+[![Author](https://img.shields.io/badge/Author-✧･ﾟCHASKI･ﾟ✧-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
 
 </div>
 
@@ -51,7 +51,7 @@
 
 Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en contactarnos ฅ^•ﻌ•^ฅ
 
-[![Contacto WhatsApp](https://img.shields.io/badge/Soporte_WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/51988514570)
+[![Contacto WhatsApp](https://img.shields.io/badge/Soporte_WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/51939508653)
 
 ---
 
@@ -71,7 +71,8 @@ Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en conta
   
   ## 📊 Estadísticas del Repositorio
   
-  ![GitHub Card](https://github-readme-stats.vercel.app/api/pin/?username=Brauliovh3&repo=HATSUNE-MIKU&theme=radical)
+  https://github-readme-stats.vercel.app/api/pin/?username=Brauliovh3&repo=GENERATIVE_3030&theme=tokyonight
+
 </div>
 
 ---
@@ -90,8 +91,8 @@ Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en conta
 
 <div align="center">
   <h2>💫 Editor y Propietario</h2>
-  <a href="https://github.com/Brauliovh3">
-    <img src="https://github.com/Brauliovh3.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
+  <a href="https://github.com/pukarumi23">
+    <img src="https://github.com/https://pukarumi23.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
   </a>
   
   <p><i>© Hatsune Miku / POR ✧･ﾟCHASKI･ﾟ✧</i></p>
