@@ -34,7 +34,7 @@ global.namechannel2 = '🔶INDEPENDIENTE CHANNEL🔶'
 global.namegrupo = '🔶INDEPENDIENTE CHANNEL🔶'
 global.namecomu = '🔶INDEPENDIENTE CHANNEL🔶'
 global.listo = '*Aquí tienes ฅ^•ﻌ•^ฅ*'
-global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://files.catbox.moe/x0n79u.webp')
+global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://img.pikbest.com/ai/illus_our/20230421/f162b37a4321eccd047eebebcff0ca59.jpg!w700wp')
 
 global.canalIdM = ["120363418348675041@newsletter", "120363418348675041@newsletter"]
 global.canalNombreM = ["🔶INDEPENDIENTE CHANNEL🔶"]
@@ -108,7 +108,7 @@ global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo
 }}, { quoted: m }
 
 global.icono = [
-'https://files.catbox.moe/x0n79u.webp',
+'https://img.pikbest.com/ai/illus_our/20230421/f162b37a4321eccd047eebebcff0ca59.jpg!w700wp',
 ].getRandom()
 
 global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: packname, body: dev, mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
