@@ -4,7 +4,7 @@
 
 ![Hatsune Miku Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
 
-[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030)
+[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030).
 [![Author](https://img.shields.io/badge/Author-✧･ﾟCHASKI･ﾟ✧-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
 
 </div>
@@ -20,7 +20,7 @@
 
 ## ✨ Acerca del Bot
 
-¡Hatsune Miku WhatsApp Bot es una herramienta de automatización rica en funciones que trae el encanto de Hatsune Miku a tu experiencia de WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
+¡Independiente WhatsApp Bot es una herramienta de automatización rica en funciones que trae el encanto de Hatsune Miku a tu experiencia de WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
 
 <div align="center">
   <img src="https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif" width="60" height="60">
@@ -81,25 +81,25 @@ Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en conta
   
   ## 📈 Estadísticas del Desarrollador
   
-  ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Brauliovh3&show_icons=true&theme=radical)
+  ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=pukarumi23&show_icons=true&theme=radical)
   
-  ![Lenguajes Principales](https://github-readme-stats.vercel.app/api/top-langs/?username=Brauliovh3&layout=compact&theme=radical)
+  ![Lenguajes Principales](https://github-readme-stats.vercel.app/api/top-langs/?username=pukarumi23&layout=compact&theme=radical)
 </div>
 
 ---
 
 <div align="center">
-  <h2>💫 Editor y Propietario</h2>
+  <h2>🔥 Editor y Propietario</h2>
   <a href="https://github.com/pukarumi23">
-    <img src="https://github.com/Brauliovh3.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
+    <img src="https://github.com/pukarumi23.png" width="200" height="200" style="border-radius: 50%;" alt="✧･ﾟCHASKI･ﾟ✧">
   </a>
   
-  <p><i>© Hatsune Miku / POR (ㅎㅊDEPOOLㅊㅎ)</i></p>
+  <p><i>© 𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼  / POR ✧･ﾟCHASKI･ﾟ✧</i></p>
 </div>
 
 <div align="center">
   
-  ### 🎵 ¡Trayendo la magia de Miku a tu WhatsApp! 🎵
+  ### 🔆 ¡Trayendo la magia de 𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼  a tu WhatsApp! 🔆
   
-  ![](https://img.shields.io/badge/Hecho_con-💙-blue?style=for-the-badge)
+  ![](https://img.shields.io/badge/Hecho_con-☘️-blue?style=for-the-badge)
 </div>
