@@ -34,26 +34,26 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.17' 
 global.vs = '2.2.5'
-global.nameqr = '🎵 Hatsune-Miku-MD 🎵'
-global.namebot = '�💙 Ｈａｔｓｕｎｅ Ｍｉｋｕ Ｂｏｔ 💙�'
+global.nameqr = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼🔶'
+global.namebot = '�🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶 �'
 global.sessions = 'Sessions'
 global.jadi = 'JadiBots' 
 global.yukiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.packname = '🎤✨ 𝙃𝘼𝙏𝙎𝙐𝙉𝙀 𝙈𝙄𝙆𝙐 𝘽𝙊𝙏 ✨🎤'
-global.botname = '🄷🄰🅃🅂🅄🄽🄴 🄼🄸🄺🅄'
-global.wm = '🎵◟Hαƚsυɳҽ Mιƙυ◞🎵'
+global.packname = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
+global.botname = '🄸🄽🄳🄴🄿🄴🄽🄳🄸🄴🄽🅃🄴'
+global.wm = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
-global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 (ㅎㅊDEPOOLㅊㅎ)'
-global.textbot = '🎤✨ Hatsune Miku, la Diva Virtual del Futuro ✨🎤'
-global.etiqueta = '🎵 Ｍｉｋｕ Ｄｅｖ 🎵'
+global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 ✧･ﾟCHASKI･ﾟ✧'
+global.textbot = '✦ 𝓘𝓷𝓭𝓮𝓹𝓮𝓷𝓭𝓲𝓮𝓷𝓽𝓮 ✦'
+global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.moneda = '🎵 Mikucoins'
-global.welcom1 = '🎤💙 ¡Konnichiwa! Bienvenido al mundo virtual de Hatsune Miku! 💙🎤 \n✨ Aquí podrás disfrutar de la magia musical ✨ \n🎶 Edita este mensaje con setwelcome 🎶'
+global.moneda = '🪙 Intis'
+global.welcom1 = '🎤💙 ¡Konnichiwa! Bienvenido al mundo virtual de Independiente! 💙🎤 \n✨ Aquí podrás disfrutar de la magia musical ✨ \n🎶 Edita este mensaje con setwelcome 🎶'
 global.welcom2 = '🌟💫 ¡Sayonara! Gracias por cantar con nosotros 💫🌟 \n🎵 ¡Esperamos verte pronto en el escenario virtual! 🎵 \n🎤 Edita este mensaje con setbye 🎤'
 global.banner = 'https://files.catbox.moe/t5iqh7.jpg'
 global.avatar = 'https://files.catbox.moe/t5iqh7.jpg'
