@@ -1,5 +1,5 @@
 {
-"name": "Hatsune miku",
+"name": "𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 ",
 "version": "2.2.5",
 "description": "WhatsApp Bot Multi Device",
 "main": "index.js",
@@ -18,16 +18,16 @@
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
-"homepage": "https://github.com/Brauliovh3",
+"homepage": "https://github.com/pukarumi23",
 "author": {
 "name": "✧･ﾟCHASKI･ﾟ✧"
 },
 "repository": {
 "type": "git",
-"url": "git+https://github.com/Brauliovh3/HATSUNE-MIKU.git"
+"url": "https://github.com/pukarumi23/GENERATIVE_3030.git"
 },
 "bugs": {
-"url": "https://github.com/Brauliovh3/HATSUNE-MIKU/issues"
+"url": "https://github.com/pukarumi23/GENERATIVE_3030/issues"
 },
 "license": "MIT-License",
 "dependencies": {
