@@ -39,9 +39,9 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n💙 Iniciando Hatsune Miku 💙\n`))
+console.log(chalk.bold.redBright(`\n🔶 Iniciando Independiente 🔶\n`))
 
-say('Hatsune\nMiku', {
+say('INDEPEDIENTE', {
 font: 'block',
 align: 'center',
 colors: ['cyanBright']
@@ -122,7 +122,7 @@ opcion = '1'
 }
 if (!methodCodeQR && !methodCode && !fs.existsSync(`./${sessions}/creds.json`)) {
 do {
-opcion = await question(colores('💙 Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
+opcion = await question(colores('🔶 Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
 
 if (!/^[1-2]$/.test(opcion)) {
 console.log(chalk.bold.redBright(`🔌 No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`))
@@ -176,7 +176,7 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`💙 CÓDIGO DE VINCULACIÓN 💙`)), chalk.bold.white(chalk.white(codeBot)))
+console.log(chalk.bold.white(chalk.bgMagenta(`🔶 CÓDIGO DE VINCULACIÓN 🔶`)), chalk.bold.white(chalk.white(codeBot)))
 }, 3000)
 }}}
 }
@@ -203,10 +203,10 @@ global.timestamp.connect = new Date;
 if (global.db.data == null) loadDatabase();
 if (update.qr != 0 && update.qr != undefined || methodCodeQR) {
 if (opcion == '1' || methodCodeQR) {
-console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR DE MIKU - EXPIRA EN 45 SEGUNDOS`))}
+console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR DE INDEPENDIENTE - EXPIRA EN 45 SEGUNDOS`))}
 }
 if (connection == 'open') {
-console.log(chalk.bold.green('\n💙 Hatsune Miku Conectada con éxito 💙'))
+console.log(chalk.bold.green('\n🔶Independiente Conectada con éxito 🔶'))
 }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
