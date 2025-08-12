@@ -2,7 +2,7 @@
   
 # 💙 HATSUNE MIKU CHANNEL 💙
 
-![Hatsune Miku Banner](https://img1.wallspic.com/crops/5/0/6/8/1/118605/118605-dibujo-ilustracion-graficos-arte-personaje_de_ficcion-2560x1600.jpg)
+![Hatsune Miku Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
 
 [![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/Brauliovh3/HATSUNE-MIKU)
 [![Author](https://img.shields.io/badge/Author-(ㅎㅊDEPOOLㅊㅎ)-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
