@@ -174,8 +174,6 @@ chat.modoadmin = false
 if (!('antiLink' in chat))
 chat.antiLink = true
 if (!('reaction' in chat))
-chat.reaction = false
-if (!('nsfw' in chat))
 chat.nsfw = false
 if (!('antifake' in chat))
 chat.antifake = false
@@ -200,7 +198,6 @@ modoadmin: false,
 antiLink: true,
 antifake: false,
 reaction: false,
-nsfw: false,
 expired: 0, 
 antiLag: false,
 per: [],
@@ -362,7 +359,7 @@ let user = global.db.data.users[m.sender]
 if (!['grupo-unbanchat.js'].includes(name) && chat && chat.isBanned && !isROwner) return
 if (name != 'grupo-unbanchat.js' && name != 'owner-exec.js' && name != 'owner-exec2.js' && name != 'grupo-delete.js' && chat?.isBanned && !isROwner) return
 if (m.text && user.banned && !isROwner) {
-m.reply(`💙 Estas baneado/a, no puedes usar comandos en este bot!\n\n${user.bannedReason ? `💔 *Motivo:* ${user.bannedReason}` : '💙 *Motivo:* Sin Especificar'}\n\n> 💙 Si este Bot es cuenta oficial y tiene evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`)
+m.reply(`🔶 Estas baneado/a, no puedes usar comandos en este bot!\n\n${user.bannedReason ? `💔 *Motivo:* ${user.bannedReason}` : '🔶 *Motivo:* Sin Especificar'}\n\n> 🔶 Si este Bot es cuenta oficial y tiene evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`)
 return
 }
 
@@ -473,7 +470,7 @@ await plugin.after.call(this, m, extra)
 console.error(e)
 }}
 if (m.coin)
-conn.reply(m.chat, `💙 Utilizaste ${+m.coin} ${moneda}`, m, rcanal)
+conn.reply(m.chat, `🔶 Utilizaste ${+m.coin} ${moneda}`, m, rcanal)
 }
 break
 }}
@@ -531,7 +528,7 @@ console.log(m, m.quoted, e)}
 let settingsREAD = global.db.data.settings[this.user.jid] || {}  
 if (opts['autoread']) await this.readMessages([m.key])
 
-if (db.data.chats[m.chat].reaction && m.text.match(/(ción|dad|aje|oso|izar|mente|pero|tion|age|ous|ate|and|but|ify|ai|miku|a|s)/gi)) {
+if (db.data.chats[m.chat].reaction && m.text.match(/(dad|aje|oso|izar|mente|pero|tion|age|ous|ate|and|but|ify|ai|a|s)/gi)) {
 let emot = pickRandom(["🍟", "😃", "😄", "😁", "😆", "🍓", "😅", "😂", "🤣", "🥲", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "🌺", "🌸", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🌟", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "💫", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😶‍🌫️", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🫣", "🤭", "🤖", "🍭", "🤫", "🫠", "🤥", "😶", "📇", "😐", "💧", "😑", "🫨", "😬", "🙄", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😮‍💨", "😵", "😵‍💫", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👺", "🧿", "🌩", "👻", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "🫶", "👍", "✌️", "🙏", "🫵", "🤏", "🤌", "☝️", "🖕", "🙏", "🫵", "🫂", "🐱", "🤹‍♀️", "🤹‍♂️", "🗿", "✨", "⚡", "🔥", "🌈", "🩷", "❤️", "🧡", "💛", "💚", "🩵", "💙", "💜", "🖤", "🩶", "🤍", "🤎", "💔", "❤️‍🔥", "❤️‍🩹", "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "🚩", "👊", "⚡️", "💋", "🫰", "💅", "👑", "🐣", "🐤", "🐈"])
 if (!m.fromMe) return this.sendMessage(m.chat, { react: { text: emot, key: m.key }})
 }
