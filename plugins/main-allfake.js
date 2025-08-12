@@ -37,7 +37,7 @@ global.listo = '*Aquí tienes ฅ^•ﻌ•^ฅ*'
 global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://files.catbox.moe/x0n79u.webp')
 
 global.canalIdM = ["120363418348675041@newsletter", "120363418348675041@newsletter"]
-global.canalNombreM = ["💙HATSUNE MIKU CHANNEL💙"]
+global.canalNombreM = ["🔶INDEPENDIENTE CHANNEL🔶"]
 global.channelRD = await getRandomChannel()
 
 global.d = new Date(new Date + 3600000)
@@ -65,11 +65,11 @@ global.waitt = '🔶 Espera un momento, soy lenta...';
 global.waittt = '🔶 Espera un momento, soy lenta...';
 global.waitttt = '🔶 Espera un momento, soy lenta...';
 
-var canal = 'https://whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o'  
-var comunidad = 'https://chat.whatsapp.com/FQ78boTUpJ7Ge3oEtn8pRE?mode=ac_t'
-var git = 'https://github.com/Brauliovh3'
-var github = 'https://github.com/Brauliovh3/HATSUNE-MIKU' 
-let correo = 'velasquezhuillcab@gmail.com'
+var canal = 'https://whatsapp.com/channel/0029Vb5rzPf3rZZXl2DI830G'  
+var comunidad = 'https://chat.whatsapp.com/IZfEp21gtvj9buh2t9Xrwu'
+var git = 'https://github.com/pukarumi23'
+var github = 'https://github.com/pukarumi23/GENERATIVE_3030' 
+let correo = 'chaski_2030@gmail.com'
 global.redes = [canal, comunidad, git, github, correo].getRandom()
 
 let category = "imagen"
@@ -90,10 +90,10 @@ var more = String.fromCharCode(8206)
 global.readMore = more.repeat(850)
 
 global.packsticker = `🔶━━━✦✧✦━━━🔶
-🎤 Usuario: ${nombre}
-🤖 Bot: ${botname}
-📅 Fecha: ${fecha}
-⏰ Hora: ${tiempo}
+⚔️ Usuario: ${nombre}
+🔱 Bot: ${botname}
+📜 Fecha: ${fecha}
+🌌 Hora: ${tiempo}
 🔶━━━✦✧✦━━━🔶`;
 
 global.packsticker2 = `
