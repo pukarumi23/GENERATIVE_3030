@@ -1,11 +1,11 @@
 <div align="center">
   
-# 💙 HATSUNE MIKU CHANNEL 💙
+# 🔶INDEPENDIENTE🔶
 
 ![Hatsune Miku Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
 
-[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/Brauliovh3/HATSUNE-MIKU)
-[![Author](https://img.shields.io/badge/Author-(ㅎㅊDEPOOLㅊㅎ)-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
+[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030)
+[![Author](https://img.shields.io/badge/Author-✧･ﾟCHASKI･ﾟ✧-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
 
 </div>
 
