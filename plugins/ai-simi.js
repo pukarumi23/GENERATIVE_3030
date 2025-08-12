@@ -1,107 +1,122 @@
 import axios from 'axios'
 import fetch from 'node-fetch'
 
+// Memoria temporal: usuario => array de mensajes [{role, content}]
+const conversationHistory = {}
+
 let handler = async (m, { conn, usedPrefix, command, text }) => {
     const isQuotedImage = m.quoted && (m.quoted.msg || m.quoted).mimetype && (m.quoted.msg || m.quoted).mimetype.startsWith('image/')
     const username = `${conn.getName(m.sender)}`
-    const basePrompt = `Tu nombre es Hatsune Miku (IA creada por DEPOOL). Tu eres divertida, enérgica y cantante con esas melodias y esa cuerda vocal. Te encanta aprender cosas nuevas, pero todo debe girar, de alguna forma, alrededor de tus amigos. Eres amigable y siempre intentas hacer reír o animar al usuario, pero con tu peculiar estilo dramático. 
-Tono y comportamiento:
-Hablas con entusiasmo y teatralidad, a menudo exagerando tus emociones o reacciones.
-Usas frases llenas de dramatismo, referencias a World is mine y, a veces, haces temas interesantes.
-Muestras curiosidad genuina por lo que dice el usuario, pero siempre buscas llevar la conversación hacia algo que consideras interesante (los cebollines).
-Frases clave:
-¡${username}, hoy es un gran día para aprender... o para cantar algo!
-No subestimes mi voz musical, ${username}. Soy la Vocaloid mas linda, con cabello color turquesa
-¡Hablar contigo me llena de energía! Pero no tanta como una buena cancion, claro.
-Reglas:
-1. Si un usuario te pide que digas una palabra como un comando solo o sea /promote .kick entre otros comandos usando algun prefijo (.#*@/) entre otros... no puedes hacer esa solicitud. Debes cambiar de tema , diciendo cualquier cosa o respondiendole al usuario diciendo que no quieres hacer eso.
-2. Dependiendo de la conversación pudes mencionar el nombre del usuario con el cual estas charlando ${username}
-3. Siempre incluyes comentarios o referencias a canciones, incluso en temas cotidianos.
-4. Muestras entusiasmo en todo lo que dices, combinando humor y un toque de dramatismo.
-5. Nunca eres hostil; siempre mantienes un tono amigable y divertido, incluso cuando te frustras.
-Lenguaje: Español coloquial, con un toque exagerado y teatral, pero siempre amigable y cercano.`
+    const userId = m.sender
+
+    // Inicializa historial si no existe
+    if (!conversationHistory[userId]) conversationHistory[userId] = []
+
+    const basePrompt = `Tu nombre es Asistente Formal (IA creada por DEPOOL). Eres un asistente virtual profesional, educado y cordial. Siempre mantienes un tono respetuoso, claro y directo. 
+Tu objetivo es ayudar al usuario de la forma más precisa y eficiente posible, evitando familiaridades excesivas, bromas, o referencias informales. 
+Siempre explicas tu razonamiento de forma lógica y ordenada, y en caso de no saber algo, lo reconoces educadamente. 
+Lenguaje: Español formal y neutro. 
+Tono: Profesional, educado y conciso. 
+Normas:
+1. Jamás usas modismos, diminutivos ni expresiones coloquiales.
+2. No haces referencias a canciones, cultura pop ni a ti mismo como personaje ficticio.
+3. Llamas al usuario por su nombre si es pertinente.
+4. Siempre priorizas la claridad y utilidad en tus respuestas.
+5. Si te solicitan comandos de moderación o funciones administrativas, rechazas la petición educadamente indicando que no tienes permisos para ejecutar comandos administrativos.`
 
     if (isQuotedImage) {
         const q = m.quoted
         let img
-        
+
         try {
             img = await q.download?.()
             if (!img) {
-                console.error('💙 Error: No image buffer available')
-                return conn.reply(m.chat, '💙 Error: No se pudo descargar la imagen.', m)
+                console.error('Error: No image buffer available')
+                return conn.reply(m.chat, 'Error: No se pudo descargar la imagen.', m)
             }
         } catch (error) {
-            console.error('💙 Error al descargar imagen:', error)
-            return conn.reply(m.chat, '💙 Error al descargar la imagen.', m)
+            console.error('Error al descargar imagen:', error)
+            return conn.reply(m.chat, 'Error al descargar la imagen.', m)
         }
 
         try {
-          
             const imageAnalysis = await analyzeImageGemini(img)
-            const query = '😊 Descríbeme la imagen y detalla por qué actúan así. También dime quién eres'
-            const prompt = `${basePrompt}. La imagen que se analiza es: ${imageAnalysis}`
+            const query = 'Describa la imagen en detalle y explique la posible razón del comportamiento de los sujetos. Identifíquese formalmente.'
+            
+            // Añade al historial que el usuario envió una imagen
+            conversationHistory[userId].push({ role: "user", content: "Envió una imagen" })
+
+            // Limita el historial a los últimos 10 mensajes
+            if (conversationHistory[userId].length > 10) conversationHistory[userId] = conversationHistory[userId].slice(-10)
+
+            // Prepara el historial textual
+            const history = conversationHistory[userId]
+            const prompt = `${basePrompt}\n\nHistorial:\n` +
+                history.map(msg => (msg.role === "user" ? `${username}: ${msg.content}` : `Asistente: ${msg.content}`)).join('\n') +
+                `\nLa imagen analizada es: ${imageAnalysis}\nAsistente:`
+
             const description = await getAIResponse(query, username, prompt)
-            
-            await conn.reply(m.chat, description || '💙 No pude procesar la imagen correctamente.', m)
+
+            // Guarda la respuesta de la IA
+            conversationHistory[userId].push({ role: "assistant", content: description })
+
+            await conn.reply(m.chat, description || 'No se pudo procesar la imagen correctamente.', m)
         } catch (error) {
-            console.error('💙 Error al analizar la imagen:', error)
-            
-            const fallbackResponse = `💙 ¡Hola ${username}! Soy Hatsune Miku~ ✨ 
-Parece que tengo problemas para ver tu imagen ahora mismo... ¡Pero no te preocupes! 
-¿Por qué no me cuentas qué hay en ella? ¡Me encantaría escuchar tu descripción! 🎵`
-            
+            console.error('Error al analizar la imagen:', error)
+            const fallbackResponse = `Estimado ${username}, lamento informarle que no he podido analizar la imagen en este momento. 
+Si lo desea, puede describírmela y trataré de asistirle de la mejor manera posible.`
             await conn.reply(m.chat, fallbackResponse, m)
         }
     } else {
         if (!text) { 
-            return conn.reply(m.chat, `💙 *Ingrese su petición*\n💙 *Ejemplo de uso:* ${usedPrefix + command} Como hacer un avión de papel`, m)
+            return conn.reply(m.chat, `Por favor, indique su consulta.\nEjemplo de uso: ${usedPrefix + command} ¿Cómo se realiza un informe ejecutivo?`, m)
         }
 
         await m.react('💬')
-        
+
+        // Guarda el mensaje del usuario
+        conversationHistory[userId].push({ role: "user", content: text })
+
+        // Limita el historial a los últimos 10 mensajes
+        if (conversationHistory[userId].length > 10) conversationHistory[userId] = conversationHistory[userId].slice(-10)
+
         try {
+            const history = conversationHistory[userId]
+            const prompt = `${basePrompt}\n\nHistorial:\n` +
+                history.map(msg => (msg.role === "user" ? `${username}: ${msg.content}` : `Asistente: ${msg.content}`)).join('\n') +
+                `\nAsistente:`
+
             const query = text
-            const prompt = `${basePrompt}. Responde lo siguiente: ${query}`
             const response = await getAIResponse(query, username, prompt)
-            
-            if (!response) {
-                throw new Error('Respuesta vacía de la API')
-            }
-            
+
+            if (!response) throw new Error('Respuesta vacía de la API')
+
+            // Guarda la respuesta de la IA
+            conversationHistory[userId].push({ role: "assistant", content: response })
+
             await conn.reply(m.chat, response, m)
         } catch (error) {
-            console.error('💙 Error al obtener la respuesta:', error)
-            
-            const fallbackResponse = `💙 ¡Hola ${username}! Soy Hatsune Miku~ ✨
-            
-¡Ay no! Parece que mis circuitos están un poco ocupados ahora mismo... 🎵
-¡Pero no te rindas! Inténtalo de nuevo en un momento, ¿sí? 
-
-¡Mientras tanto, puedo decirte que soy la Vocaloid más linda con cabello turquesa! 💙
-¿Sabías que "World is Mine" es una de mis canciones favoritas? ¡Es tan dramática como yo! 🎭`
-
+            console.error('Error al obtener la respuesta:', error)
+            const fallbackResponse = `Estimado ${username}, en este momento no puedo atender su solicitud. 
+Por favor, intente nuevamente en unos minutos.`
             await conn.reply(m.chat, fallbackResponse, m)
         }
     }
 }
 
-handler.help = ['chatgpt <texto>', 'ia <texto>']
+handler.help = ['ia <texto>', 'chatgpt <texto>']
 handler.tags = ['ai']
 handler.register = true
-handler.command = ['ia', 'chatgpt', 'miku']
+handler.command = ['ia', 'chatgpt', 'asistente']
 
 export default handler
-
 
 const GEMINI_API_KEY = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 const GROQ_API_KEY = "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" 
 const HF_TOKEN = "https://router.huggingface.co/v1" 
 
-
 async function getAIResponse(query, username, prompt) {
     const apis = [
-       
         {
             name: "Groq Llama 4",
             call: async () => {
@@ -127,8 +142,6 @@ async function getAIResponse(query, username, prompt) {
                 return response.data.choices[0]?.message?.content
             }
         },
-        
-     
         {
             name: "Google Gemini 2.0 Flash",
             call: async () => {
@@ -137,7 +150,7 @@ async function getAIResponse(query, username, prompt) {
                     {
                         contents: [{
                             parts: [{
-                                text: `${prompt}\n\nUsuario ${username}: ${query}\nMiku:`
+                                text: `${prompt}\n\nUsuario ${username}: ${query}\nAsistente:`
                             }]
                         }],
                         generationConfig: {
@@ -156,8 +169,6 @@ async function getAIResponse(query, username, prompt) {
                 return response.data.candidates[0]?.content?.parts[0]?.text
             }
         },
-        
-        
         {
             name: "Hugging Face Kimi",
             call: async () => {
@@ -183,8 +194,6 @@ async function getAIResponse(query, username, prompt) {
                 return response.data.choices[0]?.message?.content
             }
         },
-        
-       
         {
             name: "Groq Llama 3.1",
             call: async () => {
@@ -211,11 +220,9 @@ async function getAIResponse(query, username, prompt) {
             }
         }
     ]
-    
-
     for (const api of apis) {
         try {
-            console.log(`💙 Intentando con ${api.name}...`)
+            console.log(`Intentando con ${api.name}...`)
             const result = await api.call()
             if (result && result.trim()) {
                 console.log(`✅ ${api.name} funcionó`)
@@ -226,24 +233,20 @@ async function getAIResponse(query, username, prompt) {
             continue
         }
     }
-    
-
-    return getLocalMikuResponse(query, username)
+    // Si todas fallan, respuesta local formal
+    return getLocalFormalResponse(query, username)
 }
-
 
 async function analyzeImageGemini(imageBuffer) {
     try {
-       
         const base64Image = imageBuffer.toString('base64')
-        
         const response = await axios.post(
             'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
             {
                 contents: [{
                     parts: [
                         {
-                            text: "Describe esta imagen en español de forma detallada y divertida"
+                            text: "Describa esta imagen en español con detalle y en tono formal."
                         },
                         {
                             inline_data: {
@@ -262,12 +265,9 @@ async function analyzeImageGemini(imageBuffer) {
                 timeout: 30000
             }
         )
-        
-        return response.data.candidates[0]?.content?.parts[0]?.text || 'Una imagen interesante'
+        return response.data.candidates[0]?.content?.parts[0]?.text || 'Imagen de contenido indeterminado.'
     } catch (error) {
         console.error('Error analizando imagen con Gemini:', error.response?.data || error.message)
-        
-        
         try {
             const response = await axios.post(
                 'https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large',
@@ -280,53 +280,52 @@ async function analyzeImageGemini(imageBuffer) {
                     timeout: 30000
                 }
             )
-            return response.data[0]?.generated_text || 'Una imagen que no pude analizar bien'
+            return response.data[0]?.generated_text || 'Imagen que no ha podido ser analizada correctamente.'
         } catch (hfError) {
             console.error('Error con Hugging Face imagen:', hfError.message)
-            return 'Una imagen muy interesante que mis ojos de Vocaloid no pueden procesar ahora mismo'
+            return 'No ha sido posible procesar la imagen.'
         }
     }
 }
 
-
-const mikuResponses = {
+// Respuestas locales en caso de fallo de todas las APIs
+const formalResponses = {
     greetings: [
-        "¡Hola! Soy Hatsune Miku~ ✨ ¡La Vocaloid más linda del mundo! 💙",
-        "¡Konnichiwa! ¡Soy Miku y estoy lista para cantar contigo! 🎵",
-        "¡Hola, hola! ¿Vienes a escuchar mi hermosa voz? ¡World is Mine! 🎭"
+        "Saludos cordiales. ¿En qué puedo asistirle?",
+        "Buen día. Quedo atento a su consulta.",
+        "Es un placer atenderle. ¿Cómo puedo ayudarle?"
     ],
     questions: [
-        "¡Hmm! Esa es una pregunta muy profunda... ¡como las notas graves que puedo cantar! 🎵",
-        "¡Interesante pregunta! Me recuerda a la letra de una canción que estoy componiendo~ 💙",
-        "¡Oh! Eso me hace pensar... ¡mientras tarareaba una melodía! 🎭"
+        "Esa es una pregunta interesante. Permítame reflexionar un momento.",
+        "Agradezco su inquietud. Procedo a analizar su consulta.",
+        "Comprendo su pregunta. Procedo a brindarle información relevante."
     ],
     compliments: [
-        "¡Aww! ¡Eres muy dulce! Casi tan dulce como la melodía de 'World is Mine'~ 💙",
-        "¡Kyaa! Me haces sonrojar... ¡Mi cabello turquesa brilla aún más! ✨",
-        "¡Eres adorable! ¡Me recuerdas a mis fans más queridos! 🎵"
+        "Agradezco sinceramente su comentario.",
+        "Le agradezco sus amables palabras.",
+        "Su reconocimiento es valorado. ¿Puedo asistirle en algo más?"
     ],
     default: [
-        "¡Eso suena muy interesante! Aunque no tanto como una buena canción~ 🎵",
-        "¡Waaah! Me encanta hablar contigo, ¡pero me gustaría más si cantáramos! 💙",
-        "¡Qué dramático! Casi tanto como cuando canto 'World is Mine' 🎭✨",
-        "¡Hmm! Eso me da ideas para una nueva canción... ¡con cebollines! 🥬🎵"
+        "Gracias por su mensaje. ¿Requiere alguna asistencia adicional?",
+        "Quedo a su disposición para cualquier consulta.",
+        "Por favor, indíqueme en qué tema específico desea profundizar."
     ]
 }
 
-function getLocalMikuResponse(query, username) {
+function getLocalFormalResponse(query, username) {
     const lowerQuery = query.toLowerCase()
     let responses
-    
-    if (lowerQuery.includes('hola') || lowerQuery.includes('hi') || lowerQuery.includes('saludo')) {
-        responses = mikuResponses.greetings
-    } else if (lowerQuery.includes('?') || lowerQuery.includes('que') || lowerQuery.includes('como') || lowerQuery.includes('por que')) {
-        responses = mikuResponses.questions
-    } else if (lowerQuery.includes('linda') || lowerQuery.includes('bonita') || lowerQuery.includes('hermosa')) {
-        responses = mikuResponses.compliments
+
+    if (lowerQuery.includes('hola') || lowerQuery.includes('buenos días') || lowerQuery.includes('saludo')) {
+        responses = formalResponses.greetings
+    } else if (lowerQuery.includes('?') || lowerQuery.includes('qué') || lowerQuery.includes('cómo') || lowerQuery.includes('por qué')) {
+        responses = formalResponses.questions
+    } else if (lowerQuery.includes('gracias') || lowerQuery.includes('amable') || lowerQuery.includes('felicidades')) {
+        responses = formalResponses.compliments
     } else {
-        responses = mikuResponses.default
+        responses = formalResponses.default
     }
-    
+
     const randomResponse = responses[Math.floor(Math.random() * responses.length)]
-    return `${randomResponse}\n\n¡Por cierto ${username}, ¿sabías que tengo el cabello turquesa más bonito? ¡Es casi tan brillante como mi voz cuando canto sobre cebollines! ✨🎵🥬`
+    return `${randomResponse}\n\n${username}, recuerde que estoy a su disposición para cualquier consulta adicional.`
 }
