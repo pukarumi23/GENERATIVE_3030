@@ -2,7 +2,7 @@
   
 # 🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼🔶
 
-![Hatsune Miku Banner](https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif)
+![Hatsune Miku Banner]([https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif](https://thumbs.dreamstime.com/b/caricatura-anime-un-ni%C3%B1o-con-ojos-de-fuego-la-imagen-es-una-ilustraci%C3%B3n-chico-color-generada-por-ai-304260237.jpg))
 
 [![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030)
 [![Author](https://img.shields.io/badge/Author-✧･ﾟCHASKI･ﾟ✧-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
