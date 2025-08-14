@@ -14,6 +14,11 @@ import lodash from 'lodash'
 import { mikuJadiBot } from './plugins/jadibot-serbot.js'
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
+
+
+
+let musicProcess = null
+let musicStarted = false
 import {tmpdir} from 'os'
 import {format} from 'util'
 import boxen from 'boxen'
@@ -39,15 +44,57 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n🔶 Iniciando Independiente 🔶\n`))
+console.log(chalk.bold.redBright(`\n💙 Iniciando Hatsune Miku 💙\n`))
 
-say('INDEPEDIENTE', {
+
+const MUSICA_URL = 'https://litter.catbox.moe/ae5f27n13of6sbtb.mp3' 
+const MUSICA_DURACION = 20 
+
+
+function playStartupMusic() {
+  if (musicStarted) return
+  
+  try {
+    console.log(chalk.bold.cyan(`🎵 Reproduciendo música...`))
+    
+    if (process.platform === 'win32') {
+     
+      const psCommand = `Add-Type -AssemblyName presentationCore; $p = New-Object system.windows.media.mediaplayer; $p.open([uri]'${MUSICA_URL}'); $p.Play(); Start-Sleep ${MUSICA_DURACION}; $p.Stop()`
+      musicProcess = spawn('powershell', ['-Command', psCommand], { stdio: 'pipe', windowsHide: true })
+    } else {
+    
+      musicProcess = spawn('bash', ['-c', `timeout ${MUSICA_DURACION}s ffplay -nodisp -autoexit -v quiet "${MUSICA_URL}" 2>/dev/null || curl -s "${MUSICA_URL}" | head -c 500000`], { stdio: 'pipe' })
+    }
+    
+    musicStarted = true
+    console.log(chalk.green('🎶 Música iniciada'))
+    
+  } catch (error) {
+    console.log(chalk.yellow('⚠️ Música no disponible'))
+  }
+}
+
+
+function stopStartupMusic() {
+  if (musicProcess && !musicProcess.killed) {
+    try {
+      musicProcess.kill()
+      console.log(chalk.gray('🎵 Música detenida'))
+    } catch {}
+  }
+  musicStarted = false
+}
+
+
+playStartupMusic()
+
+say('Hatsune\nMiku', {
 font: 'block',
 align: 'center',
 colors: ['cyanBright']
 })
 
-say(`Powered  𝘾𝙃𝘼𝙎𝙆𝙄`, {
+say(` By • Brauliovh3`, {
 font: 'console',
 align: 'center',
 colors: ['magentaBright']
@@ -122,7 +169,7 @@ opcion = '1'
 }
 if (!methodCodeQR && !methodCode && !fs.existsSync(`./${sessions}/creds.json`)) {
 do {
-opcion = await question(colores('🔶 Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
+opcion = await question(colores('💙 Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
 
 if (!/^[1-2]$/.test(opcion)) {
 console.log(chalk.bold.redBright(`🔌 No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`))
@@ -176,7 +223,7 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`🔶 CÓDIGO DE VINCULACIÓN 🔶`)), chalk.bold.white(chalk.white(codeBot)))
+console.log(chalk.bold.white(chalk.bgMagenta(`💙 CÓDIGO DE VINCULACIÓN 💙`)), chalk.bold.white(chalk.white(codeBot)))
 }, 3000)
 }}}
 }
@@ -203,10 +250,12 @@ global.timestamp.connect = new Date;
 if (global.db.data == null) loadDatabase();
 if (update.qr != 0 && update.qr != undefined || methodCodeQR) {
 if (opcion == '1' || methodCodeQR) {
-console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR DE INDEPENDIENTE - EXPIRA EN 45 SEGUNDOS`))}
+console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR DE MIKU - EXPIRA EN 45 SEGUNDOS`))}
 }
 if (connection == 'open') {
-console.log(chalk.bold.green('\n🔶Independiente Conectada con éxito 🔶'))
+console.log(chalk.bold.green('\n💙 Hatsune Miku Conectada con éxito 💙'))
+// Detener música de inicio cuando se conecta
+stopStartupMusic()
 }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
@@ -219,21 +268,34 @@ await global.reloadHandler(true).catch(console.error)
 console.log(chalk.bold.blueBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☂\n┆ ⚠︎ CONEXIÓN PERDIDA CON EL SERVIDOR, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☂`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗\n┆ ⚠︎ CONEXIÓN REEMPLAZADA, SE HA ABIERTO OTRA NUEVA SESION DE INDEPENDIENTE, POR FAVOR, CIERRA LA SESIÓN ACTUAL PRIMERO.\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗`))
+console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗\n┆ ⚠︎ CONEXIÓN REEMPLAZADA, SE HA ABIERTO OTRA NUEVA SESION DE MIKU, POR FAVOR, CIERRA LA SESIÓN ACTUAL PRIMERO.\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗`))
 } else if (reason === DisconnectReason.loggedOut) {
 console.log(chalk.bold.redBright(`\n⚠︎ SIN CONEXIÓN, BORRE LA CARPETA ${global.sessions} Y ESCANEA EL CÓDIGO QR ⚠︎`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.bold.cyanBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓\n┆ ✧ CONECTANDO INDEPENDIENTE AL SERVIDOR VIRTUAL...\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓`))
+console.log(chalk.bold.cyanBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓\n┆ ✧ CONECTANDO MIKU AL SERVIDOR VIRTUAL...\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸\n┆ ⧖ TIEMPO DE CONEXIÓN AGOTADO PARA INDEPENDIENTE, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸`))
+console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸\n┆ ⧖ TIEMPO DE CONEXIÓN AGOTADO PARA MIKU, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸`))
 await global.reloadHandler(true).catch(console.error) //process.send('reset')
 } else {
 console.log(chalk.bold.redBright(`\n⚠︎！ RAZON DE DESCONEXIÓN DESCONOCIDA: ${reason || 'No encontrado'} >> ${connection || 'No encontrado'}`))
 }}
 }
 process.on('uncaughtException', console.error)
+
+
+process.on('SIGINT', () => {
+  console.log(chalk.bold.yellow('\n🔌 Cerrando Hatsune Miku Bot...'))
+  stopStartupMusic()
+  process.exit(0)
+})
+
+process.on('SIGTERM', () => {
+  console.log(chalk.bold.yellow('\n🔌 Cerrando Hatsune Miku Bot...'))
+  stopStartupMusic()
+  process.exit(0)
+})
 
 let isInit = true;
 let handler = await import('./handler.js')
