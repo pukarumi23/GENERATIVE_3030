@@ -8,17 +8,14 @@ let totalreg = Object.keys(global.db.data.users).length
 let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     
 let txt = `╔════════════════╗
-║ 💙 ¡HATSUNE MIKU BOT! 💙 ║
-║  🎤 ¡Konnichiwa! 🎤      ║
+║ ◇INDEPENDIENTE_BOT◈ ║
 ╚══════════════╝
-
-💙🖥🔌 ¡Bienvenido al mundo virtual de Miku! 🔌🖥💙
 
 ┏━━━━━━━━━━━━━━━┓
 ┃ 📊 ESTADO DEL BOT┃
 ┣━━━━━━━━━━━━━━━┫
 ┃ � Usuario: @${userId.split('@')[0]}
-┃ 💙 Modo: Público en Línea
+┃ 🔶 Modo: Público en Línea
 ┃ 🤖 Estado: ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal �️' : 'Sub-Bot �️')}
 ┃ ⏰ Tiempo Activo: ${uptime}
 ┃ 👥 Usuarios: ${totalreg}
@@ -26,13 +23,11 @@ let txt = `╔════════════════╗
 ┃ 🖥️ Sistema: Multi-Device
 ┗━━━━━━━━━━━━━━━━━━━┛
 
-🔌💙 ¿Quieres tu propio bot? Usa *#qr* o *#code* 💙🔌
+┏━━━━━━━━━━━━━━━━━━━━━━┓
+┃📋INFORMACIÓN DEL BOT ┃
+┗━━━━━━━━━━━━━━━━━━━━━━┛
 
-┏━━━━━━━━━━━━━━━━━━━┓
-┃ 📋 INFORMACIÓN DEL BOT ┃
-┗━━━━━━━━━━━━━━━━━━━┛
-
-💙🖥 Comandos para ver el estado e información de Miku-chan 🖥💙
+◇◈Comandos para ver el estado e información de Independiente ◇◈
 🔌 *#help • #menu*
    ┗ 📱 Ver la lista completa de comandos disponibles
 ⏰ *#uptime • #runtime*
@@ -41,10 +36,6 @@ let txt = `╔════════════════╗
    ┗ 🔗 Link del repositorio oficial
 👥 *#staff • #colaboradores*
    ┗ 👨‍💻 Ver la lista de desarrolladores
-🔌 *#serbot • #serbot code*
-   ┗ 🤖 Crear una sesión de Sub-Bot
-🌐 *#bots • #sockets*
-   ┗ 📊 Ver lista de Sub-Bots activos
 📊 *#status • #estado*
    ┗ 💙 Ver el estado actual del bot
 🔗 *#links • #grupos*
@@ -71,10 +62,10 @@ let txt = `╔════════════════╗
    ┗ 🤖 Configurar respuesta automática personalizada
 
 ┏━━━━━━━━━━━━┓
-┃ 🔍 BUSCADORES ┃
+┃🔍BUSCADORES┃
 ┗━━━━━━━━━━━━┛
 
-💙🔍 Comandos para buscar en diferentes plataformas 🔍💙
+🔍 Comandos para buscar en diferentes plataformas 🔍
 🎵 *#tiktoksearch • #tiktoks*
    ┗ 📱 Buscador de videos de TikTok
 🐦 *#tweetposts*
@@ -93,22 +84,14 @@ let txt = `╔════════════════╗
    ┗ 🎨 Buscador de imágenes Google
 📚 *#infoanime*
    ┗ 🎌 Información de anime y manga
-🔞 *#hentaisearch • #searchhentai*
-   ┗ 🌸 Buscador de contenido hentai
-🔞 *#xnxxsearch • #xnxxs*
-   ┗ 🔴 Buscador de videos Xnxx
-🔞 *#xvsearch • #xvideossearch*
-   ┗ 🟠 Buscador de videos Xvideos
-🔞 *#pornhubsearch • #phsearch*
-   ┗ 🟡 Buscador de videos Pornhub
 📦 *#npmjs*
    ┗ 🔧 Buscador de paquetes NPM
 
 ┏━━━━━━━━━━━━━┓
-┃  📥 DESCARGAS ┃
+┃📥 DESCARGAS ┃
 ┗━━━━━━━━━━━━━┛
 
-💙📥 Comandos para descargar todo tipo de contenido 📥💙
+📥 Comandos para descargar todo tipo de contenido 📥
 🎵 *#tiktok • #tt*
    ┗ 📱 Descargar videos de TikTok
 📁 *#mediafire • #mf*
@@ -135,10 +118,6 @@ let txt = `╔════════════════╗
    ┗ 🎨 Descargar fotos/audios TikTok
 👨‍💻 *#gitclone*
    ┗ 🔧 Clonar repositorios de GitHub
-🔞 *#xvideosdl*
-   ┗ 🟠 Descargar videos de Xvideos
-🔞 *#xnxxdl*
-   ┗ 🔴 Descargar videos de Xnxx
 📱 *#apk • #modapk*
    ┗ 🤖 Descargar APKs de Aptoide
 🎲 *#tiktokrandom • #ttrandom*
@@ -147,14 +126,12 @@ let txt = `╔════════════════╗
    ┗ 🛠️ Descargar paquetes NPM
 
 ┏━━━━━━━━━━┓
-┃ 💰 ECONOMÍA ┃
+┃💰ECONOMÍA┃
 ┗━━━━━━━━━━┛
 
-💙💰 Sistema de economía y RPG para ganar recursos 💰💙
+💰 Sistema de economía y RPG para ganar recursos 💰
 💼 *#w • #work • #trabajar*
    ┗ 👔 Trabajar para ganar ${moneda}
-🔞 *#slut • #prostituirse*
-   ┗ 💄 Trabajar como prostituta
 🎰 *#cf • #suerte*
    ┗ 🪙 Apostar a cara o cruz
 🦹 *#crime • #crimen*
@@ -212,7 +189,7 @@ let txt = `╔════════════════╗
 ┃ 🎯 GACHA ┃
 ┗━━━━━━━━━━┛
 
-💙🎯 Sistema de gacha para coleccionar personajes 🎯💙
+🎯 Sistema de gacha para coleccionar personajes 🎯
 🎲 *#rollwaifu • #rw • #roll*
    ┗ 🌟 Waifu o husbando aleatorio
 💎 *#claim • #c • #reclamar*
@@ -231,10 +208,10 @@ let txt = `╔════════════════╗
    ┗ 👑 Top personajes más valiosos
 
 ┏━━━━━━━━━━━┓
-┃ 🎨 STICKERS ┃
+┃🎨STICKERS ┃
 ┗━━━━━━━━━━━┛
 
-💙🎨 Comandos para crear y editar stickers 🎨💙
+🎨 Comandos para crear y editar stickers 🎨
 ✨ *#sticker • #s*
    ┗ 🖼️ Crear stickers de imagen/video
 ⚙️ *#setmeta*
@@ -255,10 +232,10 @@ let txt = `╔════════════════╗
    ┗ ✏️ Cambiar nombre de stickers
 
 ┏━━━━━━━━━━━━━━━┓
-┃ 🛠️ HERRAMIENTAS ┃
+┃🛠️HERRAMIENTAS ┃
 ┗━━━━━━━━━━━━━━━┛
 
-💙🛠️ Comandos de herramientas útiles 🛠️💙
+🛠️ Comandos de herramientas útiles 🛠️
 🧮 *#calcular • #cal*
    ┗ 🔢 Calculadora matemática
 🌤️ *#tiempo • #clima*
@@ -287,20 +264,16 @@ let txt = `╔════════════════╗
    ┗ 🔄 Traducir idiomas
 
 ┏━━━━━━━━━┓
-┃ 👤 PERFIL ┃
+┃👤PERFIL ┃
 ┗━━━━━━━━━┛
 
-💙👤 Comandos para gestionar tu perfil 👤💙
+👤 Comandos para gestionar tu perfil 👤
 📝 *#reg • #verificar • #register*
    ┗ ✅ Registrar nombre y edad
 🗑️ *#unreg*
    ┗ ❌ Eliminar registro del bot
 👤 *#profile*
    ┗ 📋 Mostrar perfil de usuario
-💒 *#marry*
-   ┗ 💍 Proponer matrimonio
-💔 *#divorce*
-   ┗ 🚫 Divorciarse de pareja
 ⚥ *#setgenre • #setgenero*
    ┗ 👫 Establecer género
 🚫 *#delgenre • #delgenero*
@@ -319,14 +292,12 @@ let txt = `╔════════════════╗
    ┗ 📊 Ver nivel y experiencia
 💎 *#comprarpremium • #premium*
    ┗ 👑 Comprar pase premium
-💌 *#confesiones • #confesar*
-   ┗ 💕 Confesar sentimientos anónimos
 
 ┏━━━━━━━━━┓
-┃ 👥 GRUPOS ┃
+┃👥GRUPOS ┃
 ┗━━━━━━━━━┛
 
-💙👥 Comandos para gestión de grupos 👥💙
+👥 Comandos para gestión de grupos 👥
 📢 *#hidetag*
    ┗ 🔔 Mencionar a todos oculto
 ℹ️ *#gp • #infogrupo*
@@ -391,10 +362,10 @@ let txt = `╔════════════════╗
    ┗ 🚫 Eliminar por prefijo país
 
 ┏━━━━━━━━┓
-┃ 🎌 ANIME ┃
+┃🎌ANIME ┃
 ┗━━━━━━━━┛
 
-💙🎌 Comandos de reacciones anime 🎌💙
+🎌 Comandos de reacciones anime 🎌
 😠 *#angry • #enojado*
    ┗ 💢 Expresar enojo
 🦷 *#bite*
@@ -459,16 +430,14 @@ let txt = `╔════════════════╗
    ┗ 🌛 Buenas noches
 😴 *#sleep*
    ┗ 💤 Irse a dormir
-🚬 *#smoke*
-   ┗ 💨 Fumar
 🤔 *#think*
    ┗ 💭 Pensar en algo
 
 ┏━━━━━━━━━┓
-┃ 🎮 JUEGOS ┃
+┃🎮JUEGOS ┃
 ┗━━━━━━━━━┛
 
-💙🎮 Comandos para jugar y divertirse con amigos 🎮💙
+🎮 Comandos para jugar y divertirse con amigos 🎮
 🎯 *#ahorcado*
    ┗ 🎪 Juego del ahorcado
 🧮 *#mates • #matematicas*
@@ -483,7 +452,8 @@ let txt = `╔════════════════╗
    ┗ ❌ Tres en raya (Tic Tac Toe)
 
 ╔═══════════════════════════╗
-║ 💙🖥🔌 ¡GRACIAS POR USAR! 🔌🖥💙║
+║  ¡GRACIAS POR USAR!       ║
+║  ¡INDEPENDIENTE_BOT!       ║
 ╚═══════════════════════════╝`.trim()
 
 await conn.sendMessage(m.chat, { 
