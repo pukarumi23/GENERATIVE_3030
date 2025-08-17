@@ -29,7 +29,7 @@ stiker = buffer
 return conn.reply(m.chat, '🔶 Por favor, envía una *imagen* o *video* para crear un sticker 🔶', m, rcanal)
 }} catch (e) {
 await conn.reply(m.chat, '🔶 ¡Gomen! Ocurrió un error : ' + e.message + ' 🔆', m, rcanal)
-await m.react('☘️')
+await m.react('❌')
 } finally {
 if (stiker) {
 conn.sendFile(m.chat, stiker, 'sticker.webp', '', m)
