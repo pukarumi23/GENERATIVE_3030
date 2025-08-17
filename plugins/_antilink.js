@@ -18,7 +18,7 @@ if (isGroupLink && m.text.includes(linkThisGroup)) return !0
 } catch (error) {
 console.error("[ERROR] No se pudo obtener el código del grupo:", error)
 }}
-await conn.reply(m.chat, `💙 ¡Ara ara! @${m.sender.split`@`[0]} ha sido expulsado del escenario virtual por enviar enlaces prohibidos! 💙🎤\n\n🎵 ¡En el mundo de Miku no permitimos enlaces de ${isChannelLink ? 'canales' : 'otros grupos'}! 🎵\n\n✨ ¡Mantengamos nuestro concierto limpio y seguro! ✨`, null, { mentions: [m.sender] })
+await conn.reply(m.chat, `🔶 ¡Ara ara! @${m.sender.split`@`[0]} ha sido expulsado del escenario virtual por enviar enlaces prohibidos! 💙🎤\n\n🎵 ¡En el mundo de Miku no permitimos enlaces de ${isChannelLink ? 'canales' : 'otros grupos'}! 🎵\n\n✨ ¡Mantengamos nuestro concierto limpio y seguro! ✨`, null, { mentions: [m.sender] })
 if (isBotAdmin) {
 try {
 await conn.sendMessage(m.chat, { delete: m.key })
