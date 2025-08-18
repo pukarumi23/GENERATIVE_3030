@@ -1,9 +1,8 @@
-
 const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, command, usedPrefix }) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
 
   const customEmoji = global.db.data.chats[m.chat]?.customEmoji || '🍫';
-  m.react(customEmoji);
+  await m.react(customEmoji);
 
   if (!(isAdmin || isOwner)) {
     global.dfail('admin', m, conn);
@@ -12,18 +11,27 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
 
   const pesan = args.join` `;
   const oi = `*🔶 ANUNCIO:* ${pesan} 🔶`;
-  let teks = `*🔶.╭╭ִ╼࣪━ִﮩ٨ـﮩ⚜️ 𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ⚜️ﮩ٨ـﮩ━ִ╾࣪╮╮.🔶 \n  *🍀CANTIDAD DE INTEGRANTES: ${participants.length} \n\n ${oi}\n\n╭  ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${botname} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
+  let teks = `*╔═══════════════*\n`;
+  teks += `*║* 🍀 *Participantes:* ${participants.length}\n`;
+  teks += `*╠═══════════════*\n`;
+  teks += `*║*\n`;
+  teks += `*║* ${oi}\n`;
+  teks += `*║*\n`;
   for (const mem of participants) {
-    teks += `┊◈⫸ @${mem.id.split('@')[0]}\n`;
+    teks += `*║* ➤ @${mem.id.split('@')[0]}\n`;
   }
-  teks += `╰⸼ ┄ ┄ ┄ ─  ꒰  ׅ୭ *${vs}* ୧ ׅ ꒱  ┄  ─ ┄ ⸼`;
+  teks += `*║*\n`;
+  teks += `*╚═══════════════*`;
 
-  conn.sendMessage(m.chat, { text: teks, mentions: participants.map((a) => a.id) });
+  await conn.sendMessage(m.chat, { 
+    text: teks, 
+    mentions: participants.map(a => a.id) 
+  });
 };
 
-handler.help = ['todos *<mensaje opcional>*'];
+handler.help = ['todos <mensaje>'];
 handler.tags = ['group'];
-handler.command = ['todos', 'invocar', 'tagall']
+handler.command = ['todos', 'invocar', 'tagall'];
 handler.admin = true;
 handler.group = true;
 
