@@ -15,14 +15,14 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
       type = args[0].toLowerCase()
       isEnable = true
     } else {
-      return conn.reply(m.chat, `💙 Especifica qué función quieres activar.\n\n> Ejemplo: *${usedPrefix}enable antilink*`, m, rcanal)
+      return conn.reply(m.chat, `🔶 Especifica qué función quieres activar.\n\n> Ejemplo: *${usedPrefix}enable antilink*`, m, rcanal)
     }
   } else if (command === 'disable') {
     if (args[0]) {
       type = args[0].toLowerCase()
       isEnable = false
     } else {
-      return conn.reply(m.chat, `💙 Especifica qué función quieres desactivar.\n\n> Ejemplo: *${usedPrefix}disable antilink*`, m, rcanal)
+      return conn.reply(m.chat, `🔶 Especifica qué función quieres desactivar.\n\n> Ejemplo: *${usedPrefix}disable antilink*`, m, rcanal)
     }
   } else if (args[0] === 'on' || args[0] === 'enable') {
     isEnable = true;
@@ -30,7 +30,7 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, i
     isEnable = false
   } else {
     const estado = isEnable ? '✓ Activado' : '✗ Desactivado'
-    return conn.reply(m.chat, `💙 Un administrador puede activar o desactivar el *${command}* utilizando:\n\n> ✐ *${usedPrefix}${command} on* para activar.\n> ✐ *${usedPrefix}${command} off* para desactivar.\n> ✐ *${usedPrefix}enable ${command}* para activar.\n> ✐ *${usedPrefix}disable ${command}* para desactivar.\n\n✧ Estado actual » *${estado}*`, m, rcanal)
+    return conn.reply(m.chat, `🔶 Un administrador puede activar o desactivar el *${command}* utilizando:\n\n> ✐ *${usedPrefix}${command} on* para activar.\n> ✐ *${usedPrefix}${command} off* para desactivar.\n> ✐ *${usedPrefix}enable ${command}* para activar.\n> ✐ *${usedPrefix}disable ${command}* para desactivar.\n\n✧ Estado actual » *${estado}*`, m, rcanal)
   }
 
   switch (type) {
