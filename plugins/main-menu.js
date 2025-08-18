@@ -38,7 +38,7 @@ let txt = `╔════════════════╗
 👥 *#staff • #colaboradores*
    ┗ 👨‍💻 Ver la lista de desarrolladores
 📊 *#status • #estado*
-   ┗ 💙 Ver el estado actual del bot
+   ┗ 🔶 Ver el estado actual del bot
 🔗 *#links • #grupos*
    ┗ 📱 Ver enlaces oficiales del bot
 ℹ️ *#infobot*
