@@ -1,8 +1,4 @@
-/* 
-- tagall By Angel-OFC  
-- etiqueta en un grupo a todos
-- https://whatsapp.com/channel/0029VaJxgcB0bIdvuOwKTM2Y
-*/
+
 const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, command, usedPrefix }) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
 
@@ -15,10 +11,10 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
   }
 
   const pesan = args.join` `;
-  const oi = `*🎤💙 ANUNCIO DE MIKU :* ${pesan} 💙🎤`;
-  let teks = `*🎵✨  LLAMADA VIRTUAL A TODOS LOS FANÁTICOS  ✨🎵*\n  *🌟 PARA ${participants.length} MIEMBROS DEL CONCIERTO 🌟* 🎤\n\n ${oi}\n\n╭  ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${botname} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
+  const oi = `*🔶 ANUNCIO:* ${pesan} 🔶`;
+  let teks = `*🔶.╭╭ִ╼࣪━ִﮩ٨ـﮩ⚜️ 𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ⚜️ﮩ٨ـﮩ━ִ╾࣪╮╮.🔶 \n  *🍀CANTIDAD DE INTEGRANTES: ${participants.length} \n\n ${oi}\n\n╭  ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${botname} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
   for (const mem of participants) {
-    teks += `┊🎵 @${mem.id.split('@')[0]}\n`;
+    teks += `┊◈⫸ @${mem.id.split('@')[0]}\n`;
   }
   teks += `╰⸼ ┄ ┄ ┄ ─  ꒰  ׅ୭ *${vs}* ୧ ׅ ꒱  ┄  ─ ┄ ⸼`;
 
