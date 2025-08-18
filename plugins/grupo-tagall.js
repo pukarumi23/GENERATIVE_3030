@@ -11,7 +11,7 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
 
   const pesan = args.join` `;
   const oi = `*🔶 ANUNCIO:* ${pesan} 🔶`;
-  let teks = `*╔═══════════════*\n`;
+  let teks = `*🔶.╭╭ִ╼࣪━ִﮩ٨ـﮩ⚜️ 𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ⚜️ﮩ٨ـﮩ━ִ╾࣪╮╮.🔶 *\n`;
   teks += `*║* 🍀 *Participantes:* ${participants.length}\n`;
   teks += `*╠═══════════════*\n`;
   teks += `*║*\n`;
