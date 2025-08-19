@@ -60,8 +60,8 @@ global.avatar = 'https://files.catbox.moe/49cwrz.jpeg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.gp1 = 'https://chat.whatsapp.com/FQ78boTUpJ7Ge3oEtn8pRE?mode=ac_t'
-global.comunidad1 = 'https://chat.whatsapp.com/FQ78boTUpJ7Ge3oEtn8pRE?mode=ac_t'
+global.gp1 = 'https://chat.whatsapp.com/K0Bl5ktWIFE5rMKrKDEOtk?mode=ac_t'
+global.comunidad1 = 'https://chat.whatsapp.com/K0Bl5ktWIFE5rMKrKDEOtk?mode=ac_t'
 global.channel = 'https://www.whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o'
 global.channel2 = 'https://www.whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o'
 global.md = 'https://github.com/Brauliovh3/HATSUNE-MIKU'
