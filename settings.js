@@ -55,8 +55,8 @@ global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
 global.moneda = '🪙 Intis'
 global.welcom1 = '🎤💙 ¡Konnichiwa! Bienvenido al mundo virtual de Independiente! 💙🎤 \n✨ Aquí podrás disfrutar de la magia musical ✨ \n🎶 Edita este mensaje con setwelcome 🎶'
 global.welcom2 = '🌟💫 ¡Sayonara! Gracias por cantar con nosotros 💫🌟 \n🎵 ¡Esperamos verte pronto en el escenario virtual! 🎵 \n🎤 Edita este mensaje con setbye 🎤'
-global.banner = 'https://files.catbox.moe/t5iqh7.jpg'
-global.avatar = 'https://files.catbox.moe/t5iqh7.jpg'
+global.banner = 'https://s.widget-club.com/images/YyiR86zpwIMIfrCZoSs4ulVD9RF3/dfe8c527da080d8946a11f49c5833662/618b1409312bd68a0c815cce2b9ea144.jpg'
+global.avatar = 'https://s.widget-club.com/images/YyiR86zpwIMIfrCZoSs4ulVD9RF3/dfe8c527da080d8946a11f49c5833662/618b1409312bd68a0c815cce2b9ea144.jpg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
