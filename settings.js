@@ -53,8 +53,8 @@ global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.moneda = '🪙 Intis'
-global.welcom1 = '🄸🄽🄳🄴🄿🄴🄽🄳🄸🄴🄽🅃🄴'
-global.welcom2 = '🌟💫 ¡Sayonara! Gracias por cantar con nosotros 💫🌟 \n🎵 ¡Esperamos verte pronto en el escenario virtual! 🎵 \n🎤 Edita este mensaje con setbye 🎤'
+global.welcom1 = 'bienvenido'
+global.welcom2 = 'adios '
 global.banner = 'https://files.catbox.moe/49cwrz.jpeg'
 global.avatar = 'https://files.catbox.moe/49cwrz.jpeg'
 
@@ -65,7 +65,7 @@ global.comunidad1 = 'https://chat.whatsapp.com/K0Bl5ktWIFE5rMKrKDEOtk?mode=ac_t'
 global.channel = 'https://whatsapp.com/channel/0029Vb5rzPf3rZZXl2DI830G'
 global.channel2 = 'https://whatsapp.com/channel/0029Vb5rzPf3rZZXl2DI830G'
 global.md = 'https://github.com/pukarumi23/GENERATIVE_3030'
-global.correo = 'independientebot@gmail.com'
+global.correo = 'independentebot@gmail.com'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
