@@ -37,10 +37,10 @@ async function sendAlbumMessage(jid, medias, options = {}) {
 }
 
 const pinterest = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) return conn.reply(m.chat, `*💙 Uso Correcto: ${usedPrefix + command} Miku*`, m, rcanal);
+    if (!text) return conn.reply(m.chat, `*🔶 Uso Correcto: ${usedPrefix + command} Miku*`, m, rcanal);
 
     await m.react('⏳');
-    conn.reply(m.chat, '💙 *Descargando imágenes de Pinterest...*', m, {
+    conn.reply(m.chat, '🔶 *Descargando imágenes de Pinterest...*', m, {
         contextInfo: {
             externalAdReply: {
                 mediaUrl: null,
