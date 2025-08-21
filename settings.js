@@ -44,7 +44,7 @@ global.packname = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
 global.botname = '🄸🄽🄳🄴🄿🄴🄽🄳🄸🄴🄽🅃🄴'
 global.wm = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
-global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 ✧･ﾟCHASKI･ﾟ✧'
+global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 /n✧･ﾟCHASKI･ﾟ✧'
 global.textbot = '✦ 𝓘𝓷𝓭𝓮𝓹𝓮𝓷𝓭𝓲𝓮𝓷𝓽𝓮 ✦'
 global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
 
