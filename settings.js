@@ -41,7 +41,7 @@ global.sessions = 'Sessions'
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.packname = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
-global.botname = '🄸🄽🄳🄴🄿🄴🄽🄳🄸🄴🄽🅃🄴'
+global.botname ='𝑰𝑵𝑫𝑬𝑷𝑬𝑵𝑫𝑰𝑬𝑵𝑻𝑬'
 global.wm = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
 global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 /n✧･ﾟCHASKI･ﾟ✧'
