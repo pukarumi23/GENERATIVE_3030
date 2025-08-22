@@ -2,22 +2,22 @@ import axios from 'axios'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
-    // Obtener texto de cualquier forma posible
+    
     let fullText = ''
     
-    // Intentar diferentes formas de obtener el texto
+  
     if (m.text) fullText += m.text
     if (m.message?.conversation) fullText += ' ' + m.message.conversation
     if (m.message?.extendedTextMessage?.text) fullText += ' ' + m.message.extendedTextMessage.text
     
-    // Si no hay texto, salir
+    
     if (!fullText.trim()) return false
     
-    // Buscar "miku" de forma más flexible
+
     const textToCheck = fullText.toLowerCase().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ')
     console.log('Texto a verificar:', textToCheck)
     
-    // Si contiene "miku" seguido de algo más
+   
     const mikuMatch = textToCheck.match(/miku\s+(.+)/)
     if (!mikuMatch) return false
     
@@ -92,20 +92,20 @@ Responde de manera natural y útil, como una IA normal pero con un toque amigabl
     }
 }
 
-// Este handler se ejecutará en todos los mensajes para detectar "Miku"
+
 handler.all = true
 handler.register = true
 
 export default handler
 
-// APIs actualizadas 2025
-const GEMINI_API_KEY = "AIzaSyDummy_Key_Replace_With_Your_Gemini_Key" // Obtén gratis en ai.google.dev
-const HF_TOKEN = "hf_dummy_token_replace_with_yours" // Token gratuito de Hugging Face
-const OPENROUTER_KEY = "sk-or-dummy-key-replace" // API key de OpenRouter (tiene modelos gratis)
+
+const GEMINI_API_KEY = "AIzaSyDummy_Key_Replace_With_Your_Gemini_Key" 
+const HF_TOKEN = "hf_dummy_token_replace_with_yours" 
+const OPENROUTER_KEY = "sk-or-dummy-key-replace" 
 
 async function getAIResponse(query, username, prompt) {
     const apis = [
-        // 1. Google Gemini 2.5 Flash - Gratis hasta 15 RPM
+        
         {
             name: "Google Gemini 2.5 Flash",
             call: async () => {
@@ -141,14 +141,14 @@ async function getAIResponse(query, username, prompt) {
             }
         },
         
-        // 2. OpenRouter - Modelos gratis disponibles
+        
         {
             name: "OpenRouter Free Models",
             call: async () => {
                 const response = await axios.post(
                     'https://openrouter.ai/api/v1/chat/completions',
                     {
-                        model: "google/gemini-flash-1.5", // Modelo gratuito
+                        model: "google/gemini-flash-1.5",
                         messages: [
                             { role: "system", content: prompt },
                             { role: "user", content: query }
@@ -160,7 +160,7 @@ async function getAIResponse(query, username, prompt) {
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${OPENROUTER_KEY}`,
-                            'HTTP-Referer': 'https://github.com/your-repo', // Opcional
+                            'HTTP-Referer': 'https://github.com/your-repo',
                             'X-Title': 'Miku Bot'
                         },
                         timeout: 30000
@@ -170,7 +170,7 @@ async function getAIResponse(query, username, prompt) {
             }
         },
 
-        // 3. Hugging Face Inference API - Gratis con límites generosos
+       
         {
             name: "Hugging Face Qwen2.5",
             call: async () => {
@@ -196,7 +196,7 @@ async function getAIResponse(query, username, prompt) {
             }
         },
 
-        // 4. Hugging Face Microsoft DialoGPT
+      
         {
             name: "HF Microsoft DialoGPT",
             call: async () => {
@@ -221,14 +221,14 @@ async function getAIResponse(query, username, prompt) {
             }
         },
 
-        // 5. Puter.js - API gratuita sin límites estrictos
+       
         {
             name: "Puter.js AI",
             call: async () => {
                 const response = await axios.post(
                     'https://api.puter.com/v1/ai/chat',
                     {
-                        model: "gpt-4o-mini", // Modelo gratuito disponible
+                        model: "gpt-4o-mini", 
                         messages: [
                             { role: "system", content: prompt },
                             { role: "user", content: query }
@@ -247,7 +247,7 @@ async function getAIResponse(query, username, prompt) {
             }
         },
 
-        // 6. Together AI - Tiene tier gratuito
+       
         {
             name: "Together AI Llama",
             call: async () => {
@@ -329,7 +329,7 @@ async function analyzeImageGemini(imageBuffer) {
     } catch (error) {
         console.error('Error analizando imagen con Gemini:', error.response?.data || error.message)
         
-        // Fallback a Hugging Face para análisis de imagen
+        
         try {
             const response = await axios.post(
                 'https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large',
