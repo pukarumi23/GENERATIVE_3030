@@ -1,49 +1,105 @@
-const palabras = ["gato", "perro", "pájaro", "elefante", "tigre", "ballena", "mariposa", "tortuga", "conejo", "rana", "pulpo", "ardilla", "jirafa", "cocodrilo", "pingüino", "delfín", "serpiente", "hámster", "mosquito", "abeja", "Porno", "negro", "television", "computadora", "botsito", "reggaeton", "economía", "electrónica", "facebook", "WhatsApp", "Instagram", "tiktok", "milanesa", "presidente", "bot", "películas", 
+const palabras = [
+    "gato", "perro", "pájaro", "elefante", "tigre", "ballena", "mariposa", "tortuga", 
+    "conejo", "rana", "pulpo", "ardilla", "jirafa", "cocodrilo", "pingüino", "delfín", 
+    "serpiente", "hámster", "mosquito", "abeja", "televisión", "computadora", "botsito", 
+    "reggaeton", "economía", "electrónica", "facebook", "whatsapp", "instagram", "tiktok", 
+    "milanesa", "presidente", "películas", "aventura", "chocolate", "guitarra", "océano",
+    "montaña", "estrella", "ciudad", "jardín", "biblioteca", "hospital", "escuela"
 ]
 
 const intentosMaximos = 6
-
 const gam = new Map()
 
 function elegirPalabraAleatoria() {
-return palabras[Math.floor(Math.random() * palabras.length)]
+    return palabras[Math.floor(Math.random() * palabras.length)]
 }
 
 function ocultarPalabra(palabra, letrasAdivinadas) {
-    let palabraOculta = "";
-    for (const letra of palabra) {
-        if (letrasAdivinadas.includes(letra)) {
-            palabraOculta += letra + " "; 
+    let palabraOculta = ""
+    for (const letra of palabra.toLowerCase()) {
+        if (letrasAdivinadas.includes(letra.toLowerCase())) {
+            palabraOculta += letra + " "
         } else {
-            palabraOculta += "_ "; 
+            palabraOculta += "_ "
         }
     }
-    return palabraOculta.trim(); 
+    return palabraOculta.trim()
 }
 
-
 function mostrarAhorcado(intentos) {
-const dibujo = [
-"```",
-"  ╔═══════════╗",
-"  ║           ║",
-"  ║           ║",
-intentos < 6 ? "  ║     😵    ║" : "  ║           ║",
-intentos < 5 ? "  ║     |     ║" : "  ║           ║",
-intentos < 4 ? "  ║    /|     ║" : intentos < 5 ? "  ║     |     ║" : "  ║           ║",
-intentos < 3 ? "  ║    /|\\    ║" : intentos < 4 ? "  ║    /|     ║" : intentos < 5 ? "  ║     |     ║" : "  ║           ║",
-intentos < 2 ? "  ║    /      ║" : "  ║           ║",
-intentos < 1 ? "  ║    / \\    ║" : intentos < 2 ? "  ║    /      ║" : "  ║           ║",
-"  ║           ║",
-"  ╚═══════════╝",
-"```"
-]
-return dibujo.join("\n")
+    const dibujos = [
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😵    ║
+  ║    /|\\    ║
+  ║    / \\    ║
+  ║           ║
+  ╚═══════════╝`,
+       
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😰    ║
+  ║    /|\\    ║
+  ║    /      ║
+  ║           ║
+  ╚═══════════╝`,
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😨    ║
+  ║    /|\\    ║
+  ║           ║
+  ║           ║
+  ╚═══════════╝`,
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😟    ║
+  ║    /|     ║
+  ║           ║
+  ║           ║
+  ╚═══════════╝`,
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😐    ║
+  ║     |     ║
+  ║           ║
+  ║           ║
+  ╚═══════════╝`,
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║     😊    ║
+  ║           ║
+  ║           ║
+  ║           ║
+  ╚═══════════╝`,
+        
+        `
+  ╔═══════════╗
+  ║           ║
+  ║           ║
+  ║           ║
+  ║           ║
+  ║           ║
+  ╚═══════════╝`
+    ]
+    
+    return "```" + dibujos[intentos] + "```"
 }
 
 function juegoTerminado(sender, mensaje, palabra, letrasAdivinadas, intentos) {
+    
     if (intentos === 0) {
-        gam.delete(sender);
+        gam.delete(sender)
         return `╔═══════════════════════════════╗
 ║          💀 GAME OVER 💀        ║
 ╚═══════════════════════════════╝
@@ -52,14 +108,22 @@ function juegoTerminado(sender, mensaje, palabra, letrasAdivinadas, intentos) {
 
 ${mostrarAhorcado(intentos)}
 
-💡 ¡Inténtalo de nuevo con .ahorcado!`;
-    } else if (!mensaje.includes("_")) {
-        let expGanada = Math.floor(Math.random() * 300); //fáciles
+💡 ¡Inténtalo de nuevo con .ahorcado!`
+    }
+    
+    
+    if (!mensaje.includes("_")) {
+        let expGanada = Math.floor(Math.random() * 200) + 100 
         if (palabra.length >= 8) {
-            expGanada = Math.floor(Math.random() * 3500); //difíciles
+            expGanada = Math.floor(Math.random() * 400) + 300 
         }
-        global.db.data.users[sender].exp += expGanada;
-        gam.delete(sender);
+        
+       
+        if (global.db && global.db.data && global.db.data.users && global.db.data.users[sender]) {
+            global.db.data.users[sender].exp = (global.db.data.users[sender].exp || 0) + expGanada
+        }
+        
+        gam.delete(sender)
         return `╔═══════════════════════════════╗
 ║        🎉 ¡VICTORIA! 🎉        ║
 ╚═══════════════════════════════╝
@@ -68,9 +132,11 @@ ${mostrarAhorcado(intentos)}
 
 💎 *Recompensa obtenida:* ${expGanada} EXP
 
-🏆 ¡Sigue jugando para conseguir más puntos!`;
-    } else {
-        return `╔═══════════════════════════════╗
+🏆 ¡Sigue jugando para conseguir más puntos!`
+    }
+    
+    
+    return `╔═══════════════════════════════╗
 ║         🎯 AHORCADO 🎯         ║
 ╚═══════════════════════════════╝
 
@@ -80,28 +146,39 @@ ${mostrarAhorcado(intentos)}
 ❤️ Vidas restantes: ${intentos}
 📚 Letras usadas: ${letrasAdivinadas.join(', ').toUpperCase() || 'Ninguna'}
 
-💡 Envía una letra para continuar`;
-    }
+💡 Envía una letra para continuar`
 }
 
 let handler = async (m, { conn }) => {
-let users = global.db.data.users[m.sender]
-if (gam.has(m.sender)) {
-return conn.reply(m.chat, `╔═══════════════════════════════╗
+    
+    if (gam.has(m.sender)) {
+        return conn.reply(m.chat, `╔═══════════════════════════════╗
 ║        ⚠️ ADVERTENCIA ⚠️        ║
 ╚═══════════════════════════════╝
 
 🎮 Ya tienes un juego activo en curso
 ⏳ Debes terminar el juego actual primero
 
-💡 Envía una letra para continuar o escribe cualquier palabra para rendirte`, m)
-}
-let palabra = elegirPalabraAleatoria()
-let letrasAdivinadas = []
-let intentos = intentosMaximos
-let mensaje = ocultarPalabra(palabra, letrasAdivinadas)
-gam.set(m.sender, { palabra, letrasAdivinadas, intentos })
-let text = `╔═══════════════════════════════╗
+💡 Envía una letra para continuar o usa .rendirse para abandonar`, m)
+    }
+
+    
+    if (!global.db) global.db = { data: { users: {} } }
+    if (!global.db.data) global.db.data = { users: {} }
+    if (!global.db.data.users) global.db.data.users = {}
+    if (!global.db.data.users[m.sender]) {
+        global.db.data.users[m.sender] = { exp: 0 }
+    }
+
+    
+    let palabra = elegirPalabraAleatoria()
+    let letrasAdivinadas = []
+    let intentos = intentosMaximos
+    let mensaje = ocultarPalabra(palabra, letrasAdivinadas)
+    
+    gam.set(m.sender, { palabra, letrasAdivinadas, intentos })
+    
+    let text = `╔═══════════════════════════════╗
 ║         🎯 AHORCADO 🎯         ║
 ╚═══════════════════════════════╝
 
@@ -117,47 +194,108 @@ ${mostrarAhorcado(intentos)}
 ⚠️ *Advertencia:* Cada letra incorrecta te quitará una vida
 
 ¡Buena suerte! 🍀`
-conn.reply(m.chat, text, m)
+    
+    await conn.reply(m.chat, text, m)
 }
 
 handler.before = async (m, { conn }) => {
-let users = global.db.data.users[m.sender]
-let juego = gam.get(m.sender)
-if (!juego) return
-let { palabra, letrasAdivinadas, intentos } = juego
-if (m.text.length === 1 && m.text.match(/[a-zA-Z]/)) {
-let letra = m.text.toLowerCase()
-if (!letrasAdivinadas.includes(letra)) {
-letrasAdivinadas.push(letra)
-if (!palabra.includes(letra)) {
-intentos--
+    if (!m.text || m.text.startsWith('.') || m.text.startsWith('#') || m.text.startsWith('!')) return
+    
+    let juego = gam.get(m.sender)
+    if (!juego) return true
+    
+    let { palabra, letrasAdivinadas, intentos } = juego
+    
+   
+    if (m.text.length === 1 && /[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]/.test(m.text)) {
+        let letra = m.text.toLowerCase()
+        
+        
+        if (letrasAdivinadas.includes(letra)) {
+            await conn.reply(m.chat, `╔═════════════════════╗
+║ ⚠️ LETRA REPETIDA ⚠️║
+╚══════════════════════╝
+
+🔄 Ya usaste la letra: *${letra.toUpperCase()}*
+📚 Letras usadas: ${letrasAdivinadas.join(', ').toUpperCase()}
+
+💡 Intenta con otra letra`, m)
+            return false
+        }
+        
+       
+        letrasAdivinadas.push(letra)
+        
+        
+        if (!palabra.toLowerCase().includes(letra)) {
+            intentos--
+            await conn.reply(m.chat, `❌ La letra *${letra.toUpperCase()}* no está en la palabra.`, m)
+        } else {
+            await conn.reply(m.chat, `✅ ¡Bien! La letra *${letra.toUpperCase()}* está en la palabra.`, m)
+        }
+        
+        
+        let mensaje = ocultarPalabra(palabra, letrasAdivinadas)
+        
+       
+        gam.set(m.sender, { palabra, letrasAdivinadas, intentos })
+        
+       
+        let respuesta = juegoTerminado(m.sender, mensaje, palabra, letrasAdivinadas, intentos)
+        await conn.reply(m.chat, respuesta, m)
+        
+        return false 
+        
+    } else if (m.text.toLowerCase() === 'rendirse' || m.text.toLowerCase() === '.rendirse') {
+       
+        gam.delete(m.sender)
+        await conn.reply(m.chat, `╔══════════════╗
+║  🏳️ RENDIRSE 🏳️║
+╚═════════════════╝
+
+😔 Te has rendido del juego
+🔤 La palabra era: *${palabra.toUpperCase()}*
+
+💡 ¡Inténtalo de nuevo con .ahorcado!`, m)
+        return false
+        
+    } else {
+       
+        await conn.reply(m.chat, `╔═══════════════════════╗
+║ ⚠️ ENTRADA INVÁLIDA ⚠️ ║
+╚═════════════════════════╝
+
+❌ Solo puedes enviar:
+🔤 Una letra para adivinar
+🏳️ "rendirse" para abandonar el juego
+
+💡 Intenta de nuevo`, m)
+        return false
+    }
 }
-}
-let mensaje = ocultarPalabra(palabra, letrasAdivinadas)
-let respuesta = juegoTerminado(m.sender, mensaje, palabra, letrasAdivinadas, intentos)
-if (respuesta.includes("💀 GAME OVER 💀") || respuesta.includes("🎉 ¡VICTORIA! 🎉")) {
-conn.reply(m.chat, respuesta, m)
-} else {
-gam.set(m.sender, { palabra, letrasAdivinadas, intentos })
-conn.reply(m.chat, respuesta, m)
-}
-} else {
-let mensaje = ocultarPalabra(palabra, letrasAdivinadas);
-let respuesta = `╔═══════════════════════════════╗
+
+
+handler.rendirse = async (m, { conn }) => {
+    if (!gam.has(m.sender)) {
+        return conn.reply(m.chat, '❌ No tienes ningún juego activo.', m)
+    }
+    
+    let { palabra } = gam.get(m.sender)
+    gam.delete(m.sender)
+    
+    await conn.reply(m.chat, `╔═══════════════════════════════╗
 ║         🏳️ RENDIRSE 🏳️         ║
 ╚═══════════════════════════════╝
 
 😔 Te has rendido del juego
 🔤 La palabra era: *${palabra.toUpperCase()}*
 
-💡 ¡Inténtalo de nuevo con .ahorcado!`
-conn.reply(m.chat, respuesta, m)
-gam.delete(m.sender)
+💡 ¡Inténtalo de nuevo con .ahorcado!`, m)
 }
-}
-handler.help = ['ahorcado']
+
+handler.help = ['ahorcado', 'rendirse']
 handler.tags = ['game']
-handler.command = ['ahorcado']
+handler.command = /^(ahorcado|rendirse)$/i
 handler.group = true
 handler.register = true
 
