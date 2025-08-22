@@ -1,312 +1,354 @@
 import { promises as fs } from 'fs';
 
 global.db = global.db || {};
-global.db.waifu = global.db.waifu || {
+global.db.inca = global.db.inca || {
     cooldowns: {},
-    waifus: {},
+    personajes: {},
     collection: {}
 };
 
+const personajesIncas = [
+    // COMÚN - Habitantes comunes del Tahuantinsuyu
+    {
+        name: "Campesino Quechua",
+        rarity: "común",
+        probability: 5,  
+        img: "https://files.catbox.moe/example1.png", //reemplazar con imágenes 
+        description: "Trabajador de los andenes sagrados"
+    },
+    {
+        name: "Tejedora Inca",
+        rarity: "común",
+        probability: 5,  
+        img: "https://files.catbox.moe/example2.png",
+        description: "Maestra en el arte del cumbi"
+    },
+    {
+        name: "Chasqui Joven",
+        rarity: "común",
+        probability: 5,  
+        img: "https://files.catbox.moe/example3.png",
+        description: "Mensajero de los caminos del Inca"
+    },
+    {
+        name: "Pastor de Llamas",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example4.png",
+        description: "Guardián de los rebaños sagrados"
+    },
+    {
+        name: "Alfarero del Cusco",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example5.png",
+        description: "Artesano de la cerámica imperial"
+    },
+    {
+        name: "Agricultor de Quinua",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example6.png",
+        description: "Cultivador del grano de oro"
+    },
+    {
+        name: "Pescador del Titicaca",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example7.png",
+        description: "Navegante de las aguas sagradas"
+    },
+    {
+        name: "Minero de Potosí",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example8.png",
+        description: "Extractor de la plata del Cerro Rico"
+    },
+    {
+        name: "Cuidadora de Vicuñas",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example9.png",
+        description: "Protectora de la fibra más fina"
+    },
+    {
+        name: "Constructor Inca",
+        rarity: "común",
+        probability: 5,
+        img: "https://files.catbox.moe/example10.png",
+        description: "Maestro de la piedra perfecta"
+    },
 
-const waifuList = [
-   
+    // RARA - Nobles y especialistas del imperio
     {
-        name: "Hatsune Chibi",
-        rarity: "común",
-        probability: 5,  
-        img: "https://files.catbox.moe/vjkemw.png"
-    },
-    {
-        name: "Aoki Chibi",
-        rarity: "común",
-        probability: 5,  
-        img: "https://files.catbox.moe/ds1rt5.png"
-    },
-    {
-        name: "Defoko Chibi",
-        rarity: "común",
-        probability: 5,  
-        img: "https://files.catbox.moe/r951p2.png"
-    },
-    {
-        name: "Neru Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/ht6aci.png"
-    },
-    {
-        name: "Rin Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/2y6wre.png"
-    },
-    {
-        name: "Teto Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/h9m6ac.webp"
-    },
-    {
-        name: "Gumi Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "./src/chibis/gumi_chibi.png"
-    },
-    {
-        name: "Emu Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/nrchrb.webp"
-    },
-    {
-        name: "Len Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/rxvuqq.png"
-    },
-    {
-        name: "Luka Chibi",
-        rarity: "común",
-        probability: 5,
-        img: "https://files.catbox.moe/5cyyis.png"
-    },
-    
-    
-    {
-        name: "Hatsune Miku 2006",
+        name: "Curaca Regional",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/id47xr.png"
+        img: "https://files.catbox.moe/example11.png",
+        description: "Gobernador de una región del imperio"
     },
     {
-        name: "Aoki Lapis 2006",
+        name: "Quipucamayoc",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/5m2nw3.png"
+        img: "https://files.catbox.moe/example12.png",
+        description: "Maestro contador de los quipus"
     },
     {
-        name: "Defoko Utau",
+        name: "Amautas Sabio",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/0ghewm.png"
+        img: "https://files.catbox.moe/example13.png",
+        description: "Educador y filósofo del Cusco"
     },
     {
-        name: "Akita Neru 2006",
+        name: "Chasqui Veterano",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/zia0tk.png"
+        img: "https://files.catbox.moe/example14.png",
+        description: "Corredor élite del Qhapaq Ñan"
     },
     {
-        name: "Gumi Megpoid 2006",
+        name: "Sacerdotisa de la Luna",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/ulvmhk.png"
+        img: "https://files.catbox.moe/example15.png",
+        description: "Servidora de Mama Quilla"
     },
     {
-        name: "Rin",
+        name: "Guerrero Antis",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/wk4sh0.png"
+        img: "https://files.catbox.moe/example16.png",
+        description: "Defensor de la selva oriental"
     },
     {
-        name: "Teto",
+        name: "Arquiteco de Sacsayhuamán",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/0cax3r.png"
+        img: "https://files.catbox.moe/example17.png",
+        description: "Constructor de la fortaleza sagrada"
     },
     {
-        name: "Emu Otori",
+        name: "Coya Noble",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/vphcvo.png"
+        img: "https://files.catbox.moe/example18.png",
+        description: "Princesa del linaje real"
     },
     {
-        name: "Len",
+        name: "Hatun Runa Distinguido",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/x4du11.png"
+        img: "https://files.catbox.moe/example19.png",
+        description: "Ciudadano honorable del imperio"
     },
     {
-        name: "Luka Megurine 2006",
+        name: "Médico Kallawaya",
         rarity: "rara",
         probability: 3,
-        img: "https://files.catbox.moe/3wo3h9.webp"
+        img: "https://files.catbox.moe/example20.png",
+        description: "Curandero de las montañas sagradas"
     },
-    
-    
+
+    // ÉPICA - Personajes históricos importantes
     {
-        name: "💙Miku💙",
+        name: "🌟 Princesa Chuya Occllo 🌟",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/ishwpi.png"
+        img: "https://files.catbox.moe/example21.png",
+        description: "Hija del Sol, hermana del Inca"
     },
     {
-        name: "🩵Aoki Lapis🩵",
+        name: "⚔️ Rumiñahui el Valiente ⚔️",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/gje6q7.png"
+        img: "https://files.catbox.moe/example22.png",
+        description: "General que resistió a los conquistadores"
     },
     {
-        name: "💜Defoko Utane💜",
+        name: "🏔️ Capac Yupanqui 🏔️",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/eb1jy3.png"
+        img: "https://files.catbox.moe/example23.png",
+        description: "Príncipe conquistador de Chinchasuyu"
     },
     {
-        name: "💛Neru💛",
+        name: "🌙 Mama Anahuarque 🌙",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/gj18ti.png"
+        img: "https://files.catbox.moe/example24.png",
+        description: "Coya, esposa de Tupac Inca Yupanqui"
     },
     {
-        name: "💛Rin💛",
+        name: "⚡ Quisquis el Estratega ⚡",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/jiefh9.png"
+        img: "https://files.catbox.moe/example25.png",
+        description: "General de la guerra civil inca"
     },
     {
-        name: "💚Gumi💚",
+        name: "🦅 Challcuchima 🦅",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/hpalur.png"
+        img: "https://files.catbox.moe/example26.png",
+        description: "Gran General de Atahualpa"
     },
     {
-        name: "❤Teto❤",
+        name: "💫 Mama Raua Occllo 💫",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/k5w0ea.png"
+        img: "https://files.catbox.moe/example27.png",
+        description: "Coya fundadora del Cusco"
     },
     {
-        name: "💗Emu💗",
+        name: "🌋 Tupac Amaru I 🌋",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/sygb0h.png"
+        img: "https://files.catbox.moe/example28.png",
+        description: "Último Inca de Vilcabamba"
     },
     {
-        name: "Len (gei)",
+        name: "⭐ Capac Raymi ⭐",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/pnho83.png"
+        img: "https://files.catbox.moe/example29.png",
+        description: "Príncipe del solsticio sagrado"
     },
     {
-        name: "💗LUKA🪷",
+        name: "🏺 Sinchi Roca 🏺",
         rarity: "épica",
         probability: 1.5,
-        img: "https://files.catbox.moe/bp2wrg.webp"
+        img: "https://files.catbox.moe/example30.png",
+        description: "Segundo Inca del Cusco"
     },
-   
-    
+
+    // ULTRA RARA - Grandes Incas históricos
     {
-        name: "💙HATSUNE MIKU💙",
+        name: "☀️ MANCO CAPAC ☀️",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/881c3b.png"
+        img: "https://files.catbox.moe/example31.png",
+        description: "Primer Inca, Hijo del Sol, Fundador del Cusco"
     },
     {
-        name: "🩵Aoki Lapis🩵",
+        name: "⚔️ PACHACUTEC INCA YUPANQUI ⚔️",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/fkxvxb.png"
+        img: "https://files.catbox.moe/example32.png",
+        description: "El Transformador del Mundo, Constructor del Imperio"
     },
     {
-        name: "💜Utane Defoko💜",
+        name: "🌟 TUPAC INCA YUPANQUI 🌟",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/c4uvcy.png"
+        img: "https://files.catbox.moe/example33.png",
+        description: "Gran Conquistador, Expandió el Tahuantinsuyu"
     },
     {
-        name: "💛AKITA NERU💛",
+        name: "👑 HUAYNA CAPAC 👑",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/agw1y1.png"
+        img: "https://files.catbox.moe/example34.png",
+        description: "Último Gran Inca, Emperador del Apogeo"
     },
     {
-        name: "💗EMU OTORI💗",
+        name: "🦎 LLOQUE YUPANQUI 🦎",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/ekzntn.png"
+        img: "https://files.catbox.moe/example35.png",
+        description: "Tercer Inca, El Zurdo Memorable"
     },
     {
-        name: "💚Megpoid Gumi💚",
+        name: "🌸 MAMA OCCLLO 🌸",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/opn7vz.png"
+        img: "https://files.catbox.moe/example36.png",
+        description: "Primera Coya, Esposa de Manco Capac"
     },
     {
-        name: "❤KASANE TETO❤",
+        name: "⚡ CAPAC YUPANQUI ⚡",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/6j9jgl.webp"
+        img: "https://files.catbox.moe/example37.png",
+        description: "Quinto Inca, Conquistador del Norte"
     },
     {
-        name: "💛KAGAMINE RIN💛",
+        name: "🏔️ MAYTA CAPAC 🏔️",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/lh5sxn.png"
+        img: "https://files.catbox.moe/example38.png",
+        description: "Cuarto Inca, Guerrero de las Montañas"
     },
     {
-        name: "💥KAGAMINE LEN💢",
+        name: "⚰️ ATAHUALPA ⚰️",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/awuecy.png"
+        img: "https://files.catbox.moe/example39.png",
+        description: "Último Inca Soberano, Víctima de Cajamarca"
     },
     {
-        name: "💗MEGUMIRE LUKA💮",
+        name: "🗿 INCA ROCA 🗿",
         rarity: "ultra rara",
         probability: 0.4,
-        img: "https://files.catbox.moe/jodjln.png"
+        img: "https://files.catbox.moe/example40.png",
+        description: "Sexto Inca, Fundador de los Hanan Cusco"
     },
-    
-    
+
+    // LEGENDARIA - Deidades y seres míticos
     {
-        name: "💙Brazilian Miku💛",
+        name: "☀️🔥 INTI - DIOS SOL 🔥☀️",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/ifl773.jpg" 
+        img: "https://files.catbox.moe/example41.png",
+        description: "Padre de todos los Incas, Dios supremo del Tahuantinsuyu"
     },
     {
-        name: "🖤Inabakumori🖤",
+        name: "🌙✨ MAMA QUILLA ✨🌙",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/1oiyvv.jpg"
+        img: "https://files.catbox.moe/example42.png",
+        description: "Diosa Luna, Esposa de Inti, Protectora de las mujeres"
     },
     {
-        name: "❤KASANE TETO❤",
+        name: "⚡🌩️ ILLAPA - DIOS RAYO 🌩️⚡",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/3cb73f.jpg"
+        img: "https://files.catbox.moe/example43.png",
+        description: "Señor del Trueno y la Lluvia, Controlador del Tiempo"
     },
     {
-        name: "☢️Cyberpunk Edgeruners💫",
+        name: "🌍⛰️ PACHAMAMA ⛰️🌍",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/3bl6qe.png"
+        img: "https://files.catbox.moe/example44.png",
+        description: "Madre Tierra, Diosa de la Fertilidad y la Naturaleza"
     },
     {
-        name: "❤️🩷VOCALOIDS💛💙",
+        name: "🌊🐍 MAMA COCHA 🐍🌊",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/g6kfb6.jpg"
+        img: "https://files.catbox.moe/example45.png",
+        description: "Diosa del Mar y los Lagos, Madre de las Aguas"
     },
     {
-        name: "🌌HALO⚕️",
+        name: "🔥👁️ VIRACOCHA 👁️🔥",
         rarity: "Legendaria",
         probability: 0.167,
-        img: "https://files.catbox.moe/h2hvi4.png"
+        img: "https://files.catbox.moe/example46.png",
+        description: "Creador del Universo, Dios Supremo Anterior a los Incas"
     }
 ];
 
-
-
-const totalProbability = waifuList.reduce((sum, waifu) => sum + waifu.probability, 0);
+const totalProbability = personajesIncas.reduce((sum, personaje) => sum + personaje.probability, 0);
 console.log(`Probabilidad total calculada: ${totalProbability}%`);
-
 
 const cumulativeProbabilities = [];
 let accumulated = 0;
-for (const waifu of waifuList) {
-    accumulated += waifu.probability;
-    cumulativeProbabilities.push({ waifu, threshold: accumulated });
+for (const personaje of personajesIncas) {
+    accumulated += personaje.probability;
+    cumulativeProbabilities.push({ personaje, threshold: accumulated });
 }
 
 let handler = async (m, { conn }) => {
@@ -314,40 +356,39 @@ let handler = async (m, { conn }) => {
     const currentTime = Date.now();
     
     
-    if (global.db.waifu.cooldowns[userId]) {
-        const timeDiff = currentTime - global.db.waifu.cooldowns[userId];
+    if (global.db.inca.cooldowns[userId]) {
+        const timeDiff = currentTime - global.db.inca.cooldowns[userId];
         if (timeDiff < 900000) {
             const remainingTime = 900000 - timeDiff;
             const minutes = Math.floor(remainingTime / 60000);
             const seconds = Math.floor((remainingTime % 60000) / 1000);
-            return m.reply(`⏰ Debes esperar ${minutes}m ${seconds}s para volver a usar este comando.`);
+            return m.reply(`⏰ El oráculo del Inca dice que debes esperar ${minutes}m ${seconds}s para consultar nuevamente los designios del Tahuantinsuyu.`);
         }
     }
 
-   
+    
     const roll = Math.random() * totalProbability;
-    let selectedWaifu = null;
+    let selectedPersonaje = null;
     
-    
-    for (const { waifu, threshold } of cumulativeProbabilities) {
+    for (const { personaje, threshold } of cumulativeProbabilities) {
         if (roll <= threshold) {
-            selectedWaifu = waifu;
+            selectedPersonaje = personaje;
             break;
         }
     }
     
-   
-    if (!selectedWaifu) {
-        selectedWaifu = waifuList[waifuList.length - 1];
+  
+    if (!selectedPersonaje) {
+        selectedPersonaje = personajesIncas[personajesIncas.length - 1];
     }
 
     
     const rarityColors = {
-        'común': '⚪',
-        'rara': '🔵',
-        'épica': '🟣',
-        'ultra rara': '🟡',
-        'Legendaria': '🔴'
+        'común': '🤎', // Marrón como la tierra
+        'rara': '🔵', // Azul como el cielo
+        'épica': '🟣', // Púrpura real
+        'ultra rara': '🟡', // Oro como el Sol
+        'Legendaria': '🔴' // Rojo como el fuego sagrado
     };
 
     const rarityProbs = {
@@ -358,32 +399,75 @@ let handler = async (m, { conn }) => {
         'Legendaria': '1%'
     };
 
+    const rarityNames = {
+        'común': 'HATUN RUNA',
+        'rara': 'CURACA',
+        'épica': 'AUQUI',
+        'ultra rara': 'INCA',
+        'Legendaria': 'HUACA DIVINA'
+    };
+
     
-    let message = `🎲 WAIFU GACHA 🎲\n\n`;
-    message += `👤 Invocador: @${userId.split('@')[0]}\n`;
-    message += `${rarityColors[selectedWaifu.rarity]} Rareza: ${selectedWaifu.rarity.toUpperCase()} (${rarityProbs[selectedWaifu.rarity]})\n`;
-    message += `💫 ¡Felicidades! Obtuviste a:\n`;
-    message += `💙 ${selectedWaifu.name}\n`;
-    message += `\n💫 Usa .save o .c para guardar tu waifu!`;
+    let message = `🏔️ ¡ORÁCULO DEL TAHUANTINSUYU! 🏔️\n\n`;
+    message += `👤 Consultante: @${userId.split('@')[0]}\n`;
+    message += `${rarityColors[selectedPersonaje.rarity]} Rango: ${rarityNames[selectedPersonaje.rarity]} (${rarityProbs[selectedPersonaje.rarity]})\n`;
+    message += `⚱️ Los dioses han hablado...\n\n`;
+    message += `🌟 ¡Has invocado a:\n`;
+    message += `${selectedPersonaje.name}\n\n`;
+    message += `📜 "${selectedPersonaje.description}"\n\n`;
+    message += `💎 Usa .guardar o .coleccion para preservar este encuentro sagrado en tu ushnu personal!`;
 
    
     await conn.sendMessage(m.chat, { 
-        image: { url: selectedWaifu.img },
+        image: { url: selectedPersonaje.img },
         caption: message,
         mentions: [userId]
     });
 
-    
-    global.db.waifu.cooldowns[userId] = currentTime;
-    global.db.waifu.waifus[userId] = selectedWaifu;
+   
+    global.db.inca.cooldowns[userId] = currentTime;
+    global.db.inca.personajes[userId] = selectedPersonaje;
 }
 
-handler.help = ['rw']
-handler.tags = ['rpg']
-handler.command = /^(rw|rollwaifu)$/i
+
+handler.before = async (m, { conn }) => {
+    if (m.text.toLowerCase() === '.guardar' || m.text.toLowerCase() === '.coleccion') {
+        const userId = m.sender;
+        
+        if (!global.db.inca.personajes[userId]) {
+            return m.reply('🏺 No tienes ningún personaje reciente para guardar. Usa .invocar primero.');
+        }
+
+        if (!global.db.inca.collection[userId]) {
+            global.db.inca.collection[userId] = [];
+        }
+
+        const personaje = global.db.inca.personajes[userId];
+        
+        
+        const yaExiste = global.db.inca.collection[userId].some(p => p.name === personaje.name);
+        
+        if (yaExiste) {
+            return m.reply(`🏺 Ya tienes a ${personaje.name} en tu colección sagrada.`);
+        }
+
+        global.db.inca.collection[userId].push({
+            ...personaje,
+            fechaObtencion: new Date().toLocaleDateString('es-PE'),
+            timestamp: Date.now()
+        });
+
+        delete global.db.inca.personajes[userId]; 
+
+        return m.reply(`✅ ${personaje.name} ha sido añadido a tu colección del Tahuantinsuyu!\n🏺 Colección actual: ${global.db.inca.collection[userId].length} personajes`);
+    }
+}
+
+handler.help = ['invocar', 'inca', 'tahuantinsuyu']
+handler.tags = ['rpg', 'inca']
+handler.command = /^(invocar|inca|tahuantinsuyu|ri)$/i
 handler.register = true
 handler.group = true
 handler.cooldown = 900000
 
 export default handler
-
