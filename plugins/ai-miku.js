@@ -98,44 +98,19 @@ handler.register = true
 
 export default handler
 
-// [Resto del código igual - todas las funciones de API...]
-const GEMINI_API_KEY = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-const GROQ_API_KEY = "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" 
-const HF_TOKEN = "https://router.huggingface.co/v1" 
+// APIs actualizadas 2025
+const GEMINI_API_KEY = "AIzaSyDummy_Key_Replace_With_Your_Gemini_Key" // Obtén gratis en ai.google.dev
+const HF_TOKEN = "hf_dummy_token_replace_with_yours" // Token gratuito de Hugging Face
+const OPENROUTER_KEY = "sk-or-dummy-key-replace" // API key de OpenRouter (tiene modelos gratis)
 
 async function getAIResponse(query, username, prompt) {
     const apis = [
+        // 1. Google Gemini 2.5 Flash - Gratis hasta 15 RPM
         {
-            name: "Groq Llama 4",
+            name: "Google Gemini 2.5 Flash",
             call: async () => {
                 const response = await axios.post(
-                    'https://api.groq.com/openai/v1/chat/completions',
-                    {
-                        model: "meta-llama/llama-4-scout-17b-16e-instruct",
-                        messages: [
-                            { role: "system", content: prompt },
-                            { role: "user", content: query }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 500
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${GROQ_API_KEY}`
-                        },
-                        timeout: 30000
-                    }
-                )
-                return response.data.choices[0]?.message?.content
-            }
-        },
-        
-        {
-            name: "Google Gemini 2.0 Flash",
-            call: async () => {
-                const response = await axios.post(
-                    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
                     {
                         contents: [{
                             parts: [{
@@ -144,13 +119,20 @@ async function getAIResponse(query, username, prompt) {
                         }],
                         generationConfig: {
                             temperature: 0.7,
-                            maxOutputTokens: 500
-                        }
+                            maxOutputTokens: 500,
+                            topP: 0.8,
+                            topK: 40
+                        },
+                        safetySettings: [
+                            {
+                                category: "HARM_CATEGORY_HARASSMENT",
+                                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                            }
+                        ]
                     },
                     {
                         headers: {
-                            'Content-Type': 'application/json',
-                            'X-goog-api-key': GEMINI_API_KEY
+                            'Content-Type': 'application/json'
                         },
                         timeout: 30000
                     }
@@ -159,19 +141,48 @@ async function getAIResponse(query, username, prompt) {
             }
         },
         
+        // 2. OpenRouter - Modelos gratis disponibles
         {
-            name: "Hugging Face Kimi",
+            name: "OpenRouter Free Models",
             call: async () => {
                 const response = await axios.post(
-                    'https://router.huggingface.co/v1/chat/completions',
+                    'https://openrouter.ai/api/v1/chat/completions',
                     {
-                        model: "moonshotai/Kimi-K2-Instruct",
+                        model: "google/gemini-flash-1.5", // Modelo gratuito
                         messages: [
                             { role: "system", content: prompt },
                             { role: "user", content: query }
                         ],
                         temperature: 0.7,
                         max_tokens: 500
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${OPENROUTER_KEY}`,
+                            'HTTP-Referer': 'https://github.com/your-repo', // Opcional
+                            'X-Title': 'Miku Bot'
+                        },
+                        timeout: 30000
+                    }
+                )
+                return response.data.choices[0]?.message?.content
+            }
+        },
+
+        // 3. Hugging Face Inference API - Gratis con límites generosos
+        {
+            name: "Hugging Face Qwen2.5",
+            call: async () => {
+                const response = await axios.post(
+                    'https://api-inference.huggingface.co/models/Qwen/Qwen2.5-7B-Instruct',
+                    {
+                        inputs: `${prompt}\n\nUsuario: ${query}\nAsistente:`,
+                        parameters: {
+                            temperature: 0.7,
+                            max_new_tokens: 500,
+                            return_full_text: false
+                        }
                     },
                     {
                         headers: {
@@ -181,17 +192,69 @@ async function getAIResponse(query, username, prompt) {
                         timeout: 30000
                     }
                 )
+                return response.data[0]?.generated_text || response.data?.generated_text
+            }
+        },
+
+        // 4. Hugging Face Microsoft DialoGPT
+        {
+            name: "HF Microsoft DialoGPT",
+            call: async () => {
+                const response = await axios.post(
+                    'https://api-inference.huggingface.co/models/microsoft/DialoGPT-large',
+                    {
+                        inputs: query,
+                        parameters: {
+                            temperature: 0.7,
+                            max_length: 500
+                        }
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${HF_TOKEN}`
+                        },
+                        timeout: 30000
+                    }
+                )
+                return response.data[0]?.generated_text
+            }
+        },
+
+        // 5. Puter.js - API gratuita sin límites estrictos
+        {
+            name: "Puter.js AI",
+            call: async () => {
+                const response = await axios.post(
+                    'https://api.puter.com/v1/ai/chat',
+                    {
+                        model: "gpt-4o-mini", // Modelo gratuito disponible
+                        messages: [
+                            { role: "system", content: prompt },
+                            { role: "user", content: query }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 500
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        timeout: 30000
+                    }
+                )
                 return response.data.choices[0]?.message?.content
             }
         },
-        
+
+        // 6. Together AI - Tiene tier gratuito
         {
-            name: "Groq Llama 3.1",
+            name: "Together AI Llama",
             call: async () => {
                 const response = await axios.post(
-                    'https://api.groq.com/openai/v1/chat/completions',
+                    'https://api.together.xyz/v1/chat/completions',
                     {
-                        model: "llama-3.1-8b-instant",
+                        model: "meta-llama/Llama-3.2-3B-Instruct-Turbo",
                         messages: [
                             { role: "system", content: prompt },
                             { role: "user", content: query }
@@ -202,7 +265,7 @@ async function getAIResponse(query, username, prompt) {
                     {
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${GROQ_API_KEY}`
+                            'Authorization': `Bearer ${process.env.TOGETHER_API_KEY || 'dummy-key'}`
                         },
                         timeout: 30000
                     }
@@ -234,7 +297,7 @@ async function analyzeImageGemini(imageBuffer) {
         const base64Image = imageBuffer.toString('base64')
         
         const response = await axios.post(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
             {
                 contents: [{
                     parts: [
@@ -248,12 +311,15 @@ async function analyzeImageGemini(imageBuffer) {
                             }
                         }
                     ]
-                }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 300
+                }
             },
             {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-goog-api-key': GEMINI_API_KEY
+                    'Content-Type': 'application/json'
                 },
                 timeout: 30000
             }
@@ -263,6 +329,7 @@ async function analyzeImageGemini(imageBuffer) {
     } catch (error) {
         console.error('Error analizando imagen con Gemini:', error.response?.data || error.message)
         
+        // Fallback a Hugging Face para análisis de imagen
         try {
             const response = await axios.post(
                 'https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large',
@@ -275,7 +342,8 @@ async function analyzeImageGemini(imageBuffer) {
                     timeout: 30000
                 }
             )
-            return response.data[0]?.generated_text || 'Una imagen que no pude analizar bien'
+            const caption = response.data[0]?.generated_text || 'Una imagen interesante'
+            return `Veo una imagen que muestra: ${caption}`
         } catch (hfError) {
             console.error('Error con Hugging Face imagen:', hfError.message)
             return 'Una imagen muy interesante que mis ojos de Vocaloid no pueden procesar ahora mismo'
@@ -322,5 +390,5 @@ function getLocalMikuResponse(query, username) {
     }
     
     const randomResponse = responses[Math.floor(Math.random() * responses.length)]
-    return randomResponse
+    return `${username}, ${randomResponse}`
 }
