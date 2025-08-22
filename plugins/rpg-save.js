@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const dbPath = path.join(process.cwd(), 'src', 'database');
-const databaseFilePath = path.join(dbPath, 'waifudatabase.json');
+const databaseFilePath = path.join(dbPath, 'incadatabase.json');  
 
 function loadDatabase() {
     try {
@@ -33,93 +33,92 @@ function saveDatabase(data) {
 
 let handler = async (m, { conn }) => {
     const userId = m.sender;
-    let userName = 'Usuario';
-    
+    let userName = 'Sumaq Runa';
+
     try {
-        userName = (await conn.getName(userId)) || 'Usuario';
+        userName = (await conn.getName(userId)) || 'Sumaq Runa';
     } catch {}
 
-    
     if (!global.db) global.db = {};
-    if (!global.db.waifu) global.db.waifu = { waifus: {} };
+    if (!global.db.inca) global.db.inca = { personajes: {}, collection: {}, cooldowns: {} };
 
     try {
-        
-        let currentWaifu = null;
-        let waifuKey = null;
+        let currentPersonaje = null;
+        let personajeKey = null;
 
-       
-        const waifuKeys = Object.keys(global.db.waifu.waifus);
-        
-        if (waifuKeys.length === 0) {
-            return m.reply('💙 No hay personajes disponibles. Usa .rw para generar uno.');
+        const personajeKeys = Object.keys(global.db.inca.personajes);
+
+        if (personajeKeys.length === 0) {
+            return m.reply('💙 No hay personajes invocados. Usa .invocar para llamar a un personaje del Tahuantinsuyu.');
         }
 
-        
-        if (global.db.waifu.waifus[userId]) {
-            currentWaifu = global.db.waifu.waifus[userId];
-            waifuKey = userId;
-        }
-       
-        else if (waifuKeys.length > 0) {
-            waifuKey = waifuKeys[0];
-            currentWaifu = global.db.waifu.waifus[waifuKey];
+        if (global.db.inca.personajes[userId]) {
+            currentPersonaje = global.db.inca.personajes[userId];
+            personajeKey = userId;
+        } else if (personajeKeys.length > 0) {
+            personajeKey = personajeKeys[0];
+            currentPersonaje = global.db.inca.personajes[personajeKey];
         }
 
-        if (!currentWaifu || !currentWaifu.name) {
+        if (!currentPersonaje || !currentPersonaje.name) {
             return m.reply('💙 No se encontró personaje válido para guardar.');
         }
 
-        
         let db = loadDatabase();
-        
-       
+
         if (!db.users[userId]) {
             db.users[userId] = {
                 name: userName,
-                characters: []
+                quipu: []
             };
         }
 
-        
-        const exists = db.users[userId].characters.find(
-            char => char.name === currentWaifu.name && char.rarity === currentWaifu.rarity
+        const exists = db.users[userId].quipu.find(
+            char => char.name === currentPersonaje.name && char.rarity === currentPersonaje.rarity
         );
 
         if (exists) {
-            delete global.db.waifu.waifus[waifuKey];
-            return m.reply(`💙 Ya tienes a **${currentWaifu.name}** (${currentWaifu.rarity}) en tu colección.`);
+            delete global.db.inca.personajes[personajeKey];
+            return m.reply(`🏺 Ya tienes a **${currentPersonaje.name}** (${currentPersonaje.rarity}) en tu quipu sagrado.`);
         }
 
-        
-        db.users[userId].characters.push({
-            name: currentWaifu.name,
-            rarity: currentWaifu.rarity,
-            obtainedAt: new Date().toISOString()
+        db.users[userId].quipu.push({
+            ...currentPersonaje,
+            fechaObtencion: new Date().toLocaleDateString('es-PE'),
+            timestamp: Date.now()
         });
 
-        
         if (!saveDatabase(db)) {
-            return m.reply('❌ Error al guardar en base de datos.');
+            return m.reply('❌ Error al grabar en el quipu (registro).');
         }
 
-        
-        delete global.db.waifu.waifus[waifuKey];
+        delete global.db.inca.personajes[personajeKey];
 
-        
         const rarityEmojis = {
-            'comun': '⚪', 'poco comun': '🟢', 'raro': '🔵',
-            'epico': '🟣', 'legendario': '🟡', 'mitico': '🔴'
+            'común': '🤎',
+            'rara': '🔵',
+            'épica': '🟣',
+            'ultra rara': '🟡',
+            'legendaria': '🔴'
         };
 
-        const emoji = rarityEmojis[currentWaifu.rarity.toLowerCase()] || '💙';
-        
-        let msg = `✅ ¡PERSONAJE GUARDADO! ✅\n\n`;
-        msg += `${emoji} *${currentWaifu.name}*\n`;
-        msg += `💎 *${currentWaifu.rarity.toUpperCase()}*\n`;
-        msg += `👤 ${userName}\n`;
-        msg += `📊 Total: *${db.users[userId].characters.length}* personajes\n\n`;
-        msg += `🔍 Usa *.col* para ver tu colección`;
+        const rarityTitles = {
+            'común': 'HATUN RUNA',
+            'rara': 'CURACA',
+            'épica': 'AUQUI',
+            'ultra rara': 'INCA',
+            'legendaria': 'HUACA DIVINA'
+        };
+
+        const emoji = rarityEmojis[currentPersonaje.rarity.toLowerCase()] || '🦙';
+        const rarityTitle = rarityTitles[currentPersonaje.rarity.toLowerCase()] || currentPersonaje.rarity;
+
+        let msg = `🛕 *¡GUARDADO EN EL USHNU SAGRADO!* 🛕\n\n`;
+        msg += `${emoji} *${currentPersonaje.name}*\n`;
+        msg += `💎 *Rango: ${rarityTitle.toUpperCase()}*\n`;
+        msg += `👤 Consultante: ${userName}\n`;
+        msg += `📊 Total en tu quipu: *${db.users[userId].quipu.length}* personajes ancestrales\n\n`;
+        msg += `🌄 Usa *.coleccion* para ver tus tesoros del Tahuantinsuyu.`;
 
         return m.reply(msg);
 
@@ -127,11 +126,12 @@ let handler = async (m, { conn }) => {
         console.error('Error en save:', error);
         return m.reply(`❌ Error: ${error.message}`);
     }
-}
+};
 
-handler.help = ['save', 'guardar', 'claim']
-handler.tags = ['rpg']
-handler.command = /^(save|guardar|c|claim|reclamar)$/i
-handler.group = true
+handler.help = ['guardar', 'save', 'claim', 'c', 'reclamar'];
+handler.tags = ['rpg', 'inca'];
+handler.command = /^(guardar|save|claim|c|reclamar)$/i;
+handler.group = true;
 
 export default handler;
+
