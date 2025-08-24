@@ -15,12 +15,12 @@ let img = 'https://files.catbox.moe/ewiruf.jpg';
 let time = user.lastmiming + 600000;
 
 if (new Date() - user.lastmiming < 600000) {
-return conn.reply(m.chat, `🎤💙 Debes esperar ${msToTime(time - new Date())} para volver a minar en el mundo virtual. ✨🎵`, m);
+return conn.reply(m.chat, `🔶 Debes esperar ${msToTime(time - new Date())} para volver a minar en el mundo virtual.⛏️`, m);
 }
 
 let hasil = Math.floor(Math.random() * 1000);
 let info = `⛏️ *Te has adentrando en lo profundo de las cuevas*\n\n` +
-`> *💙 Obtuviste estos recursos*\n\n` +
+`> *🔶 Obtuviste estos recursos*\n\n` +
 `✨ *Exp*: ${hasil}\n` +
 `💸 *${moneda}*: ${coin}\n` +
 `♦️ *Esmeralda*: ${emerald}\n` +
