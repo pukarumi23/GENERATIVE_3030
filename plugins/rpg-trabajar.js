@@ -10,7 +10,7 @@ return
 }
 let rsl = Math.floor(Math.random() * 500)
 cooldowns[m.sender] = Date.now()
-await conn.reply(m.chat, `\n 🔶se agregaran  ${pickRandom(trabajo)} *${toNum(rsl)}* ( *${rsl}* ) ${moneda} ◈`, m)
+await conn.reply(m.chat, `🔶 ${pickRandom(trabajo)} *${toNum(rsl)}* intis \n 💳se agregaran ( *${rsl}* ) ${moneda} ◈`, m)
 user.coin += rsl
 }
 
