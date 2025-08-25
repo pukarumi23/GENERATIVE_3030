@@ -13,7 +13,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `💙 Ingresa el nombre de la música a descargar.\n\nEjemplo: ${usedPrefix}${command} Coldplay Viva la Vida`, m, fake);
+      return conn.reply(m.chat, `🔶 Ingresa el nombre de la música a descargar.\n\nEjemplo: ${usedPrefix}${command} Coldplay Viva la Vida`, m, fake);
     }
 
     const search = await yts(text);
@@ -44,12 +44,12 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const canal = author.name || 'Desconocido';
     
     const infoMessage = `
-*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩ💙𝗠𝗶𝗸𝘂𝗺𝗶𝗻🌱ﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
-> 💙 *Título:* ${title}
+*𖹭.╭╭ִ╼࣪━ִﮩ٨ﮩ 🔶INDEPENDIENTE🧡٨ـﮩ━ִ╾࣪╮╮.𖹭*
+> 🔶 *Título:* ${title}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
-> 🌱 *Duración:* ${timestamp}
+> 🧡 *Duración:* ${timestamp}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
-> 💙 *Vistas:* ${vistas}
+> 🔶 *Vistas:* ${vistas}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
 > 🌱 *Canal:* ${canal}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
@@ -114,7 +114,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   } catch (error) {
     console.error("Error completo:", error);
-    return m.reply(`💙 Ocurrió un error: ${error.message || 'Desconocido'}`);
+    return m.reply(`🔶 Ocurrió un error: ${error.message || 'Desconocido'}`);
   }
 };
 
@@ -130,7 +130,7 @@ function isValidUrl(string) {
 
 
 async function processDownload(conn, m, url, title, option) {
-  await conn.reply(m.chat, `💙 Procesando ${option === 1 || option === 3 ? 'audio' : 'video'}. Por favor espera...`, m);
+  await conn.reply(m.chat, `🔶 Procesando ${option === 1 || option === 3 ? 'audio' : 'video'}. Por favor espera...`, m);
   
   try {
     let downloadUrl;
@@ -200,13 +200,13 @@ async function processDownload(conn, m, url, title, option) {
     if (!user.cebollinesDeducted) {
       user.chocolates -= 2;
       user.cebollinesDeducted = true;
-      conn.reply(m.chat, `💙 Has utilizado 2 *Cebollines 🌱*`, m);
+      conn.reply(m.chat, `🔶 Has utilizado 2 *Intis 🪙*`, m);
     }
     
     return true;
   } catch (error) {
     console.error("Error al procesar descarga:", error);
-    conn.reply(m.chat, `💙 Error: ${error.message}`, m);
+    conn.reply(m.chat, `🔶 Error: ${error.message}`, m);
     return false;
   }
 }
