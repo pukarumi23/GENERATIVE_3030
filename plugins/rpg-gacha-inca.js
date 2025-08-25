@@ -13,7 +13,7 @@ const personajesIncas = [
         name: "Campesino Quechua",
         rarity: "común",
         probability: 5,  
-        img: "https://files.catbox.moe/example1.png", //reemplazar con imágenes 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMMCKkNvJblbsnAOxtdOfdXZ2L03MIB0DGg&s", //reemplazar con imágenes 
         description: "Trabajador de los andenes sagrados"
     },
     {
@@ -465,9 +465,10 @@ handler.before = async (m, { conn }) => {
 
 handler.help = ['invocar', 'inca', 'tahuantinsuyu']
 handler.tags = ['rpg', 'inca']
-handler.command = /^(invocar|inca|tahuantinsuyu|ri)$/i
+handler.command = /^(inca|ri)$/i
 handler.register = true
 handler.group = true
 handler.cooldown = 900000
 
 export default handler
+
