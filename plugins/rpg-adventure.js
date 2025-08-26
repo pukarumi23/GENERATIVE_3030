@@ -4,14 +4,14 @@ let handler = async (m, { conn }) => {
 let user = global.db.data.users[m.sender];
 let img = 'https://us.123rf.com/450wm/artcuboy/artcuboy2304/artcuboy230402593/203429490-caminante-de-pie-en-la-cima-de-una-monta%C3%B1a-ilustraci%C3%B3n-de-arte-digital-ai-generativo.jpg?ver=6';
 if (!user) {
-return conn.reply(m.chat, ` 🔶el usuario ne se encuentra en la base de datos`, m);
+return conn.reply(m.chat, ` 🔶el usuario no se encuentra en la base de datos`, m);
 }
 if (user.health < 80) {
 return conn.reply(m.chat, '🔶No tienes suficiente energía para aventurarte en el mundo. Usa el comando .heal para recuperar tu energía ✨💫', m);
 }
 if (user.lastAdventure && new Date() - user.lastAdventure <= 1500000) {
 let timeLeft = 1500000 - (new Date() - user.lastAdventure);
-return conn.reply(m.chat, `🔶 Debes esperar ${msToTime(timeLeft)} para tu siguente aventura en en el mundo`, m);
+return conn.reply(m.chat, `🔶 Debes esperar ${msToTime(timeLeft)} para tu siguente aventura en el mundo`, m);
 }
 let kingdoms = [
   'Imperio Inca de Tawantinsuyo',
