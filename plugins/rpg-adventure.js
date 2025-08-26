@@ -4,26 +4,26 @@ let handler = async (m, { conn }) => {
 let user = global.db.data.users[m.sender];
 let img = 'https://us.123rf.com/450wm/artcuboy/artcuboy2304/artcuboy230402593/203429490-caminante-de-pie-en-la-cima-de-una-monta%C3%B1a-ilustraci%C3%B3n-de-arte-digital-ai-generativo.jpg?ver=6';
 if (!user) {
-return conn.reply(m.chat, `🎤💙 El fanático no se encuentra en la base de datos del concierto virtual ✨`, m);
+return conn.reply(m.chat, ` 🔶el usuario ne se encuentra en la base de datos`, m);
 }
 if (user.health < 80) {
-return conn.reply(m.chat, '🎤� No tienes suficiente energía para aventurarte en el mundo virtual. Usa el comando .heal para recuperar tu energía ✨💫', m);
+return conn.reply(m.chat, '🔶No tienes suficiente energía para aventurarte en el mundo. Usa el comando .heal para recuperar tu energía ✨💫', m);
 }
 if (user.lastAdventure && new Date() - user.lastAdventure <= 1500000) {
 let timeLeft = 1500000 - (new Date() - user.lastAdventure);
-return conn.reply(m.chat, `🎤💙 Debes esperar ${msToTime(timeLeft)} antes de aventurarte de nuevo en el concierto virtual ✨🎵`, m);
+return conn.reply(m.chat, `🔶 Debes esperar ${msToTime(timeLeft)} para tu siguente aventura en en el mundo`, m);
 }
 let kingdoms = [
-'Reino Virtual de Eldoria',
-'Reino Cibernético de Drakonia',
-'Reino Digital de Arkenland',
-'Reino Musical de Valoria',
-'Reino Mágico de Mystara',
-'Reino Virtual de Ferelith',
-'Reino Cibernético de Thaloria',
-'Reino Digital de Nimboria',
-'Reino Musical de Galadorn',
-'Reino Virtual de Elenaria'
+  'Imperio Inca de Tawantinsuyo',
+  'Reino Maya de Tikal',
+  'Señorío Chimú de Chan Chan',
+  'Reino Azteca de Tenochtitlán',
+  'Reino Muisca de Bacatá',
+  'Ciudad Sagrada de Teotihuacán',
+  'Reino Zapoteca de Monte Albán',
+  'Reino Mochica del Sol y la Luna',
+  'Reino Purépecha de Tzintzuntzan',
+  'Ciudadela Sagrada de Machu Picchu'
 ];
 let randomKingdom = pickRandom(kingdoms);
 let coin = pickRandom([20, 5, 7, 8, 88, 40, 50, 70, 90, 999, 300]);
@@ -47,18 +47,18 @@ user.lastAdventure = new Date();
 if (user.health < 0) {
 user.health = 0;
 }
-let info = `🎤� Te has aventurado en el *<${randomKingdom}>* ✨\n` +
-`� *Aventura Virtual Finalizada* �\n` +
-`� *Notas Musicales Ganadas:* ${coin}\n` +
-`♦️ *Esmeralda Virtual:* ${emerald}\n` +
-`🔩 *Hierro Cibernético:* ${iron}\n` +
-`🏅 *Oro Digital:* ${gold}\n` +
-`🕋 *Carbón Virtual:* ${coal}\n` +
-`🪨 *Piedra del Concierto:* ${stone}\n` +
-`💎 *Diamantes del Mundo Virtual:* ${diamonds}\n` +
-`✨ *Experiencia Musical Ganada:* ${exp}\n` +
-`❤️ *Energía Virtual Actual:* ${user.health}`;
-await conn.sendFile(m.chat, img, 'miku.jpg', info, fkontak);
+let info = `⚔️� Te has aventurado en el *<${randomKingdom}>* ✨\n` +
+`� *Aventura Finalizada* �\n` +
+`� *Intis ganados:* ${coin}\n` +
+`♦️ *Esmeralda :* ${emerald}\n` +
+`🔩 *Hierro:* ${iron}\n` +
+`🏅 *Oro:* ${gold}\n` +
+`🕋 *Carbón:* ${coal}\n` +
+`🪨 *Piedras:* ${stone}\n` +
+`💎 *Diamantes:* ${diamonds}\n` +
+`✨ *Experiencia Ganada:* ${exp}\n` +
+`❤️ *Energía Actual:* ${user.health}`;
+await conn.sendFile(m.chat, img, 'aventura.jpg', info, fkontak);
 }
 
 handler.help = ['aventura', 'adventure'];
