@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
 let user = global.db.data.users[m.sender];
-let img = 'https://raw.githubusercontent.com/Brauliovh3/HATSUNE-MIKU/main/Contenido/1745557963353.jpeg';
+let img = 'https://us.123rf.com/450wm/artcuboy/artcuboy2304/artcuboy230402593/203429490-caminante-de-pie-en-la-cima-de-una-monta%C3%B1a-ilustraci%C3%B3n-de-arte-digital-ai-generativo.jpg?ver=6';
 if (!user) {
 return conn.reply(m.chat, `🎤💙 El fanático no se encuentra en la base de datos del concierto virtual ✨`, m);
 }
