@@ -15,6 +15,7 @@ let handler = async (m, { conn, args }) => {
     let name = conn.getName(userId);
     let cumpleanos = user.birth || 'No especificado';
     let genero = user.genre || 'No especificado';
+    let pareja = user.marry || 'Nadie';
     let description = user.description || 'Sin Descripción';
     let exp = user.exp || 0;
     let nivel = user.level || 0;
@@ -22,24 +23,24 @@ let handler = async (m, { conn, args }) => {
     let coins = user.coin || 0;
     let bankCoins = user.bank || 0;
 
-    let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://raw.githubusercontent.com/Brauliovh3/HATSUNE-MIKU/main/Contenido/1745522645448.jpeg');
+    let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://w7.pngwing.com/pngs/492/82/png-transparent-hatsune-miku-vocaloid-anime-animation-hatsune-miku-blue-fictional-characters-black-hair.png');
 
     let profileText = `
-「✿」 *Perfil* ◢@${userId.split('@')[0]}◤
+💙 *Perfil* ◢@${userId.split('@')[0]}◤
 ${description}
 
-✦ Edad » ${user.age || 'Desconocida'}
-♛ *Cumpleaños* » ${cumpleanos}
-⚥ *Género* » ${genero}
-♡ *Casado con* » ${pareja}
+🐱‍🏍 Edad » ${user.age || 'Desconocida'}
+🎉 *Cumpleaños* » ${cumpleanos}
+🚻 *Género* » ${genero}
+💍 *Casado con* » ${pareja}
 
-☆ *Experiencia* » ${exp.toLocaleString()}
-❖ *Nivel* » ${nivel}
-✎ Rango » ${role}
+💫 *Experiencia* » ${exp.toLocaleString()}
+📈 *Nivel* » ${nivel}
+🔌 Rango » ${role}
 
-⛁ *Coins Cartera* » ${coins.toLocaleString()} ${moneda}
-⛃ *Coins Banco* » ${bankCoins.toLocaleString()} ${moneda}
-❁ *Premium* » ${user.premium ? '✅' : '❌'}
+💎 *Coins Cartera* » ${coins.toLocaleString()} ${moneda}
+🎫 *Coins Banco* » ${bankCoins.toLocaleString()} ${moneda}
+🔰 *Premium* » ${user.premium ? '✅' : '❌'}
   `.trim();
 
     await conn.sendMessage(m.chat, { 
@@ -47,7 +48,7 @@ ${description}
         contextInfo: {
             mentionedJid: [userId],
             externalAdReply: {
-                title: '✧ Perfil de Usuario ✧',
+                title: '💙 Perfil de Usuario 💙',
                 body: dev,
                 thumbnailUrl: perfil,
                 mediaType: 1,
