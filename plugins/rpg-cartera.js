@@ -20,13 +20,6 @@ let handler = async (m, {conn, usedPrefix}) => {
     // Elementos barrocos/góticos y emojis
     let borderTop = "╔═━━━━━━༺༻━━━━━━═╗"
     let borderBot = "╚═━━━━━━༺༻━━━━━━═╝"
-    let gothicFrame = "༒༓༒༓༒༓༒༓༒"
-    let skull = "💀"
-    let cross = "✝️"
-    let rose = "🥀"
-    let bat = "🦇"
-    let candle = "🕯️"
-    let stars = "✦"
     let userTag = who == m.sender ? "𝔘𝔰𝔲𝔞𝔯𝔦𝔬:" : `𝔘𝔰𝔲𝔞𝔯𝔦𝔬: @${who.split('@')[0]}`
     let walletTitle = "𝕮𝖆𝖗𝖙𝖊𝖗𝖆:"
     let coinArt = `${moneda}${skull}${rose}`
