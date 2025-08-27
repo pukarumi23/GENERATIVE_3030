@@ -3,7 +3,7 @@ let who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m
 if (who == conn.user.jid) return error 
 if (!(who in global.db.data.users)) return conn.reply(m.chat, `🔶 Este usuario no está registrado en mi base de datos . ✨`, m , rcanal)
 let user = global.db.data.users[who]
-await m.reply(`${who == m.sender ? `🔶Tienes *${user.coin} ${moneda} 🎤* en tu cartera ! ✨` : `🔶 El usuario @${who.split('@')[0]} tiene *${user.coin} ${moneda} 🎤* en su cartera  ✨`}. `, null, { mentions: [who] })}
+await m.reply(`${who == m.sender ? `🔶Tienes *${user.coin} ${moneda} * en tu cartera ! ✨` : `🔶 El usuario @${who.split('@')[0]} tiene *${user.coin} ${moneda} 🎤* en su cartera  ✨`}. `, null, { mentions: [who] })}
 
 handler.help = ['wallet']
 handler.tags = ['economy']
