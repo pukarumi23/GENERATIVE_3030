@@ -11,9 +11,12 @@ let handler = async (m, { conn, usedPrefix }) => {
     const texto = `𐌔⟦ 🔶 𝕀ℕ𝔽𝕆 𝔼ℂ𝕆ℕ𝕆́𝕄𝕀ℂ𝔸 🔶 ⟧𐌔 
 
 ༺❀༻═══•❖•═══༺❀༻
-👤 usuario: *${conn.getName(who)}*   
-🪙 Intis: *${user.coin} ${moneda}*
+👤 usuario: *${conn.getName(who)}*  
+✠══════✠
+💳cartera: *${user.coin} ${moneda}*
+✠══════✠
 🏦 Banco: *${user.bank} ${moneda}*
+✠══════✠
 📊 Total: *${total} ${moneda}*
 ༺❀༻═══•❖•═══༺❀༻
 
