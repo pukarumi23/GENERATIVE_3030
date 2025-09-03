@@ -30,10 +30,10 @@ let handler = async (m, { conn }) => {
 
         
         const rarityCount = {
-            'legendaria': 0,
+            'mitico': 0,
             'ultra rara': 0,
-            'épica': 0,
-            'rara': 0,
+            'epico': 0,
+            'raro': 0,
             'común': 0
         };
 
@@ -46,21 +46,22 @@ let handler = async (m, { conn }) => {
 
         message += `❯🏺 *RESUMEN DE QUIPU* 🏺 ❮\n\n`;
         message += `┌──『 Rareza 』─────『 Cantidad 』───┐\n`;
-        message += `│ 🔴 Legendaria  │ ${rarityCount['legendaria'].toString().padEnd(3)} │ ${createBar(rarityCount['legendaria'], 10)} │\n`;
-        message += `│ 🟡 Ultra Rara  │ ${rarityCount['ultra rara'].toString().padEnd(3)} │ ${createBar(rarityCount['ultra rara'], 10)} │\n`;
-        message += `│ 🟣 Épica       │ ${rarityCount['épica'].toString().padEnd(3)} │ ${createBar(rarityCount['épica'], 10)} │\n`;
-        message += `│ 🔵 Rara        │ ${rarityCount['rara'].toString().padEnd(3)} │ ${createBar(rarityCount['rara'], 10)} │\n`;
-        message += `│ 🤎 Común       │ ${rarityCount['común'].toString().padEnd(3)} │ ${createBar(rarityCount['común'], 10)} │\n`;
+        message += `│  mitico 👑     │ ${rarityCount['legendaria'].toString().padEnd(3)} │ ${createBar(rarityCount['legendaria'], 10)} │\n`;
+        message += `│  legendario 🌞 │ ${rarityCount['ultra rara'].toString().padEnd(3)} │ ${createBar(rarityCount['ultra rara'], 10)} │\n`;
+        message += `│  epico 🗿       │ ${rarityCount['épica'].toString().padEnd(3)} │ ${createBar(rarityCount['épica'], 10)} │\n`;
+        message += `│  poco comun 🪶   │ ${rarityCount['rara'].toString().padEnd(3)} │ ${createBar(rarityCount['rara'], 10)} │\n`;
+        message += `│  comun 🌾      │ ${rarityCount['común'].toString().padEnd(3)} │ ${createBar(rarityCount['común'], 10)} │\n`;
         message += `└───────────────────────────────┘\n\n`;
 
         message += `📜 Total de personajes en tu quipu: ${collection.length}\n\n`;
 
         const rarityEmojis = {
-            'legendaria': '🔴',
-            'ultra rara': '🟡',
-            'épica': '🟣',
-            'rara': '🔵',
-            'común': '🤎'
+            'comun': '🌾',
+            'poco comun': '🪶', 
+            'raro': '⛰️',       
+            'epico': '🗿',       
+            'legendario': '🌞',  
+            'mitico': '👑'
         };
 
         
