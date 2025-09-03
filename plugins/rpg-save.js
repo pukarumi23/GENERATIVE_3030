@@ -95,19 +95,20 @@ let handler = async (m, { conn }) => {
         delete global.db.inca.personajes[personajeKey];
 
         const rarityEmojis = {
-            'común': '🤎',
-            'rara': '🔵',
-            'épica': '🟣',
-            'ultra rara': '🟡',
-            'legendaria': '🔴'
+             'comun': '🌾',       
+             'poco comun': '🪶', 
+             'raro': '⛰️',       
+             'epico': '🗿',       
+             'legendario': '🌞',  
+             'mitico': '👑'
         };
 
         const rarityTitles = {
             'común': 'HATUN RUNA',
             'rara': 'CURACA',
-            'épica': 'AUQUI',
+            'epico': 'AUQUI',
             'ultra rara': 'INCA',
-            'legendaria': 'HUACA DIVINA'
+            'mitico': 'HUACA DIVINA'
         };
 
         const emoji = rarityEmojis[currentPersonaje.rarity.toLowerCase()] || '🦙';
