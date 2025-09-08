@@ -16,24 +16,24 @@ let handler = async (m, { conn, text }) => {
         who = m.chat;
     }
     
-    if (!who) return m.reply(`🎤💙 Por favor, menciona al fanático o cita un mensaje en el concierto virtual ✨`);
+    if (!who) return m.reply(`🔶 Por favor, menciona al usuario o responde un mensaje✨`);
     
     let txt = text.replace('@' + who.split`@`[0], '').trim();
-    if (!txt) return m.reply(`🎤💙 Por favor, ingresa la cantidad de notas musicales que deseas añadir al concierto virtual ✨🎵`);
-    if (isNaN(txt)) return m.reply(`🎤💙 Solo números son válidos en el mundo virtual de Miku ✨💫`);
+    if (!txt) return m.reply(`🔶 Por favor, ingresa la cantidad de intis que deseas añadir al usuario`);
+    if (isNaN(txt)) return m.reply(`🔶 Solo números son válidos`);
     
     let dmt = parseInt(txt);
     let coin = dmt;
     let pjk = Math.ceil(dmt * impts);
     coin += pjk;
     
-    if (coin < 1) return m.reply(`🎤💙 El mínimo es *1* nota musical en el concierto virtual ✨🎵`);
+    if (coin < 1) return m.reply(`🔶 El mínimo es *1* inti para incrementar`);
     
     let users = global.db.data.users;
     users[who].coin += dmt;
     
-    m.reply(`🎤� *Notas Musicales Añadidas al Concierto Virtual:*
-» ${dmt} 💎\n@${who.split('@')[0]}, recibiste ${dmt} notas musicales en el mundo virtual de Miku ✨🎵�`, null, { mentions: [who] });
+    m.reply(`🔶 *intis Añadidas al usuario:*
+⫸ ${dmt} 🪙\n@${who.split('@')[0]}, recibiste ${dmt} intis`, null, { mentions: [who] });
 };
 
 handler.help = ['addcoins *<@user>*'];
