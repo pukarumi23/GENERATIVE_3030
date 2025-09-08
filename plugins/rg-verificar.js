@@ -9,59 +9,59 @@ let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 let handler = async function (m, { conn, text, usedPrefix, command }) {
   let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
   let mentionedJid = [who]
-  let pp = await conn.profilePictureUrl(who, 'image').catch((_) => 'https://files.catbox.moe/8wic22.jpg')
+  let pp = await conn.profilePictureUrl(who, 'image').catch((_) => 'https://files.catbox.moe/neim8e.jpeg')
   let user = global.db.data.users[m.sender]
   let name2 = conn.getName(m.sender)
-  if (user.registered === true) return m.reply(`╔══════════════════╗
+  if (user.registered === true) return m.reply(`╔════════════════╗
 ║⚠️ YA REGISTRADO ⚠️ ║
-╚═════════════════════╝
+╚═══════════════════╝
 
-💙 Ya estás registrado en el sistema 💙
+🔶 Ya estás registrado en el sistema 🔶
 
 🔄 ¿Quieres registrarte de nuevo?
 📝 Usa: *${usedPrefix}unreg* para eliminar tu registro actual`)
-  if (!Reg.test(text)) return m.reply(`╔═════════════════════╗
+  if (!Reg.test(text)) return m.reply(`╔═══════════════════╗
 ║📝 FORMATO INCORRECTO 📝║
-╚═════════════════════════╝
+╚═══════════════════════╝
 
-💙🖥 Uso correcto del comando 🖥💙
+🔶🖥 Uso correcto del comando 🖥🔶
 
 📋 *Formato:* ${usedPrefix + command} nombre.edad
 ✨ *Ejemplo:* ${usedPrefix + command} ${name2}.18
 
 🔌 ¡Regístrate para acceder a todas las funciones! 🔌`)
   let [_, name, splitter, age] = text.match(Reg)
-  if (!name) return m.reply(`╔══════════════════╗
+  if (!name) return m.reply(`╔════════════════╗
 ║❌ NOMBRE VACÍO ❌║
-╚═══════════════════╝
-
-💙 El nombre no puede estar vacío 💙
-📝 Por favor ingresa tu nombre`)
-  if (!age) return m.reply(`╔═══════════════════╗
-║❌ EDAD VACÍA ❌║
 ╚═════════════════╝
 
-💙 La edad no puede estar vacía 💙
-🎂 Por favor ingresa tu edad`)
-  if (name.length >= 100) return m.reply(`╔════════════════════╗
-║📏 NOMBRE MUY LARGO 📏 ║
-╚════════════════════════╝
+🔶 El nombre no puede estar vacío 🔶
+📝 Por favor ingresa tu nombre`)
+  if (!age) return m.reply(`╔═════════════════╗
+║❌ EDAD VACÍA ❌║
+╚═══════════════╝
 
-💙 El nombre es demasiado largo 💙
+🔶 La edad no puede estar vacía 🔶
+🎂 Por favor ingresa tu edad`)
+  if (name.length >= 100) return m.reply(`╔══════════════════╗
+║📏 NOMBRE MUY LARGO 📏 ║
+╚══════════════════════╝
+
+🔶 El nombre es demasiado largo 🔶
 ✂️ Usa un nombre más corto (máximo 100 caracteres)`)
   age = parseInt(age)
-  if (age > 1000) return m.reply(`╔══════════════════════╗
+  if (age > 1000) return m.reply(`╔══════════════════╗
 ║ 👴 ¡WOW ABUELO! 👴  ║
-╚══════════════════════╝
+╚════════════════════╝
 
-💙 ¡Increíble edad! 💙
+🔶 ¡Increíble edad! 🔶
 🎉 ¿En serio tienes más de 1000 años?
 😄 Usa una edad más realista`)
-  if (age < 5) return m.reply(`╔═══════════════════════╗
+  if (age < 5) return m.reply(`╔═════════════════════╗
 ║  👶 MUY PEQUEÑO 👶  ║
-╚══════════════════════╝
+╚════════════════════╝
 
-💙 ¡Eres muy pequeño para usar el bot! 💙
+🔶 ¡Eres muy pequeño para usar el bot! 🔶
 🍼 Los bebés necesitan supervisión
 😊 Usa una edad mayor a 5 años`)
   user.name = name + '✓'.trim()
@@ -72,42 +72,39 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   global.db.data.users[m.sender].exp += 300
   global.db.data.users[m.sender].joincount += 20
   let sn = createHash('md5').update(m.sender).digest('hex').slice(0, 20)
-let regbot = `╔═════════════════════════╗
-║💙 ¡REGISTRO EXITOSO! 💙  ║
-║   🎤 ¡Bienvenido! 🎤     ║
-╚═══════════════════════════╝
+let regbot = `╔═════════════════════╗
+║🔶 ¡REGISTRO EXITOSO! 🔶  ║
+╚════════════════════════╝
 
-💙🖥🔌 ¡Te has registrado en el mundo de Miku! 🔌🖥💙
-
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ 📋 DATOS PERSONALES        ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 📋 DATOS PERSONALES        
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃ 👤 Nombre: ${name}
 ┃ 🎂 Edad: ${age} años
 ┃ ✅ Estado: Verificado ✓
 ┃ 🆔 ID: ${sn}
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ 🎁 RECOMPENSAS INICIALES   ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 🎁 RECOMPENSAS INICIALES   
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃ 💰 ${moneda}: +40
 ┃ ✨ Experiencia: +300 XP
 ┃ 🎟️ Tokens: +20
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+┗━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-🎵 ¡Ahora puedes usar todos los comandos de Miku! 🎵
-💙 Usa *#menu* para ver todas las funciones disponibles 💙
+🌿 ¡Ahora puedes usar todos los comandos del bot! 🌿
+🔶 Usa *#menu* para ver todas las funciones disponibles 🔶
 
 ${dev}`
-await m.react('💙')
+await m.react('🧡')
 
 await conn.sendMessage(m.chat, {
         text: regbot,
         contextInfo: {
             externalAdReply: {
-                title: '💙 ¡Registro Exitoso en Miku Bot! 💙',
-                body: '🎤 Bienvenido al mundo virtual de Hatsune Miku 🎤',
+                title: '🔶 ¡Registro Exitoso en Bot ! 🔶',
+                body: '🌱 Bienvenido al mundo de conocimiento de independiente 🌱',
                 thumbnailUrl: pp,
                 sourceUrl: channel,
                 mediaType: 1,
