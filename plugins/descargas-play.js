@@ -198,9 +198,9 @@ async function processDownload(conn, m, url, title, option) {
     
     const user = global.db.data.users[m.sender];
     if (!user.cebollinesDeducted) {
-      user.chocolates -= 2;
+      user.chocolates -= 10;
       user.cebollinesDeducted = true;
-      conn.reply(m.chat, `🔶 Has utilizado 2 *Intis 🪙*`, m);
+      conn.reply(m.chat, `🔶 Has utilizado 10 *Intis 🪙*`, m);
     }
     
     return true;
