@@ -67,15 +67,15 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   global.db.data.users[m.sender].joincount += 20
   let sn = createHash('md5').update(m.sender).digest('hex').slice(0, 20)
 let regbot = `
-║🔶 ¡REGISTRO EXITOSO! 🔶  ║
+🔶 𝙄́𝙍𝙀𝙂𝙄𝙎𝙏𝙍𝙊 𝙀𝙓𝙄𝙏𝙊𝙎𝙊! 🔶
 
-📋 DATOS PERSONALES        
+📋 𝘿𝘼𝙏𝙊𝙎 𝙋𝙀𝙍𝙎𝙊𝙉𝘼𝙇𝙀𝙎        
 👤 Nombre: ${name}
 🎂 Edad: ${age} años
 ✅ Estado: Verificado ✓
 🆔 ID: ${sn}
 
-🎁 RECOMPENSAS INICIALES   
+🎁 𝙍𝙀𝘾𝙊𝙈𝙋𝙀𝙉𝙎𝘼𝙎 𝙄𝙉𝙄𝘾𝙄𝘼𝙇𝙀𝙎 
 💰 ${moneda}: +40
 ✨ Experiencia: +300 XP
 🎟️ Tokens: +20
@@ -90,8 +90,8 @@ await conn.sendMessage(m.chat, {
         text: regbot,
         contextInfo: {
             externalAdReply: {
-                title: '🔶 ¡Registro Exitoso en Bot ! 🔶',
-                body: '🌱 Bienvenido al mundo de conocimiento de independiente 🌱',
+                title: '🔶 ¡Registro Exitoso en el Bot ! 🔶',
+                body: '🌱 Bienvenido al mundo del conocimiento🌱',
                 thumbnailUrl: pp,
                 sourceUrl: channel,
                 mediaType: 1,
