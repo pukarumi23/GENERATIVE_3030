@@ -34,19 +34,19 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.17' 
 global.vs = '2.2.5'
-global.nameqr = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼🔶'
-global.namebot = '�🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶 �'
+global.nameqr = '🔶CHATBOT🔶'
+global.namebot = '�🔶CHATBOT 🔶 �'
 global.sessions = 'Sessions'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.packname = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
-global.botname ='𝑰𝑵𝑫𝑬𝑷𝑬𝑵𝑫𝑰𝑬𝑵𝑻𝑬'
-global.wm = '🔶𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼 🔶'
+global.botname ='CHATBOT'
+global.wm = '🔶CHATBOT 🔶'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
 global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 /n✧･ﾟCHASKI･ﾟ✧'
 global.textbot = '✦ 𝓘𝓷𝓭𝓮𝓹𝓮𝓷𝓭𝓲𝓮𝓷𝓽𝓮 ✦'
-global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
+global.etiqueta = '◇CHATBOT ◈'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
