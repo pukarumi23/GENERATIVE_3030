@@ -1,18 +1,10 @@
-import axios from 'axios';
-const {
-  proto,
-  generateWAMessageFromContent
-} = (await import("@whiskeysockets/baileys")).default;
+import { proto, generateWAMessageFromContent } from "@whiskeysockets/baileys";
 
-let handler = async (message, { conn, text }) => {
-  if (!text) {
-    return conn.reply(message.chat, "❀ Por favor, ingrese un texto para generar poemas en el carrusel.", message);
-  }
-
+let handler = async (message, { conn }) => {
   try {
     conn.reply(message.chat, '✧ *ENVIANDO SUS POEMAS..*', message);
 
-    // Ejemplos de poemas (puedes reemplazarlos o cargarlos dinámicamente)
+    // Poemas de ejemplo
     let poemas = [
       "🌙 En la luna se esconde el sueño,\nallí nace el eterno empeño.",
       "🌹 La rosa canta en silencio,\nperfume guardado en el tiempo.",
@@ -21,32 +13,27 @@ let handler = async (message, { conn, text }) => {
       "🌳 Árbol viejo de raíces profundas,\ncuentas memorias que nunca se esfuman."
     ];
 
-    let results = [];
-    for (let poema of poemas) {
-      results.push({
-        body: proto.Message.InteractiveMessage.Body.fromObject({ 
-          text: poema 
-        }),
-        footer: proto.Message.InteractiveMessage.Footer.fromObject({ 
-          text: "✧ Torre del Conocimiento ✧" 
-        }),
-        header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: "📖 Poema",
-          hasMediaAttachment: false
-        }),
-        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ 
-          buttons: [] 
-        })
-      });
-    }
+    // Armamos las tarjetas
+    let results = poemas.map(poema => ({
+      body: proto.Message.InteractiveMessage.Body.fromObject({
+        text: poema
+      }),
+      footer: proto.Message.InteractiveMessage.Footer.fromObject({
+        text: "✧ Torre del Conocimiento ✧"
+      }),
+      header: proto.Message.InteractiveMessage.Header.fromObject({
+        title: "📖 Poema",
+        hasMediaAttachment: false
+      }),
+      nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+        buttons: []
+      })
+    }));
 
+    // Construimos el carrusel
     const messageContent = generateWAMessageFromContent(message.chat, {
       viewOnceMessage: {
         message: {
-          messageContextInfo: {
-            deviceListMetadata: {},
-            deviceListMetadataVersion: 2
-          },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: proto.Message.InteractiveMessage.Body.create({
               text: "✧ COLECCIÓN DE POEMAS ✧"
@@ -58,15 +45,14 @@ let handler = async (message, { conn, text }) => {
               hasMediaAttachment: false
             }),
             carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-              cards: [...results]
+              cards: results
             })
           })
         }
       }
-    }, {
-      quoted: message
-    });
+    }, { quoted: message });
 
+    // Enviamos
     await conn.relayMessage(message.chat, messageContent.message, {
       messageId: messageContent.key.id
     });
