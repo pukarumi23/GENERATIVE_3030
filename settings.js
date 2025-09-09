@@ -44,8 +44,9 @@ global.packname = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
 global.botname ='𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭'
 global.wm = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
-global.dev = '© 🄿🄾🅆🄴🅁🄴🄳 /n✧･ﾟCHASKI･ﾟ✧'
-global.textbot = '✦ 𝓘𝓷𝓭𝓮𝓹𝓮𝓷𝓭𝓲𝓮𝓷𝓽𝓮 ✦'
+global.dev = '© 🄿🄾🅆🄴🅁🄴🄳
+✧･ﾟCHASKI･ﾟ✧'
+global.textbot = '✦𝐀𝐮𝐫𝐚𝐥𝐢𝐬 𝐁𝐨𝐭✦'
 global.etiqueta = '◇𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭◈'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
