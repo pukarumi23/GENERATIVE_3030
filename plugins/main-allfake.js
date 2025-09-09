@@ -29,15 +29,15 @@ console.log(`Error : ${e}`)
   
 global.creador = 'wa.me/51939508653'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
-global.namechannel = '🔶INDEPENDIENTE🔶'
-global.namechannel2 = '🔶INDEPENDIENTE🔶'
-global.namegrupo = '🔶INDEPENDIENTE🔶'
-global.namecomu = '🔶INDEPENDIENTE🔶'
+global.namechannel = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
+global.namechannel2 = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
+global.namegrupo = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
+global.namecomu = '🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶'
 global.listo = '*Aquí tienes ฅ^•ﻌ•^ฅ*'
 global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://img.pikbest.com/ai/illus_our/20230421/f162b37a4321eccd047eebebcff0ca59.jpg!w700wp')
 
 global.canalIdM = ["120363418348675041@newsletter", "120363418348675041@newsletter"]
-global.canalNombreM = ["🔶INDEPENDIENTE🔶"]
+global.canalNombreM = ["🔶𝐀𝐮𝐫𝐚𝐥𝐢𝐬_𝐁𝐨𝐭🔶"]
 global.channelRD = await getRandomChannel()
 
 global.d = new Date(new Date + 3600000)
