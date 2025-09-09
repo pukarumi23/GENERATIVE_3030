@@ -53,8 +53,8 @@ global.etiqueta = '◇𝙄𝙉𝘿𝙀𝙋𝙀𝙉𝘿𝙄𝙀𝙉𝙏𝙀 ◈'
 global.moneda = '🪙 Intis'
 global.welcom1 = 'bienvenido'
 global.welcom2 = 'adios '
-global.banner = 'https://image.cdn2.seaart.me/2023-10-30/21321978567750661/5b7b699eb0385f63cda46aa0c58d5a8c19865d4d_high.webp'
-global.avatar = 'https://image.cdn2.seaart.me/2023-10-30/21321978567750661/5b7b699eb0385f63cda46aa0c58d5a8c19865d4d_high.webp'
+global.banner = 'https://files.catbox.moe/huq9y4.jpeg'
+global.avatar = 'https://files.catbox.moe/huq9y4.jpeg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
