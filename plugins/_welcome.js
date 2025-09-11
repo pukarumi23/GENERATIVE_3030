@@ -17,7 +17,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   }
 
   if (chat.welcome && m.messageStubType == 27) {
-    let bienvenida = `🙌 *¡Bienvenido!* Te sumas a ${groupMetadata.subject}. \n\n✨ @${m.messageStubParameters[0].split`@`[0]} ✨\n\n${global.welcom1}\n\nSomos ${groupSize} personas únicas, ¡comparte tus ideas, haz amigos y disfruta la experiencia! 🚀`
+    let bienvenida = `🙌 *¡Bienvenido!* Te sumas a \n ${groupMetadata.subject}. \n\n✨ @${m.messageStubParameters[0].split`@`[0]} ✨\n\n${global.welcom1}\n\nSomos ${groupSize} personas únicas, ¡comparte tus ideas, haz amigos y disfruta la experiencia! 🚀`
     await conn.sendMini(m.chat, txt, dev, bienvenida, img, img, redes, fkontak, m, rcanal)
   }
   
