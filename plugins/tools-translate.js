@@ -1,7 +1,7 @@
 import translate from '@vitalets/google-translate-api';
 import fetch from 'node-fetch';
 const handler = async (m, {args, usedPrefix, command}) => {
-  const msg = `🎤💙 ¡Konnichiwa! Por favor, proporciona el (idioma) (texto) para que pueda traducirlo con mi magia virtual ✨\n\n🎵 Ejemplo: #traducir en ¡Hola mundo! 🎵`;
+  const msg = `🔶Por favor, proporciona el (idioma) (texto) para que pueda traducirlo \n\n🌱 Ejemplo: #traducir en ¡Hola mundo! 🌿`;
   if (!args || !args[0]) return m.reply(msg);
   let lang = args[0];
   let text = args.slice(1).join(' ');
@@ -23,7 +23,7 @@ const handler = async (m, {args, usedPrefix, command}) => {
       const result2 = loll.result.translated;
       await conn.reply(m.chat, result2, m);
     } catch {
-      await m.reply(`🎵💙 ¡Gomen nasai! Ocurrió un error al traducir en el escenario virtual... ✨\n\n🎤 Intenta de nuevo con otro idioma o texto 💫`);
+      await m.reply(`🔶Ocurrió un error al traducir✨\n\n◆Intenta de nuevo con otro idioma o texto 🌱`);
     }
   }
 };
