@@ -1,28 +1,24 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys'
+import {WAMessageStubType} from '@whiskeysockets/baileys'
 import fetch from 'node-fetch'
 
-export async function before(m, { conn, participants, groupMetadata }) {
+export async function before(m, {conn, participants, groupMetadata}) {
   if (!m.messageStubType || !m.isGroup) return !0;
-  const fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN[...]` } } }
-  let pp = await conn.profilePictureUrl(m.messageStubParameters[0], 'image').catch(_ => 'https://files.catbox.moe/wm4w1x.jpg')
+  let pp = await conn.profilePictureUrl(m.messageStubParameters[0], 'image').catch(_ => 'https://tinyurl.com/2cd94clt')
   let img = await (await fetch(`${pp}`)).buffer()
   let chat = global.db.data.chats[m.chat]
-  let txt = '🌟 ¡Nuevo miembro se ha unido! 🌟'
-  let txt1 = '👋 ¡Hasta pronto! 👋'
-  let groupSize = participants.length
-  if (m.messageStubType == 27) {
-    groupSize++;
-  } else if (m.messageStubType == 28 || m.messageStubType == 32) {
-    groupSize--;
-  }
 
-  if (chat.welcome && m.messageStubType == 27) {
-    let bienvenida = `👋 *¡Bienvenido/a!* Te damos la bienvenida al grupo *${groupMetadata.subject}*.\n\n🌟 @${m.messageStubParameters[0].split`@`[0]} 🌟\n\nEsperamos que disfrutes tu estadía y participes con todos nosotros.\n\nActualmente somos ${groupSize} miembros.`
-    await conn.sendMini(m.chat, txt, dev, bienvenida, img, img, redes, fkontak, m, rcanal)
+  if (chat.bienvenida && m.messageStubType == 27) {
+    let bienvenida = `*${botname}* \n█🔆 *¡Bienvenid@!* 🔆\n█⫸Usuario:\n█ @${m.messageStubParameters[0].split`@`[0]} \n█🔆Grupo:\n█${groupMetadata.subject}\n█☘️ *¡El universo vibra* \n█  *en cada pensamiento!*  \n🔶▰▰▰▰▰▰▰▰■🔶`
+    
+await conn.sendAi(m.chat, botname, textbot, bienvenida, img, img, canal, estilo)
   }
   
-  if (chat.welcome && (m.messageStubType == 28 || m.messageStubType == 32)) {
-    let bye = `👋 *¡Hasta luego!* El grupo *${groupMetadata.subject}* te extrañará.\n\n🌟 @${m.messageStubParameters[0].split`@`[0]} 🌟\n\nEsperamos verte de vuelta algún día.\n\nAhora somos ${groupSize} miembros.`
-    await conn.sendMini(m.chat, txt1, dev, bye, img, img, redes, fkontak, m, rcanal)
+  if (chat.bienvenida && m.messageStubType == 28) {
+    let bye = `*${botname}* \n█🚫Expulsión confirmada.\n█⫸Usuario:\n█ @${m.messageStubParameters[0].split`@`[0]} \n█💔Fue removido\n█ del grupo.\n█🌿 *Que el flujo nunca* \n█.  *se detenga.* \n🔶▰▰▰▰▰▰▰▰■🔶`
+await conn.sendAi(m.chat, botname, textbot, bye, img, img, canal, estilo)
   }
-}
+  
+  if (chat.bienvenida && m.messageStubType == 32) {
+    let kick = `*${botname}* \n█😢 *Adiós, usuario.*\n█⫸ Usuario:「 @${m.messageStubParameters[0].split`@`[0]} \n█ 💔 *Se fue del grupo...\n█   🪐 *Tu eco perdura* \n *en el cosmos.* 🎶\n   🔶▰▰▰▰▰▰▰▰■🔶`
+await conn.sendAi(m.chat, botname, textbot, kick, img, img, canal, estilo)
+}}
