@@ -2,7 +2,7 @@
   
 # 🔶 AURALIS 🔶
 
-![Hatsune Miku Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
+![auralis  Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
 
 [![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/GENERATIVE_3030).
 [![Author](https://img.shields.io/badge/Author-✧･ﾟCHASKI･ﾟ✧-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
@@ -20,7 +20,7 @@
 
 ## ✨ Acerca del Bot
 
-¡Independiente WhatsApp Bot es una herramienta de automatización rica en funciones que trae el encanto de Hatsune Miku a tu experiencia de WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
+¡Auralis Bot es una herramienta de automatización rica en funciones que trae experiencia buena en WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
 
 <div align="center">
   <img src="https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif" width="60" height="60">
