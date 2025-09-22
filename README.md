@@ -1,6 +1,6 @@
 <div align="center">
   
-# 🔶INDEPENDIENTE🔶
+# 🔶 AURALIS 🔶
 
 ![Hatsune Miku Banner](https://image.cdn2.seaart.me/temp-convert-webp/png/2023-08-18/14707342638617605/bd7c3103ce43d676a5e38a73c4b47494b267fa41_low.webp)
 
