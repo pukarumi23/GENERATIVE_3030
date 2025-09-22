@@ -94,12 +94,12 @@ Si encuentras algún problema o tienes preguntas sobre el bot, no dudes en conta
     <img src="https://github.com/pukarumi23.png" width="200" height="200" style="border-radius: 50%;" alt="✧･ﾟCHASKI･ﾟ✧">
   </a>
   
-  <p><i>© 𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼  / POR ✧･ﾟCHASKI･ﾟ✧</i></p>
+  <p><i>© AURALIS  / POR ✧･ﾟCHASKI･ﾟ✧</i></p>
 </div>
 
 <div align="center">
   
-  ### 🔆 ¡Trayendo la magia de 𝕀ℕ𝔻𝔼ℙ𝔼ℕ𝔻𝕀𝔼ℕ𝕋𝔼  a tu WhatsApp! 🔆
+  ### 🔆 ¡Trayendo la magia de AURALIS  a tu WhatsApp! 🔆
   
   ![](https://img.shields.io/badge/Hecho_con-☘️-blue?style=for-the-badge)
 </div>
