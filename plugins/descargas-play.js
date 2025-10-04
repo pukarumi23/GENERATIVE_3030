@@ -68,20 +68,29 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const footer = 'KARISIRI BOT - YouTube';
 
     try {
-      // Enviar imagen primero si está disponible
+      // Enviar mensaje con imagen integrada + texto + botones en uno solo
       if (thumbnail) {
         try {
           await conn.sendMessage(m.chat, {
             image: { url: thumbnail },
-            caption: `🎬 *${title}*\n⏱️ ${timestamp} | 👁️ ${vistas} | 📅 ${ago}`
+            caption: infoText,
+            footer: footer,
+            buttons: [
+              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
+              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
+              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
+              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
+            ]
           }, { quoted: m });
         } catch (imageError) {
-          console.log('Error enviando imagen:', imageError.message);
+          console.log('Error con imagen integrada, enviando sin imagen:', imageError.message);
+          // Fallback sin imagen pero con botones
+          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
         }
+      } else {
+        // Si no hay thumbnail, enviar solo con botones
+        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       }
-      
-      // Enviar mensaje con información y botones
-      await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
