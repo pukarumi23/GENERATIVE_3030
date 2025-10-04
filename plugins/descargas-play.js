@@ -72,38 +72,39 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         try {
           await conn.sendMessage(m.chat, {
             image: { url: thumbnail },
-            caption: infoText + `\n\n${footer}`,
-          }, { quoted: m });
-          
-          await conn.sendMessage(m.chat, {
-            text: '💌 *Selecciona el formato para descargar:*',
-            buttons: buttons.map(([text, id]) => ({
-              buttonId: id,
-              buttonText: { displayText: text },
-              type: 1
-            }))
+            caption: infoText,
+            footer: footer,
+            buttons: [
+              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
+              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
+              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
+              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
+            ],
+            headerType: 4
           }, { quoted: m });
         } catch (imageError) {
-          console.log('Error con imagen, enviando texto simple:', imageError.message);
-          await conn.reply(m.chat, infoText + `\n\n${footer}`, m);
+          console.log('Error con imagen, enviando sin miniatura:', imageError.message);
           await conn.sendMessage(m.chat, {
-            text: '💌 *Selecciona el formato para descargar:*',
-            buttons: buttons.map(([text, id]) => ({
-              buttonId: id,
-              buttonText: { displayText: text },
-              type: 1
-            }))
+            text: infoText,
+            footer: footer,
+            buttons: [
+              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
+              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
+              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
+              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
+            ]
           }, { quoted: m });
         }
       } else {
-        await conn.reply(m.chat, infoText + `\n\n${footer}`, m);
         await conn.sendMessage(m.chat, {
-          text: '💌 *Selecciona el formato para descargar:*',
-          buttons: buttons.map(([text, id]) => ({
-            buttonId: id,
-            buttonText: { displayText: text },
-            type: 1
-          }))
+          text: infoText,
+          footer: footer,
+          buttons: [
+            { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
+            { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
+            { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
+            { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
+          ]
         }, { quoted: m });
       }
       
