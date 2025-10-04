@@ -68,7 +68,19 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const footer = 'KARISIRI BOT - YouTube';
 
     try {
-      // Método simple y rápido sin imagen para evitar demoras
+      // Enviar imagen primero si está disponible
+      if (thumbnail) {
+        try {
+          await conn.sendMessage(m.chat, {
+            image: { url: thumbnail },
+            caption: `🎬 *${title}*\n⏱️ ${timestamp} | 👁️ ${vistas} | 📅 ${ago}`
+          }, { quoted: m });
+        } catch (imageError) {
+          console.log('Error enviando imagen:', imageError.message);
+        }
+      }
+      
+      // Enviar mensaje con información y botones
       await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       
       if (!global.db.data.users[m.sender]) {
