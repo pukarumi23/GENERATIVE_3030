@@ -68,15 +68,26 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const footer = '🌱 KARISIRI BOT - YouTube';
 
     try {
-      let imageBuffer = null;
+      let imagePath = null;
       
       if (thumbnail) {
         try {
           console.log('Obteniendo imagen de:', thumbnail);
           const response = await fetch(thumbnail);
           if (response.ok) {
-            imageBuffer = await response.buffer();
+            const imageBuffer = await response.buffer();
             console.log('Imagen obtenida exitosamente, tamaño:', imageBuffer.length);
+            
+            // Crear carpeta tmp si no existe
+            if (!fs.existsSync('./tmp')) {
+              fs.mkdirSync('./tmp', { recursive: true });
+            }
+            
+            // Guardar imagen temporal
+            const tempPath = `./tmp/thumb_${Date.now()}.jpg`;
+            fs.writeFileSync(tempPath, imageBuffer);
+            imagePath = tempPath;
+            console.log('Imagen guardada en:', tempPath);
           } else {
             console.log('Error al obtener imagen, status:', response.status);
           }
@@ -85,7 +96,17 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         }
       }
       
-      await conn.sendButton(m.chat, infoText, footer, imageBuffer, buttons, m);
+      await conn.sendButton(m.chat, infoText, footer, imagePath, buttons, m);
+      
+      // Limpiar archivo temporal
+      if (imagePath && fs.existsSync(imagePath)) {
+        try {
+          fs.unlinkSync(imagePath);
+          console.log('Imagen temporal eliminada');
+        } catch (deleteError) {
+          console.log('Error al eliminar imagen temporal:', deleteError.message);
+        }
+      }
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
