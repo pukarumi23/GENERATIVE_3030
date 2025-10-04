@@ -68,17 +68,24 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const footer = '🌱 KARISIRI BOT - YouTube';
 
     try {
+      let imageBuffer = null;
+      
       if (thumbnail) {
         try {
-          const thumbImg = await conn.getFile(thumbnail);
-          await conn.sendButton(m.chat, infoText, footer, thumbImg.data, buttons, m);
+          console.log('Obteniendo imagen de:', thumbnail);
+          const response = await fetch(thumbnail);
+          if (response.ok) {
+            imageBuffer = await response.buffer();
+            console.log('Imagen obtenida exitosamente, tamaño:', imageBuffer.length);
+          } else {
+            console.log('Error al obtener imagen, status:', response.status);
+          }
         } catch (imageError) {
-          console.log('Error con imagen, enviando sin miniatura:', imageError.message);
-          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+          console.log('Error al descargar imagen:', imageError.message);
         }
-      } else {
-        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       }
+      
+      await conn.sendButton(m.chat, infoText, footer, imageBuffer, buttons, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
