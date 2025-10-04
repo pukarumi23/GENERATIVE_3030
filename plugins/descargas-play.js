@@ -68,14 +68,70 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const footer = 'KARISIRI BOT - YouTube';
 
     try {
-      // Optimizar descarga de imagen con timeout
+      // Método simple y rápido sin imagen para evitar demoras
+      await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+      
+      if (!global.db.data.users[m.sender]) {
+        global.db.data.users[m.sender] = {};
+      }
+      
+      global.db.data.users[m.sender].lastYTSearch = {
+        url: url,
+        title: title,
+        messageId: m.key.id,  
+        timestamp: Date.now(),
+        videoInfo: {
+          duration: timestamp,
+          views: vistas,
+          channel: canal,
+          published: ago
+        }
+      };
+      
+      global.db.data.users[m.sender].processingDownload = false;
+      global.db.data.users[m.sender].monedaDeducted = false;
+      
+    } catch (error) {
+      console.error("Error al enviar mensaje con botones:", error);
+      
+      try {
+        await conn.reply(m.chat, infoText + `\n\n${footer}\n\n💌 *Responde con:*\n1️⃣ audio_mp3\n2️⃣ video_mp4\n3️⃣ audio_doc\n4️⃣ video_doc`, m);
+        
+        if (!global.db.data.users[m.sender]) {
+          global.db.data.users[m.sender] = {};
+        }
+        
+        global.db.data.users[m.sender].lastYTSearch = {
+          url: url,
+          title: title,
+          messageId: m.key.id,  
+          timestamp: Date.now(),
+          videoInfo: {
+            duration: timestamp,
+            views: vistas,
+            channel: canal,
+            published: ago
+          }
+        };
+        
+        global.db.data.users[m.sender].processingDownload = false;
+        global.db.data.users[m.sender].monedaDeducted = false;
+        
+      } catch (fallbackError) {
+        console.error("Error en fallback:", fallbackError);
+        return m.reply(`💙 Error al mostrar información del video: ${fallbackError.message}`);
+      }
+    }
+
+    try {
+      
       let imageBuffer = null;
       
       if (thumbnail) {
         try {
           console.log('Descargando imagen rápidamente...');
           
-          // Usar AbortController para timeout rápido
+          
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 segundos máximo
           
@@ -97,7 +153,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         }
       }
       
-      // Enviar con imagen directamente usando buffer
+      
       if (imageBuffer) {
         await conn.sendMessage(m.chat, {
           image: imageBuffer,
@@ -112,7 +168,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           headerType: 4
         }, { quoted: m });
       } else {
-        // Fallback sin imagen pero con botones
+       
         await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       }
       
