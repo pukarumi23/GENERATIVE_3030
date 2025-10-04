@@ -50,7 +50,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       ['📁 Video Doc', 'video_doc']
     ];
     
-    const infoText = `*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩ💙𝗠𝗶𝗸𝘂𝗺𝗶𝗻🌱ﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
+    const infoText = `*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩKARISIRI BOTﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
 
 > 💙 *Título:* ${title}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
@@ -65,12 +65,29 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
 💌 *Selecciona el formato para descargar:*`;
 
-    const footer = '🌱 Hatsune Miku Bot - YouTube';
+    const footer = '🌱 KARISIRI BOT - YouTube';
 
     try {
-      const thumb = thumbnail ? (await conn.getFile(thumbnail))?.data : null;
-
-      await conn.sendButton(m.chat, infoText, footer, thumb, buttons, m);
+      if (thumbnail) {
+        try {
+          await conn.sendMessage(m.chat, {
+            image: { url: thumbnail },
+            caption: infoText,
+            footer: footer,
+            buttons: buttons.map(([text, id]) => ({
+              buttonId: id,
+              buttonText: { displayText: text },
+              type: 1
+            })),
+            headerType: 4
+          }, { quoted: m });
+        } catch (imageError) {
+          console.log('Error con imagen, enviando sin miniatura:', imageError.message);
+          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+        }
+      } else {
+        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+      }
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
@@ -92,30 +109,36 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       global.db.data.users[m.sender].processingDownload = false;
       global.db.data.users[m.sender].monedaDeducted = false;
       
-    } catch (thumbError) {
-      await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+    } catch (error) {
+      console.error("Error al enviar mensaje con botones:", error);
       
-      if (!global.db.data.users[m.sender]) {
-        global.db.data.users[m.sender] = {};
-      }
-      
-      global.db.data.users[m.sender].lastYTSearch = {
-        url: url,
-        title: title,
-        messageId: m.key.id,  
-        timestamp: Date.now(),
-        videoInfo: {
-          duration: timestamp,
-          views: vistas,
-          channel: canal,
-          published: ago
+      try {
+        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+        
+        if (!global.db.data.users[m.sender]) {
+          global.db.data.users[m.sender] = {};
         }
-      };
-      
-      global.db.data.users[m.sender].processingDownload = false;
-      global.db.data.users[m.sender].monedaDeducted = false;
-      
-      console.error("Error al obtener la miniatura:", thumbError);
+        
+        global.db.data.users[m.sender].lastYTSearch = {
+          url: url,
+          title: title,
+          messageId: m.key.id,  
+          timestamp: Date.now(),
+          videoInfo: {
+            duration: timestamp,
+            views: vistas,
+            channel: canal,
+            published: ago
+          }
+        };
+        
+        global.db.data.users[m.sender].processingDownload = false;
+        global.db.data.users[m.sender].monedaDeducted = false;
+        
+      } catch (fallbackError) {
+        console.error("Error en fallback:", fallbackError);
+        return m.reply(`💙 Error al mostrar información del video: ${fallbackError.message}`);
+      }
     }
 
   } catch (error) {
