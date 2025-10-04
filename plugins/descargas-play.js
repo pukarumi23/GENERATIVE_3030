@@ -72,21 +72,39 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         try {
           await conn.sendMessage(m.chat, {
             image: { url: thumbnail },
-            caption: infoText,
-            footer: footer,
+            caption: infoText + `\n\n${footer}`,
+          }, { quoted: m });
+          
+          await conn.sendMessage(m.chat, {
+            text: '💌 *Selecciona el formato para descargar:*',
             buttons: buttons.map(([text, id]) => ({
               buttonId: id,
               buttonText: { displayText: text },
               type: 1
-            })),
-            headerType: 4
+            }))
           }, { quoted: m });
         } catch (imageError) {
-          console.log('Error con imagen, enviando sin miniatura:', imageError.message);
-          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+          console.log('Error con imagen, enviando texto simple:', imageError.message);
+          await conn.reply(m.chat, infoText + `\n\n${footer}`, m);
+          await conn.sendMessage(m.chat, {
+            text: '💌 *Selecciona el formato para descargar:*',
+            buttons: buttons.map(([text, id]) => ({
+              buttonId: id,
+              buttonText: { displayText: text },
+              type: 1
+            }))
+          }, { quoted: m });
         }
       } else {
-        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+        await conn.reply(m.chat, infoText + `\n\n${footer}`, m);
+        await conn.sendMessage(m.chat, {
+          text: '💌 *Selecciona el formato para descargar:*',
+          buttons: buttons.map(([text, id]) => ({
+            buttonId: id,
+            buttonText: { displayText: text },
+            type: 1
+          }))
+        }, { quoted: m });
       }
       
       if (!global.db.data.users[m.sender]) {
@@ -113,7 +131,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       console.error("Error al enviar mensaje con botones:", error);
       
       try {
-        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
+        await conn.reply(m.chat, infoText + `\n\n${footer}\n\n💌 *Responde con:*\n1️⃣ audio_mp3\n2️⃣ video_mp4\n3️⃣ audio_doc\n4️⃣ video_doc`, m);
         
         if (!global.db.data.users[m.sender]) {
           global.db.data.users[m.sender] = {};
@@ -528,7 +546,15 @@ handler.before = async (m, { conn }) => {
     /audio_mp3/,
     /video_mp4/,
     /audio_doc/,
-    /video_doc/
+    /video_doc/,
+    /^1$/,
+    /^2$/,
+    /^3$/,
+    /^4$/,
+    /^1️⃣$/,
+    /^2️⃣$/,
+    /^3️⃣$/,
+    /^4️⃣$/
   ];
   
   let isButtonResponse = false;
@@ -538,13 +564,13 @@ handler.before = async (m, { conn }) => {
     if (pattern.test(m.text)) {
       isButtonResponse = true;
       
-      if (/audio_mp3/.test(m.text)) {
+      if (/audio_mp3|^1$|^1️⃣$/.test(m.text)) {
         buttonType = 'audio';
-      } else if (/video_mp4/.test(m.text)) {
+      } else if (/video_mp4|^2$|^2️⃣$/.test(m.text)) {
         buttonType = 'video';
-      } else if (/audio_doc/.test(m.text)) {
+      } else if (/audio_doc|^3$|^3️⃣$/.test(m.text)) {
         buttonType = 'audiodoc';
-      } else if (/video_doc/.test(m.text)) {
+      } else if (/video_doc|^4$|^4️⃣$/.test(m.text)) {
         buttonType = 'videodoc';
       }
       break;
