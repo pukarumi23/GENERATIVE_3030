@@ -43,12 +43,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const vistas = formatViews(views);
     const canal = author.name || 'Desconocido';
     
-    
     const buttons = [
-      { buttonId: `YTDL_AUDIO_${Date.now()}`, buttonText: { displayText: '� Audio MP3' }, type: 1 },
-      { buttonId: `YTDL_VIDEO_${Date.now()}`, buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-      { buttonId: `YTDL_AUDIODOC_${Date.now()}`, buttonText: { displayText: '📁 Audio Documento' }, type: 1 },
-      { buttonId: `YTDL_VIDEODOC_${Date.now()}`, buttonText: { displayText: '📁 Video Documento' }, type: 1 }
+      ['🎵 Audio MP3', 'audio_mp3'],
+      ['🎬 Video MP4', 'video_mp4'],
+      ['📁 Audio Doc', 'audio_doc'],
+      ['📁 Video Doc', 'video_doc']
     ];
     
     const infoText = `*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩ💙𝗠𝗶𝗸𝘂𝗺𝗶𝗻🌱ﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
@@ -71,16 +70,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     try {
       const thumb = thumbnail ? (await conn.getFile(thumbnail))?.data : null;
 
-      
-      const buttonMessage = {
-        text: infoText,
-        footer: footer,
-        buttons: buttons,
-        headerType: 4,
-        ...(thumb && { image: thumb })
-      };
-      await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
-      
+      await conn.sendButton(m.chat, infoText, footer, thumb, buttons, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
@@ -98,21 +88,12 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           published: ago
         }
       };
-      
       
       global.db.data.users[m.sender].processingDownload = false;
       global.db.data.users[m.sender].monedaDeducted = false;
       
     } catch (thumbError) {
-      
-      const buttonMessage = {
-        text: infoText,
-        footer: footer,
-        buttons: buttons,
-        headerType: 1
-      };
-      await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
-      
+      await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
@@ -130,7 +111,6 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           published: ago
         }
       };
-      
       
       global.db.data.users[m.sender].processingDownload = false;
       global.db.data.users[m.sender].monedaDeducted = false;
@@ -144,7 +124,6 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 };
 
-
 function isValidUrl(string) {
   try {
     new URL(string);
@@ -154,9 +133,6 @@ function isValidUrl(string) {
   }
 }
 
-
-
-
 async function validateDownloadUrl(url) {
   if (!url || typeof url !== 'string' || url.trim() === '') {
     console.log('❌ URL inválida o vacía');
@@ -164,7 +140,6 @@ async function validateDownloadUrl(url) {
   }
 
   try {
-    
     new URL(url);
     
     console.log(`🔍 Validating download URL: ${url.substring(0, 100)}...`);
@@ -191,7 +166,6 @@ async function validateDownloadUrl(url) {
     const contentType = response.headers.get('content-type') || '';
     const contentLength = response.headers.get('content-length');
     
-    
     const isMediaFile = contentType.includes('video') || 
                        contentType.includes('audio') || 
                        contentType.includes('application/octet-stream') ||
@@ -214,9 +188,7 @@ async function validateDownloadUrl(url) {
   }
 }
 
-
 async function processDownload(conn, m, url, title, option) {
- 
   const downloadTypes = {
     1: '🎵 Audio MP3',
     2: '🎬 Video MP4', 
@@ -225,7 +197,6 @@ async function processDownload(conn, m, url, title, option) {
   };
   
   const downloadType = downloadTypes[option] || 'archivo';
-  
   
   let processingMsg;
   try {
@@ -240,11 +211,9 @@ async function processDownload(conn, m, url, title, option) {
     let mimeType;
     let isAudio = (option === 1 || option === 3);
 
-  
     const cleanTitle = title.replace(/[^\w\s\-_.()]/gi, '').replace(/\s+/g, ' ').trim();
     
     if (isAudio) {
-      
       downloadUrl = await getAudioUrl(url);
       fileName = `${cleanTitle}.mp3`;
       mimeType = 'audio/mpeg';
@@ -253,15 +222,12 @@ async function processDownload(conn, m, url, title, option) {
         throw new Error(`No se pudo obtener el enlace de audio. La canción podría no estar disponible.`);
       }
 
-      
       const isValidDownload = await validateDownloadUrl(downloadUrl);
       if (!isValidDownload) {
         throw new Error(`El enlace de descarga no es válido o ha expirado.`);
       }
 
-      
       if (option === 1) {
-        
         await conn.sendMessage(m.chat, { 
           audio: { url: downloadUrl }, 
           fileName: fileName, 
@@ -269,7 +235,6 @@ async function processDownload(conn, m, url, title, option) {
           ptt: false
         }, { quoted: m });
       } else {
-        
         await conn.sendMessage(m.chat, { 
           document: { url: downloadUrl },
           mimetype: mimeType,
@@ -278,7 +243,6 @@ async function processDownload(conn, m, url, title, option) {
         }, { quoted: m });
       }
     } else {
-      
       downloadUrl = await getVideoUrl(url);
       fileName = `${cleanTitle}.mp4`;
       mimeType = 'video/mp4';
@@ -287,15 +251,12 @@ async function processDownload(conn, m, url, title, option) {
         throw new Error(`No se pudo obtener el enlace de video. El video podría no estar disponible.`);
       }
 
-      
       const isValidDownload = await validateDownloadUrl(downloadUrl);
       if (!isValidDownload) {
         throw new Error(`El enlace de descarga no es válido o ha expirado.`);
       }
 
-      
       if (option === 2) {
-        
         await conn.sendMessage(m.chat, { 
           video: { url: downloadUrl }, 
           fileName: fileName, 
@@ -303,7 +264,6 @@ async function processDownload(conn, m, url, title, option) {
           caption: `🎬 ${title}`
         }, { quoted: m });
       } else {
-        
         await conn.sendMessage(m.chat, { 
           document: { url: downloadUrl },
           mimetype: mimeType,
@@ -313,10 +273,8 @@ async function processDownload(conn, m, url, title, option) {
       }
     }
     
-    
     const user = global.db.data.users[m.sender];
     if (user && !user.monedaDeducted) {
-      
       if ((user.moneda || 0) >= 2) {
         user.moneda = (user.moneda || 0) - 2;
         user.monedaDeducted = true;
@@ -339,7 +297,6 @@ async function processDownload(conn, m, url, title, option) {
     return true;
   } catch (error) {
     console.error("Error al procesar descarga:", error);
-    
     
     let errorMessage = `❌ Error al descargar ${downloadType}:\n\n`;
     
@@ -392,7 +349,6 @@ async function fetchFromApis(apis) {
       
       const downloadUrl = apis[i].extractor(apiJson);
         
-      
       const trustedDomains = [
         'savemedia.website',
         'stellarwa.xyz', 
@@ -411,7 +367,6 @@ async function fetchFromApis(apis) {
           return downloadUrl;
         }
         
-       
         const isWorking = await validateDownloadUrl(downloadUrl);
         if (isWorking) {
           console.log(`✅ ${apis[i].api} devolvió URL válida: ${downloadUrl.substring(0, 50)}...`);
@@ -432,22 +387,19 @@ async function fetchFromApis(apis) {
   return null;
 }
 
-
 async function getAud(url) {
-  
   const apis = [
     { api: 'ZenzzXD', endpoint: `https://api.zenzxz.my.id/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.download_url },
     { api: 'Xyro', endpoint: `${global.APIs.xyro.url}/download/youtubemp3?url=${encodeURIComponent(url)}`, extractor: res => res.result?.dl },
-{ api: 'Yupra', endpoint: `${global.APIs.yupra.url}/api/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.enlace }
+    { api: 'Yupra', endpoint: `${global.APIs.yupra.url}/api/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.enlace }
   ]
   return await fetchFromBackupApis(apis)
 }
 
 async function getVid(url) {
-  
   const apis = [
     { api: 'Xyro', endpoint: `${global.APIs.xyro.url}/download/youtubemp4?url=${encodeURIComponent(url)}&quality=360`, extractor: res => res.result?.dl },
-{ api: 'Yupra', endpoint: `${global.APIs.yupra.url}/api/downloader/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.formatos?.[0]?.url }
+    { api: 'Yupra', endpoint: `${global.APIs.yupra.url}/api/downloader/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.formatos?.[0]?.url }
   ]
   return await fetchFromBackupApis(apis)
 }
@@ -467,11 +419,7 @@ async function fetchFromBackupApis(apis) {
   return null
 }
 
-
-
-
 async function getAudioUrl(url) {
-  
   const defaultAPIs = {
     xyro: { url: 'https://api.xyro.com' },
     yupra: { url: 'https://api.yupra.com' },
@@ -480,13 +428,10 @@ async function getAudioUrl(url) {
     zenzxz: { url: 'https://api.zenzxz.my.id' }
   };
   
-  
   const APIs = global.APIs || defaultAPIs;
   
   const apis = [
-    
     { api: 'StellarWA', endpoint: `https://api.stellarwa.xyz/dow/ytmp3?url=${encodeURIComponent(url)}&apikey=Diamond`, extractor: res => res?.data?.dl },
-    
     
     ...(APIs.xyro?.url ? [{ api: 'Xyro', endpoint: `${APIs.xyro.url}/download/youtubemp3?url=${encodeURIComponent(url)}`, extractor: res => res.result?.dl }] : []),
     ...(APIs.yupra?.url ? [{ api: 'Yupra', endpoint: `${APIs.yupra.url}/api/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.enlace }] : []),
@@ -495,14 +440,11 @@ async function getAudioUrl(url) {
     ...(APIs.zenzxz?.url ? [{ api: 'ZenzzXD', endpoint: `${APIs.zenzxz.url}/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }] : []),
     ...(APIs.zenzxz?.url ? [{ api: 'ZenzzXD v2', endpoint: `${APIs.zenzxz.url}/downloader/ytmp3v2?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }] : []),
     
-    
     { api: 'ZenzzXD Legacy', endpoint: `https://api.zenzxz.my.id/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }
   ];
   
-  
   const result = await fetchFromApis(apis);
   if (result) return result;
-  
   
   try {
     console.log('🔄 Trying backup ZenzzXD...');
@@ -518,11 +460,7 @@ async function getAudioUrl(url) {
   return null;
 }
 
-
-
-
 async function getVideoUrl(url) {
-  
   const defaultAPIs = {
     xyro: { url: 'https://api.xyro.com' },
     yupra: { url: 'https://api.yupra.com' },
@@ -531,11 +469,9 @@ async function getVideoUrl(url) {
     zenzxz: { url: 'https://api.zenzxz.my.id' }
   };
   
-  
   const APIs = global.APIs || defaultAPIs;
   
   const apis = [
-    
     ...(APIs.xyro?.url ? [{ api: 'Xyro', endpoint: `${APIs.xyro.url}/download/youtubemp4?url=${encodeURIComponent(url)}&quality=360`, extractor: res => res.result?.dl }] : []),
     ...(APIs.yupra?.url ? [{ api: 'Yupra', endpoint: `${APIs.yupra.url}/api/downloader/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.resultado?.formatos?.[0]?.url }] : []),
     ...(APIs.vreden?.url ? [{ api: 'Vreden', endpoint: `${APIs.vreden.url}/api/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.result?.download?.url }] : []),
@@ -543,15 +479,12 @@ async function getVideoUrl(url) {
     ...(APIs.zenzxz?.url ? [{ api: 'ZenzzXD', endpoint: `${APIs.zenzxz.url}/downloader/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }] : []),
     ...(APIs.zenzxz?.url ? [{ api: 'ZenzzXD v2', endpoint: `${APIs.zenzxz.url}/downloader/ytmp4v2?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }] : []),
     
-    
     { api: 'ZenzzXD Legacy', endpoint: `https://api.zenzxz.my.id/downloader/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.download_url },
     { api: 'Delirius Legacy', endpoint: `https://delirius-apiofc.vercel.app/download/ytmp4?url=${encodeURIComponent(url)}`, extractor: res => res.data?.download?.url }
   ];
   
-  
   const result = await fetchFromApis(apis);
   if (result) return result;
-  
 
   try {
     console.log('🔄 Trying backup ZenzzXD...');
@@ -567,54 +500,43 @@ async function getVideoUrl(url) {
   return null;
 }
 
-
-
-
 handler.before = async (m, { conn }) => {
-  
-  const ytdlPatterns = [
-    /^YTDL_(AUDIO|VIDEO|AUDIODOC|VIDEODOC)_\d+$/,
-    /^ytdl_(audio|video)_(mp3|mp4|doc)$/,
-    /🎵.*Audio.*MP3/i,
-    /🎬.*Video.*MP4/i,
-    /📁.*Audio.*Documento/i,
-    /📁.*Video.*Documento/i
+  const buttonPatterns = [
+    /audio_mp3/,
+    /video_mp4/,
+    /audio_doc/,
+    /video_doc/
   ];
   
-  let isYTDLButton = false;
+  let isButtonResponse = false;
   let buttonType = null;
   
-  
-  for (const pattern of ytdlPatterns) {
+  for (const pattern of buttonPatterns) {
     if (pattern.test(m.text)) {
-      isYTDLButton = true;
+      isButtonResponse = true;
       
-     
-      if (/YTDL_AUDIO_|ytdl_audio_mp3|🎵.*Audio.*MP3/i.test(m.text)) {
+      if (/audio_mp3/.test(m.text)) {
         buttonType = 'audio';
-      } else if (/YTDL_VIDEO_|ytdl_video_mp4|🎬.*Video.*MP4/i.test(m.text)) {
+      } else if (/video_mp4/.test(m.text)) {
         buttonType = 'video';
-      } else if (/YTDL_AUDIODOC_|ytdl_audio_doc|📁.*Audio.*Documento/i.test(m.text)) {
+      } else if (/audio_doc/.test(m.text)) {
         buttonType = 'audiodoc';
-      } else if (/YTDL_VIDEODOC_|ytdl_video_doc|📁.*Video.*Documento/i.test(m.text)) {
+      } else if (/video_doc/.test(m.text)) {
         buttonType = 'videodoc';
       }
       break;
     }
   }
   
-  
-  if (!isYTDLButton || !buttonType) {
+  if (!isButtonResponse || !buttonType) {
     return false;
   }
-  
   
   const user = global.db.data.users[m.sender];
   if (!user || !user.lastYTSearch) {
     await conn.reply(m.chat, '❌ No hay búsqueda activa. Realiza una nueva búsqueda con .play', m);
     return false;
   }
-  
   
   const currentTime = Date.now();
   const searchTime = user.lastYTSearch.timestamp || 0;
@@ -625,7 +547,6 @@ handler.before = async (m, { conn }) => {
     return false;
   }
   
-  
   if (user.processingDownload) {
     await conn.reply(m.chat, '⏳ Ya hay una descarga en proceso. Espera a que termine.', m);
     return false;
@@ -633,12 +554,11 @@ handler.before = async (m, { conn }) => {
   
   console.log(`🎵 Procesando descarga de: ${user.lastYTSearch.title} - Tipo: ${buttonType}`);
   
- 
   const optionMap = {
-    'audio': 1,     
-    'video': 2,     
-    'audiodoc': 3, 
-    'videodoc': 4   
+    'audio': 1,
+    'video': 2,
+    'audiodoc': 3,
+    'videodoc': 4
   };
   
   const option = optionMap[buttonType];
@@ -647,7 +567,6 @@ handler.before = async (m, { conn }) => {
     return false;
   }
   
-
   user.processingDownload = true;
   user.monedaDeducted = false;
 
@@ -660,7 +579,6 @@ handler.before = async (m, { conn }) => {
       option
     );
     
-   
     delete user.lastYTSearch;
     user.processingDownload = false;
     
