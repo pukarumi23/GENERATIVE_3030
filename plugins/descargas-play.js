@@ -70,42 +70,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     try {
       if (thumbnail) {
         try {
-          await conn.sendMessage(m.chat, {
-            image: { url: thumbnail },
-            caption: infoText,
-            footer: footer,
-            buttons: [
-              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
-              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
-              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
-            ],
-            headerType: 4
-          }, { quoted: m });
+          const thumbImg = await conn.getFile(thumbnail);
+          await conn.sendButton(m.chat, infoText, footer, thumbImg.data, buttons, m);
         } catch (imageError) {
           console.log('Error con imagen, enviando sin miniatura:', imageError.message);
-          await conn.sendMessage(m.chat, {
-            text: infoText,
-            footer: footer,
-            buttons: [
-              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
-              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
-              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
-            ]
-          }, { quoted: m });
+          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
         }
       } else {
-        await conn.sendMessage(m.chat, {
-          text: infoText,
-          footer: footer,
-          buttons: [
-            { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
-            { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-            { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
-            { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
-          ]
-        }, { quoted: m });
+        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
       }
       
       if (!global.db.data.users[m.sender]) {
