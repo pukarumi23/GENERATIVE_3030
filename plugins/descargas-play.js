@@ -44,13 +44,13 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const canal = author.name || 'Desconocido';
     
     const buttons = [
-      ['🎵 Audio MP3', 'audio_mp3'],
-      ['🎬 Video MP4', 'video_mp4'],
-      ['📁 Audio Doc', 'audio_doc'],
-      ['📁 Video Doc', 'video_doc']
+      ['🎵 Audio', 'ytdl_audio_mp3'],
+      ['🎬 Video', 'ytdl_video_mp4'],
+      ['📁 MP3 Documento', 'ytdl_audio_doc'],
+      ['📁 MP4 Documento', 'ytdl_video_doc']
     ];
     
-    const infoText = `*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩKARISIRI BOTﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
+    const infoText = `*𖹭.╭╭ִ╼࣪━ִﮩ٨ـﮩ💙𝗠𝗶𝗸𝘂𝗺𝗶𝗻🌱ﮩ٨ـﮩ━ִ╾࣪╮╮.𖹭*
 
 > 💙 *Título:* ${title}
 *°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*
@@ -65,184 +65,39 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
 💌 *Selecciona el formato para descargar:*`;
 
-    const footer = 'KARISIRI BOT - YouTube';
+    const footer = '🌱 Hatsune Miku Bot - YouTube';
 
     try {
-      // Enviar mensaje con imagen integrada + texto + botones en uno solo
-      if (thumbnail) {
-        try {
-          await conn.sendMessage(m.chat, {
-            image: { url: thumbnail },
-            caption: infoText,
-            footer: footer,
-            buttons: [
-              { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
-              { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-              { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
-              { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
-            ]
-          }, { quoted: m });
-        } catch (imageError) {
-          console.log('Error con imagen integrada, enviando sin imagen:', imageError.message);
-          // Fallback sin imagen pero con botones
-          await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
-        }
-      } else {
-        // Si no hay thumbnail, enviar solo con botones
-        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
-      }
+      const thumb = thumbnail ? (await conn.getFile(thumbnail))?.data : null;
+
+      await conn.sendNCarousel(m.chat, infoText, footer, thumb, buttons, null, null, null, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
       }
       
       global.db.data.users[m.sender].lastYTSearch = {
-        url: url,
-        title: title,
+        url,
+        title,
         messageId: m.key.id,  
-        timestamp: Date.now(),
-        videoInfo: {
-          duration: timestamp,
-          views: vistas,
-          channel: canal,
-          published: ago
-        }
+        timestamp: Date.now() 
       };
       
-      global.db.data.users[m.sender].processingDownload = false;
-      global.db.data.users[m.sender].monedaDeducted = false;
-      
-    } catch (error) {
-      console.error("Error al enviar mensaje con botones:", error);
-      
-      try {
-        await conn.reply(m.chat, infoText + `\n\n${footer}\n\n💌 *Responde con:*\n1️⃣ audio_mp3\n2️⃣ video_mp4\n3️⃣ audio_doc\n4️⃣ video_doc`, m);
-        
-        if (!global.db.data.users[m.sender]) {
-          global.db.data.users[m.sender] = {};
-        }
-        
-        global.db.data.users[m.sender].lastYTSearch = {
-          url: url,
-          title: title,
-          messageId: m.key.id,  
-          timestamp: Date.now(),
-          videoInfo: {
-            duration: timestamp,
-            views: vistas,
-            channel: canal,
-            published: ago
-          }
-        };
-        
-        global.db.data.users[m.sender].processingDownload = false;
-        global.db.data.users[m.sender].monedaDeducted = false;
-        
-      } catch (fallbackError) {
-        console.error("Error en fallback:", fallbackError);
-        return m.reply(`💙 Error al mostrar información del video: ${fallbackError.message}`);
-      }
-    }
-
-    try {
-      
-      let imageBuffer = null;
-      
-      if (thumbnail) {
-        try {
-          console.log('Descargando imagen rápidamente...');
-          
-          
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 segundos máximo
-          
-          const response = await fetch(thumbnail, {
-            signal: controller.signal,
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
-          });
-          
-          clearTimeout(timeoutId);
-          
-          if (response.ok) {
-            imageBuffer = await response.buffer();
-            console.log('Imagen descargada, tamaño:', imageBuffer.length);
-          }
-        } catch (imageError) {
-          console.log('Error rápido en imagen:', imageError.message);
-        }
-      }
-      
-      
-      if (imageBuffer) {
-        await conn.sendMessage(m.chat, {
-          image: imageBuffer,
-          caption: infoText,
-          footer: footer,
-          buttons: [
-            { buttonId: 'audio_mp3', buttonText: { displayText: '🎵 Audio MP3' }, type: 1 },
-            { buttonId: 'video_mp4', buttonText: { displayText: '🎬 Video MP4' }, type: 1 },
-            { buttonId: 'audio_doc', buttonText: { displayText: '📁 Audio Doc' }, type: 1 },
-            { buttonId: 'video_doc', buttonText: { displayText: '📁 Video Doc' }, type: 1 }
-          ],
-          headerType: 4
-        }, { quoted: m });
-      } else {
-       
-        await conn.sendButton(m.chat, infoText, footer, null, buttons, m);
-      }
+    } catch (thumbError) {
+      await conn.sendNCarousel(m.chat, infoText, footer, null, buttons, null, null, null, m);
       
       if (!global.db.data.users[m.sender]) {
         global.db.data.users[m.sender] = {};
       }
       
       global.db.data.users[m.sender].lastYTSearch = {
-        url: url,
-        title: title,
+        url,
+        title,
         messageId: m.key.id,  
-        timestamp: Date.now(),
-        videoInfo: {
-          duration: timestamp,
-          views: vistas,
-          channel: canal,
-          published: ago
-        }
+        timestamp: Date.now() 
       };
       
-      global.db.data.users[m.sender].processingDownload = false;
-      global.db.data.users[m.sender].monedaDeducted = false;
-      
-    } catch (error) {
-      console.error("Error al enviar mensaje con botones:", error);
-      
-      try {
-        await conn.reply(m.chat, infoText + `\n\n${footer}\n\n💌 *Responde con:*\n1️⃣ audio_mp3\n2️⃣ video_mp4\n3️⃣ audio_doc\n4️⃣ video_doc`, m);
-        
-        if (!global.db.data.users[m.sender]) {
-          global.db.data.users[m.sender] = {};
-        }
-        
-        global.db.data.users[m.sender].lastYTSearch = {
-          url: url,
-          title: title,
-          messageId: m.key.id,  
-          timestamp: Date.now(),
-          videoInfo: {
-            duration: timestamp,
-            views: vistas,
-            channel: canal,
-            published: ago
-          }
-        };
-        
-        global.db.data.users[m.sender].processingDownload = false;
-        global.db.data.users[m.sender].monedaDeducted = false;
-        
-      } catch (fallbackError) {
-        console.error("Error en fallback:", fallbackError);
-        return m.reply(`💙 Error al mostrar información del video: ${fallbackError.message}`);
-      }
+      console.error("Error al obtener la miniatura:", thumbError);
     }
 
   } catch (error) {
@@ -317,70 +172,50 @@ async function validateDownloadUrl(url) {
 
 async function processDownload(conn, m, url, title, option) {
   const downloadTypes = {
-    1: '🎵 Audio MP3',
-    2: '🎬 Video MP4', 
-    3: '📁 Audio MP3 (Documento)',
-    4: '📁 Video MP4 (Documento)'
+    1: '🎵 audio MP3',
+    2: '🎬 video MP4', 
+    3: '📁 audio MP3 doc',
+    4: '📁 video MP4 doc'
   };
   
   const downloadType = downloadTypes[option] || 'archivo';
   
-  let processingMsg;
-  try {
-    processingMsg = await conn.reply(m.chat, `💙 Descargando ${downloadType}... ⚡\n\n⏳ Por favor espera...`, m);
-  } catch (error) {
-    console.log('No se pudo enviar mensaje de procesamiento');
-  }
+  const processingMsg = await conn.reply(m.chat, `💙 Obteniendo ${downloadType}... ⚡`, m);
   
   try {
     let downloadUrl;
     let fileName;
     let mimeType;
-    let isAudio = (option === 1 || option === 3);
 
-    const cleanTitle = title.replace(/[^\w\s\-_.()]/gi, '').replace(/\s+/g, ' ').trim();
-    
-    if (isAudio) {
+    if (option === 1 || option === 3) {
       downloadUrl = await getAudioUrl(url);
-      fileName = `${cleanTitle}.mp3`;
+      fileName = `${title.replace(/[^\w\s]/gi, '')}.mp3`;
       mimeType = 'audio/mpeg';
       
       if (!downloadUrl) {
-        throw new Error(`No se pudo obtener el enlace de audio. La canción podría no estar disponible.`);
-      }
-
-      const isValidDownload = await validateDownloadUrl(downloadUrl);
-      if (!isValidDownload) {
-        throw new Error(`El enlace de descarga no es válido o ha expirado.`);
+        throw new Error(`❌ No se pudo obtener el enlace de audio. Intenta de nuevo.`);
       }
 
       if (option === 1) {
         await conn.sendMessage(m.chat, { 
           audio: { url: downloadUrl }, 
           fileName: fileName, 
-          mimetype: mimeType,
-          ptt: false
+          mimetype: mimeType 
         }, { quoted: m });
       } else {
         await conn.sendMessage(m.chat, { 
           document: { url: downloadUrl },
           mimetype: mimeType,
-          fileName: fileName,
-          caption: `🎵 ${title}`
+          fileName: fileName
         }, { quoted: m });
       }
     } else {
       downloadUrl = await getVideoUrl(url);
-      fileName = `${cleanTitle}.mp4`;
+      fileName = `${title.replace(/[^\w\s]/gi, '')}.mp4`;
       mimeType = 'video/mp4';
       
       if (!downloadUrl) {
-        throw new Error(`No se pudo obtener el enlace de video. El video podría no estar disponible.`);
-      }
-
-      const isValidDownload = await validateDownloadUrl(downloadUrl);
-      if (!isValidDownload) {
-        throw new Error(`El enlace de descarga no es válido o ha expirado.`);
+        throw new Error(`❌ No se pudo obtener el enlace de video. Intenta de nuevo.`);
       }
 
       if (option === 2) {
@@ -388,61 +223,29 @@ async function processDownload(conn, m, url, title, option) {
           video: { url: downloadUrl }, 
           fileName: fileName, 
           mimetype: mimeType, 
-          caption: `🎬 ${title}`
+          caption: title
         }, { quoted: m });
       } else {
         await conn.sendMessage(m.chat, { 
           document: { url: downloadUrl },
           mimetype: mimeType,
           fileName: fileName,
-          caption: `🎬 ${title}`
+          caption: title
         }, { quoted: m });
       }
     }
     
     const user = global.db.data.users[m.sender];
-    if (user && !user.monedaDeducted) {
-      if ((user.moneda || 0) >= 2) {
-        user.moneda = (user.moneda || 0) - 2;
-        user.monedaDeducted = true;
-        
-        try {
-          await conn.reply(m.chat, `✅ ${downloadType} descargado exitosamente!\n💰 Se descontaron 2 Cebollines 🌱\n💰 Cebollines restantes: ${user.moneda}`, m);
-        } catch (error) {
-          console.log('No se pudo enviar mensaje de confirmación');
-        }
-      } else {
-        user.monedaDeducted = true;
-        try {
-          await conn.reply(m.chat, `✅ ${downloadType} descargado exitosamente!\n⚠️ No tienes suficientes Cebollines. Consigue más con otros comandos.`, m);
-        } catch (error) {
-          console.log('No se pudo enviar mensaje de confirmación');
-        }
-      }
+    if (!user.monedaDeducted) {
+      user.moneda -= 2;
+      user.monedaDeducted = true;
+      conn.reply(m.chat, `💙 Has utilizado 2 *Cebollines 🌱*`, m);
     }
     
     return true;
   } catch (error) {
     console.error("Error al procesar descarga:", error);
-    
-    let errorMessage = `❌ Error al descargar ${downloadType}:\n\n`;
-    
-    if (error.message.includes('obtener el enlace')) {
-      errorMessage += `• El contenido no está disponible para descarga\n• Intenta con otro video o canción`;
-    } else if (error.message.includes('no es válido')) {
-      errorMessage += `• El enlace de descarga ha expirado\n• Intenta realizar una nueva búsqueda`;
-    } else if (error.message.includes('network') || error.message.includes('timeout')) {
-      errorMessage += `• Problema de conexión\n• Intenta de nuevo en unos momentos`;
-    } else {
-      errorMessage += `• ${error.message}\n• Intenta con otro formato de descarga`;
-    }
-    
-    try {
-      await conn.reply(m.chat, errorMessage, m);
-    } catch (replyError) {
-      console.error('No se pudo enviar mensaje de error:', replyError);
-    }
-    
+    conn.reply(m.chat, `💙 Error: ${error.message}`, m);
     return false;
   }
 }
@@ -629,81 +432,97 @@ async function getVideoUrl(url) {
 
 handler.before = async (m, { conn }) => {
   const buttonPatterns = [
-    /audio_mp3/,
-    /video_mp4/,
-    /audio_doc/,
-    /video_doc/,
-    /^1$/,
-    /^2$/,
-    /^3$/,
-    /^4$/,
-    /^1️⃣$/,
-    /^2️⃣$/,
-    /^3️⃣$/,
-    /^4️⃣$/
+    /^ytdl_(audio|video)_(mp3|mp4|doc)$/,
+    /ytdl_audio_mp3/,
+    /ytdl_video_mp4/,
+    /ytdl_audio_doc/,
+    /ytdl_video_doc/
   ];
   
   let isButtonResponse = false;
-  let buttonType = null;
+  let matchedPattern = null;
   
   for (const pattern of buttonPatterns) {
     if (pattern.test(m.text)) {
       isButtonResponse = true;
-      
-      if (/audio_mp3|^1$|^1️⃣$/.test(m.text)) {
-        buttonType = 'audio';
-      } else if (/video_mp4|^2$|^2️⃣$/.test(m.text)) {
-        buttonType = 'video';
-      } else if (/audio_doc|^3$|^3️⃣$/.test(m.text)) {
-        buttonType = 'audiodoc';
-      } else if (/video_doc|^4$|^4️⃣$/.test(m.text)) {
-        buttonType = 'videodoc';
-      }
+      matchedPattern = pattern;
       break;
     }
   }
   
-  if (!isButtonResponse || !buttonType) {
+  const textContainsButton = m.text.includes('ytdl_') || 
+                            m.text.includes('audio_mp3') || 
+                            m.text.includes('video_mp4') ||
+                            m.text.includes('audio_doc') ||
+                            m.text.includes('video_doc');
+  
+  const buttonTextPatterns = [
+    /🎵.*MP3.*Audio/i,
+    /🎬.*MP4.*Video/i,
+    /📁.*MP3.*Documento/i,
+    /📁.*MP4.*Documento/i
+  ];
+  
+  let isButtonTextResponse = false;
+  for (const pattern of buttonTextPatterns) {
+    if (pattern.test(m.text)) {
+      isButtonTextResponse = true;
+      matchedPattern = `text: ${pattern}`;
+      break;
+    }
+  }
+  
+  if (!isButtonResponse && !textContainsButton && !isButtonTextResponse) {
     return false;
   }
   
   const user = global.db.data.users[m.sender];
   if (!user || !user.lastYTSearch) {
-    await conn.reply(m.chat, '❌ No hay búsqueda activa. Realiza una nueva búsqueda con .play', m);
     return false;
   }
+  
+  console.log(`🎵 Procesando: ${user.lastYTSearch.title}`);
   
   const currentTime = Date.now();
   const searchTime = user.lastYTSearch.timestamp || 0;
   
   if (currentTime - searchTime > 10 * 60 * 1000) {
     await conn.reply(m.chat, '⏰ La búsqueda ha expirado. Por favor realiza una nueva búsqueda.', m);
-    delete user.lastYTSearch;
-    return false;
+    return false; 
   }
   
-  if (user.processingDownload) {
-    await conn.reply(m.chat, '⏳ Ya hay una descarga en proceso. Espera a que termine.', m);
-    return false;
+  let option = null;
+  
+  if (m.text.includes('audio_mp3') || m.text === 'ytdl_audio_mp3') {
+    option = 1; 
+  } else if (m.text.includes('video_mp4') || m.text === 'ytdl_video_mp4') {
+    option = 2; 
+  } else if (m.text.includes('audio_doc') || m.text === 'ytdl_audio_doc') {
+    option = 3; 
+  } else if (m.text.includes('video_doc') || m.text === 'ytdl_video_doc') {
+    option = 4; 
   }
   
-  console.log(`🎵 Procesando descarga de: ${user.lastYTSearch.title} - Tipo: ${buttonType}`);
+  else if (/🎵.*MP3.*Audio/i.test(m.text)) {
+    option = 1; 
+  } else if (/🎬.*MP4.*Video/i.test(m.text)) {
+    option = 2; 
+  } else if (/📁.*MP3.*Documento/i.test(m.text)) {
+    option = 3; 
+  } else if (/📁.*MP4.*Documento/i.test(m.text)) {
+    option = 4; 
+  }
   
-  const optionMap = {
-    'audio': 1,
-    'video': 2,
-    'audiodoc': 3,
-    'videodoc': 4
-  };
-  
-  const option = optionMap[buttonType];
   if (!option) {
-    await conn.reply(m.chat, '❌ Tipo de descarga no válido.', m);
+    return false;
+  }
+
+  if (user.processingDownload) {
     return false;
   }
   
   user.processingDownload = true;
-  user.monedaDeducted = false;
+  user.cebollinesDeducted = false;
 
   try {
     await processDownload(
@@ -714,11 +533,11 @@ handler.before = async (m, { conn }) => {
       option
     );
     
-    delete user.lastYTSearch;
+    user.lastYTSearch = null;
     user.processingDownload = false;
     
   } catch (error) {
-    console.error(`❌ Error en descarga:`, error.message);
+    console.error(`❌ Error:`, error.message);
     user.processingDownload = false;
     await conn.reply(m.chat, `💙 Error al procesar la descarga: ${error.message}`, m);
   }
