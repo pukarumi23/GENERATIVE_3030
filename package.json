@@ -1,6 +1,6 @@
 {
 "name": "Hatsune miku",
-"version": "2.2.5",
+"version": "2.2.6",
 "description": "WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
@@ -33,7 +33,7 @@
 "dependencies": {
 "@bochilteam/scraper": "^4.2.4",
 "@vitalets/google-translate-api": "^8.0.0",
-"@whiskeysockets/baileys": "npm:@baileys-md/stable",
+"@whiskeysockets/baileys": "github:xzzys26/Itsuki-BaileysMD",
 "acrcloud": "^1.4.0",
 "api-dylux": "^1.7.2",
 "aptoide-scraper": "github:DIEGO-OFC/dv-aptoide-scraper",
