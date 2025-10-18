@@ -13,16 +13,16 @@ let timeLeft = 1500000 - (new Date() - user.lastAdventure);
 return conn.reply(m.chat, `🌸 ¡Espera un poquito! Necesitas descansar ${msToTime(timeLeft)} antes de tu próxima aventura~ 💕`, m);
 }
 let kingdoms = [
-  'Mercado de Shibuya en Tokio',
-  'Festival de Comiket en Odaiba',
-  'Tienda de Cosplay en Akihabara',
-  'Distrito de Moda en Harajuku',
-  'Estudio de Fotografía en Shinjuku',
-  'Centro Comercial de Ikebukuro',
-  'Convención de Anime en Yokohama',
-  'Boutique Vintage en Nakano',
-  'Cafetería Temática en Roppongi',
-  'Pasarela de Moda en Ginza'
+  'Minas de Moria (El Señor de los Anillos)',
+  'Montañas Solitarias (El Hobbit)',
+  'Reino Subterráneo de Erebor',
+  'Planeta Pandora (Avatar)',
+  'Ciudad Minera de Ba Sing Se (Avatar)',
+  'Islas Flotantes de Laputa (Castillo en el Cielo)',
+  'Valle de los Cristales (Nausicaä)',
+  'Cavernas de Cristal de Krypton (Superman)',
+  'Minas de Beskar de Mandalore (Star Wars)',
+  'Wakanda - Minas de Vibranium (Marvel)'
 ];
 let randomKingdom = pickRandom(kingdoms);
 let coin = pickRandom([20, 5, 7, 8, 88, 40, 50, 70, 90, 999, 300]);
@@ -48,7 +48,7 @@ user.health = 0;
 }
 let info = `✨💖 ¡Aventura Completada! 💖✨
 
-🌸 Has explorado el *${randomKingdom}* y encontraste cosas increíbles~
+⛏️ Has explorado las *${randomKingdom}* y encontraste tesoros increíbles~
 
 ╭━━━━━━━━━━━━━━━╮
 ┃ 🎁 RECOMPENSAS 🎁
