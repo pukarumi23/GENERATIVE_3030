@@ -12,11 +12,11 @@ let txt = `╔════════════════╗
 ╚══════════════════╝
 
 ┏━━━━━━━━━━━━━━━┓
-┃ 📊 ESTADO DEL BOT┃
+┃💖ESTADO DEL BOT┃
 ┣━━━━━━━━━━━━━━━┫
-┃ � Usuario: @${userId.split('@')[0]}
-┃ 🔶 Modo: Público en Línea
-┃ 🤖 Estado: ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal �️' : 'Sub-Bot �️')}
+┃ ✨ Usuario: @${userId.split('@')[0]}
+┃ 🌸 Modo: Público en Línea
+┃ 🤖 Estado: ${(conn.user.jid == global.conn.user.jid ? 'Bot Principal 💕' : 'Sub-Bot 💕')}
 ┃ ⏰ Tiempo Activo: ${uptime}
 ┃ 👥 Usuarios: ${totalreg}
 ┃ 🔧 Comandos: ${totalCommands}
@@ -24,10 +24,10 @@ let txt = `╔════════════════╗
 ┗━━━━━━━━━━━━━━━━━━━┛
 
 ┏━━━━━━━━━━━━━━━━━━━━━━┓
-┃📋INFORMACIÓN DEL BOT ┃
+┃💕INFORMACIÓN DEL BOT ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━┛
 ▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭
-◇◈Comandos para ver el estado e información de kitagawa ◇◈
+💖 Comandos para ver el estado e información de kitagawa 💖
 ▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭
 🔌 *#help • #menu*
    ┗ 📱 Ver la lista completa de comandos disponibles
@@ -38,7 +38,7 @@ let txt = `╔════════════════╗
 👥 *#staff • #colaboradores*
    ┗ 👨‍💻 Ver la lista de desarrolladores
 📊 *#status • #estado*
-   ┗ 🔶 Ver el estado actual del bot
+   ┗ 🌸 Ver el estado actual del bot
 🔗 *#links • #grupos*
    ┗ 📱 Ver enlaces oficiales del bot
 ℹ️ *#infobot*
