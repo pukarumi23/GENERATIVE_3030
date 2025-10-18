@@ -1,29 +1,28 @@
 import fetch from 'node-fetch';
-
 let handler = async (m, { conn }) => {
 let user = global.db.data.users[m.sender];
 let img = 'https://us.123rf.com/450wm/artcuboy/artcuboy2304/artcuboy230402593/203429490-caminante-de-pie-en-la-cima-de-una-monta%C3%B1a-ilustraci%C3%B3n-de-arte-digital-ai-generativo.jpg?ver=6';
 if (!user) {
-return conn.reply(m.chat, ` 🔶el usuario no se encuentra en la base de datos`, m);
+return conn.reply(m.chat, `💕 ¡Uy! Parece que no estás registrado en mi base de datos~`, m);
 }
 if (user.health < 80) {
-return conn.reply(m.chat, '🔶No tienes suficiente energía para aventurarte en el mundo. Usa el comando .heal para recuperar tu energía ✨💫', m);
+return conn.reply(m.chat, '🥺 ¡Ay no! No tienes suficiente energía para ir de aventura. Usa .heal para recuperarte, ¿sí? 💖✨', m);
 }
 if (user.lastAdventure && new Date() - user.lastAdventure <= 1500000) {
 let timeLeft = 1500000 - (new Date() - user.lastAdventure);
-return conn.reply(m.chat, `🔶 Debes esperar ${msToTime(timeLeft)} para tu siguente aventura en el mundo`, m);
+return conn.reply(m.chat, `🌸 ¡Espera un poquito! Necesitas descansar ${msToTime(timeLeft)} antes de tu próxima aventura~ 💕`, m);
 }
 let kingdoms = [
-  'Imperio Inca de Tawantinsuyo',
-  'Reino Maya de Tikal',
-  'Señorío Chimú de Chan Chan',
-  'Reino Azteca de Tenochtitlán',
-  'Reino Muisca de Bacatá',
-  'Ciudad Sagrada de Teotihuacán',
-  'Reino Zapoteca de Monte Albán',
-  'Reino Mochica del Sol y la Luna',
-  'Reino Purépecha de Tzintzuntzan',
-  'Ciudadela Sagrada de Machu Picchu'
+  'Mercado de Shibuya en Tokio',
+  'Festival de Comiket en Odaiba',
+  'Tienda de Cosplay en Akihabara',
+  'Distrito de Moda en Harajuku',
+  'Estudio de Fotografía en Shinjuku',
+  'Centro Comercial de Ikebukuro',
+  'Convención de Anime en Yokohama',
+  'Boutique Vintage en Nakano',
+  'Cafetería Temática en Roppongi',
+  'Pasarela de Moda en Ginza'
 ];
 let randomKingdom = pickRandom(kingdoms);
 let coin = pickRandom([20, 5, 7, 8, 88, 40, 50, 70, 90, 999, 300]);
@@ -47,33 +46,42 @@ user.lastAdventure = new Date();
 if (user.health < 0) {
 user.health = 0;
 }
-let info = `⚔️� Te has aventurado en el *<${randomKingdom}>* ✨\n` +
-`� *Aventura Finalizada* �\n` +
-`� *Intis ganados:* ${coin}\n` +
-`♦️ *Esmeralda :* ${emerald}\n` +
-`🔩 *Hierro:* ${iron}\n` +
-`🏅 *Oro:* ${gold}\n` +
-`🕋 *Carbón:* ${coal}\n` +
-`🪨 *Piedras:* ${stone}\n` +
-`💎 *Diamantes:* ${diamonds}\n` +
-`✨ *Experiencia Ganada:* ${exp}\n` +
-`❤️ *Energía Actual:* ${user.health}`;
+let info = `✨💖 ¡Aventura Completada! 💖✨
+
+🌸 Has explorado el *${randomKingdom}* y encontraste cosas increíbles~
+
+╭━━━━━━━━━━━━━━━╮
+┃ 🎁 RECOMPENSAS 🎁
+╰━━━━━━━━━━━━━━━╯
+
+💰 Intis: ${coin}
+💎 Esmeralda: ${emerald}
+⚙️ Hierro: ${iron}
+🏆 Oro: ${gold}
+🪨 Carbón: ${coal}
+🗿 Piedras: ${stone}
+💍 Diamantes: ${diamonds}
+✨ Experiencia: +${exp}
+
+╭━━━━━━━━━━━━━━╮
+┃ 💕 TU ESTADO 💕
+╰━━━━━━━━━━━━━━╯
+
+❤️ Energía: ${user.health}/100
+
+¡Estuvo genial! ¿Vamos por otra aventura cuando descanses? 🌟`;
 await conn.sendFile(m.chat, img, 'aventura.jpg', info, fkontak);
 }
-
 handler.help = ['aventura', 'adventure'];
 handler.tags = ['rpg'];
 handler.command = ['adventure', 'aventura'];
 handler.group = true;
 handler.register = true;
 handler.cooldown = 1500000;
-
 export default handler;
-
 function pickRandom(list) {
 return list[Math.floor(Math.random() * list.length)];
 }
-
 function msToTime(duration) {
 let minutes = Math.floor((duration / (1000 * 60)) % 60);
 let seconds = Math.floor((duration / 1000) % 60);
