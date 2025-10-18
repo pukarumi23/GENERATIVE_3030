@@ -1,6 +1,6 @@
 const handler = async (m, { isPrems, conn }) => {
   if (!global.db.data.users[m.sender]) {
-    throw `💙 ¡Ara ara! Usuario no encontrado en mi base de datos virtual. ✨`;
+    throw `✨ ¡Oya oya! Parece que no estás registrado en mi mundo, senpai~ 💫`;
   }
 
   const lastCofreTime = global.db.data.users[m.sender].lastcofre;
@@ -8,12 +8,12 @@ const handler = async (m, { isPrems, conn }) => {
 
   if (Date.now() < timeToNextCofre) {
     const tiempoRestante = timeToNextCofre - Date.now();
-    const mensajeEspera = `💙 ¡Ya reclamaste tu cofre virtual de Miku hoy! 💙\n⏰️ Regresa en: *${msToTime(tiempoRestante)}* para obtener más tesoros musicales. ✨`;
+    const mensajeEspera = `🎀 ¡Ufufu~ Ya reclamaste tu tesoro especial hoy, senpai! 🎀\n⏰ Vuelve en: *${msToTime(tiempoRestante)}* para más sorpresas divertidas ✨\n💕 ¡Mientras tanto, podríamos pasar el rato juntos!`;
     await conn.sendMessage(m.chat, { text: mensajeEspera }, { quoted: m });
     return;
   }
 
-  const img = '.src/catalogo.jpg';
+  const img = '.src/menu78.jpg';
   const dia = Math.floor(Math.random() * 100);
   const tok = Math.floor(Math.random() * 10);
   const ai = Math.floor(Math.random() * 40);
@@ -26,22 +26,25 @@ const handler = async (m, { isPrems, conn }) => {
   global.db.data.users[m.sender].lastcofre = Date.now();
 
   const texto = `
-╭━〔 💙 Cofre Musical de Miku 💙 〕⬣
-┃🎵 *¡Obtienes Tesoros Virtuales!*
-┃✨ ¡Felicidades, fanático de Miku!
-╰━━━━━━━━━━━━⬣
+╭━━〔 🎀 𝗖𝗼𝗳𝗿𝗲 𝗘𝘀𝗽𝗲𝗰𝗶𝗮𝗹 𝗱𝗲 𝗠𝗮𝗿𝗶𝗻 🎀 〕━━⬣
+┃ 🎮 *¡Kyaaa~ Encontraste un tesoro increíble!* 🎮
+┃ 💫 *¡Senpai, mira todas estas cosas maravillosas!*
+╰━━━━━━━━━━━━━━━━━━━━━━⬣
 
-╭━〔 🎶 Nuevos Recursos Musicales 🎶 〕⬣
-┃ *${dia} ${moneda}* 🎤
-┃ *${tok} Tokens Virtuales* ⚜️
-┃ *${ai} Cristales de Sonido* 💎
-┃ *${expp} Experiencia Musical* ✨
-╰━━━━━━━━━━━━⬣`;
+╭━━〔 🌸 𝗧𝗲𝘀𝗼𝗿𝗼𝘀 𝗘𝗻𝗰𝗮𝗻𝘁𝗮𝗱𝗼𝘀 🌸 〕━━⬣
+┃ 🎴 *${dia} Monedas Brillantes* 💰
+┃ 🎭 *${tok} Tickets Dorados* 🎫
+┃ 💎 *${ai} Cristales Relucientes* ✨
+┃ 📚 *${expp} EXP de Aventura* 🎨
+╰━━━━━━━━━━━━━━━━━━━━━━⬣
+
+🎀 *¡Ufufu~ Con esto podremos comprar muchas cosas divertidas, senpai!* 💕
+✨ *¿No te emociona? ¡Es como encontrar un tesoro escondido!* 🎮`;
 
   try {
     await conn.sendFile(m.chat, img, 'yuki.jpg', texto, fkontak);
   } catch (error) {
-    throw `${msm} Ocurrió un error al enviar el cofre.`;
+    throw `🎀 ¡Oya! Algo salió mal al enviar el cofre especial, senpai~ 💫`;
   }
 };
 
