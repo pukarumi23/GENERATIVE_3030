@@ -53,8 +53,8 @@ global.etiqueta = '◇𝕂𝕀𝕋𝔸𝔾𝔸𝕎𝔸_𝔹𝕆𝕋◈'
 global.moneda = '🪙 Intis'
 global.welcom1 = 'bienvenido'
 global.welcom2 = 'adios '
-global.banner = 'https://files.catbox.moe/huq9y4.jpeg'
-global.avatar = 'https://files.catbox.moe/huq9y4.jpeg'
+global.banner = 'https://files.catbox.moe/psffj2.jpg'
+global.avatar = 'https://files.catbox.moe/psffj2.jpg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
@@ -67,7 +67,7 @@ global.correo = 'independentebot@gmail.com'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.catalogo = fs.readFileSync('./src/menu32.jpeg');
+global.catalogo = fs.readFileSync('./src/menu78.jpg');
 global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: packname, orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
 global.ch = {
 ch1: '120363418348675041@newsletter',
