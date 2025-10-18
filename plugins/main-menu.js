@@ -8,7 +8,7 @@ let totalreg = Object.keys(global.db.data.users).length
 let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     
 let txt = `╔════════════════╗
-║ ◇INDEPENDIENTE_BOT◈ ║
+║ ◇kitagawa_bot◈ ║
 ╚══════════════════╝
 
 ┏━━━━━━━━━━━━━━━┓
@@ -27,7 +27,7 @@ let txt = `╔════════════════╗
 ┃📋INFORMACIÓN DEL BOT ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━┛
 ▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭
-◇◈Comandos para ver el estado e información de Independiente ◇◈
+◇◈Comandos para ver el estado e información de kitagawa ◇◈
 ▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭■▭
 🔌 *#help • #menu*
    ┗ 📱 Ver la lista completa de comandos disponibles
@@ -464,7 +464,7 @@ let txt = `╔════════════════╗
 
 ╔═══════════════════════════╗
 ║  ¡GRACIAS POR USAR!       ║
-║  ¡INDEPENDIENTE_BOT!       ║
+║  ¡KITAGAWA_BOT!       ║
 ╚═══════════════════════════╝`.trim()
 
 await conn.sendMessage(m.chat, { 
