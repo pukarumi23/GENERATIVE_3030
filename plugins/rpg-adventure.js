@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 let handler = async (m, { conn }) => {
 let user = global.db.data.users[m.sender];
-let img = 'https://us.123rf.com/450wm/artcuboy/artcuboy2304/artcuboy230402593/203429490-caminante-de-pie-en-la-cima-de-una-monta%C3%B1a-ilustraci%C3%B3n-de-arte-digital-ai-generativo.jpg?ver=6';
+let img = 'https://files.catbox.moe/qib7ar.jpeg';
 if (!user) {
 return conn.reply(m.chat, `💕 ¡Uy! Parece que no estás registrado en mi base de datos~`, m);
 }
