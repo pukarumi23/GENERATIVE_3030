@@ -34,19 +34,19 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.17' 
 global.vs = '2.2.5'
-global.nameqr = '🧡𝕂𝕀𝕋𝔸𝔾𝔸𝕎𝔸_𝔹𝕆𝕋☘️'
-global.namebot = '�🔶𝑲𝑰𝑻𝑨𝑮𝑨𝑾𝑨_𝑩𝑶𝑻🔶�'
+global.nameqr = '💗𝓚𝓲𝓽𝓪𝓰𝓪𝔀𝓪_𝓑𝓸𝓽🌸'
+global.namebot = '🌷Ｋ𝓲𝓽𝓪𝓰𝓪𝔀𝓪_ʙᴏᴛ💞'
 global.sessions = 'Sessions'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.packname = '🧡𝕂𝕀𝕋𝔸𝔾𝔸𝕎𝔸_𝔹𝕆𝕋🌿'
-global.botname ='𝑲𝑰𝑻𝑨𝑮𝑨𝑾𝑨_𝑩𝑶𝑻'
-global.wm = '🧡𝕂𝕀𝕋𝔸𝔾𝔸𝕎𝔸_𝔹𝕆𝕋💛'
+global.packname = '💖Ｋ𝓲𝓽𝓪𝓰𝓪𝔀𝓪_ʙᴏᴛ🎀'
+global.botname ='꧁✨𝒦𝒾𝓉𝒶𝑔𝒶𝓌𝒶_𝒝𝑜𝓉✨꧂'
+global.wm = '🌸𝓚𝓲𝓽𝓪𝓰𝓪𝔀𝓪♡ʙᴏᴛ💗'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
 global.dev = '© 🄿🄾🅆🄴🅁🄴🄳✧･ﾟCHASKI･ﾟ✧'
-global.textbot = '💛𝑲𝑰𝑻𝑨𝑮𝑨𝑾𝑨_𝑩𝑶𝑻🌿'
-global.etiqueta = '◇𝑲𝑰𝑻𝑨𝑮𝑨𝑾𝑨_𝑩𝑶𝑻◈'
+global.textbot = '💞𝘬𝘪𝘵𝘢𝘨𝘢𝘸𝘢_𝘣𝘰𝘵🌷'
+global.etiqueta = '◇🌷𝒦𝒾𝓉𝒶𝑔𝒶𝓌𝒶_ʙᴏᴛ💖◈'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
