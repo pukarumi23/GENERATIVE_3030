@@ -49,7 +49,7 @@ let handler = async (m, { conn }) => {
         const personajeKeys = Object.keys(global.db.inca.personajes);
 
         if (personajeKeys.length === 0) {
-            return m.reply('💙 No hay personajes invocados. Usa .invocar para llamar a un personaje del Tahuantinsuyu.');
+            return m.reply('✨ No tienes personajes invocados... Llama a alguien especial con .invocar 💫');
         }
 
         if (global.db.inca.personajes[userId]) {
@@ -61,7 +61,7 @@ let handler = async (m, { conn }) => {
         }
 
         if (!currentPersonaje || !currentPersonaje.name) {
-            return m.reply('💙 No se encontró personaje válido para guardar.');
+            return m.reply('💔 No encontré a nadie para guardar... intenta de nuevo~');
         }
 
         let db = loadDatabase();
@@ -79,7 +79,7 @@ let handler = async (m, { conn }) => {
 
         if (exists) {
             delete global.db.inca.personajes[personajeKey];
-            return m.reply(`🏺 Ya tienes a **${currentPersonaje.name}** (${currentPersonaje.rarity}) en tu quipu sagrado.`);
+            return m.reply(`💖 **${currentPersonaje.name}** ya está en tu colección sagrada... ¡No la olvides~! 😘`);
         }
 
         db.users[userId].quipu.push({
@@ -89,7 +89,7 @@ let handler = async (m, { conn }) => {
         });
 
         if (!saveDatabase(db)) {
-            return m.reply('❌ Error al grabar en el quipu (registro).');
+            return m.reply('❌ Ay no... algo salió mal al guardar 💔');
         }
 
         delete global.db.inca.personajes[personajeKey];
@@ -104,28 +104,32 @@ let handler = async (m, { conn }) => {
         };
 
         const rarityTitles = {
-            'común': 'HATUN RUNA',
-            'rara': 'CURACA',
-            'epico': 'AUQUI',
-            'ultra rara': 'INCA',
-            'mitico': 'HUACA DIVINA'
+            'común': 'BELLA MUSA',
+            'rara': 'PRINCESA',
+            'epico': 'REINA',
+            'ultra rara': 'DIOSA',
+            'mitico': 'DEIDAD SAGRADA'
         };
 
-        const emoji = rarityEmojis[currentPersonaje.rarity.toLowerCase()] || '🦙';
+        const emoji = rarityEmojis[currentPersonaje.rarity.toLowerCase()] || '🦋';
         const rarityTitle = rarityTitles[currentPersonaje.rarity.toLowerCase()] || currentPersonaje.rarity;
 
-        let msg = `🛕 *¡GUARDADO EN EL USHNU SAGRADO!* 🛕\n\n`;
-        msg += `${emoji} *${currentPersonaje.name}*\n`;
-        msg += `💎 *Rango: ${rarityTitle.toUpperCase()}*\n`;
-        msg += `👤 Consultante: ${userName}\n`;
-        msg += `📊 Total en tu quipu: *${db.users[userId].quipu.length}* personajes ancestrales\n\n`;
-        msg += `🌄 Usa *.coleccion* para ver tus tesoros del Tahuantinsuyu.`;
+        let msg = `╔═══════════════════════╗\n`;
+        msg += `║ 💫 *¡GUARDADO!* 💫    ║\n`;
+        msg += `╠═══════════════════════╣\n\n`;
+        msg += `✨ *${currentPersonaje.name}*\n`;
+        msg += `${emoji} *Rango: ${rarityTitle}*\n`;
+        msg += `👤 Guardada por: ${userName}\n`;
+        msg += `💎 Total coleccionados: *${db.users[userId].quipu.length}* 💕\n\n`;
+        msg += `📜 Mira tu colección con *.coleccion*\n`;
+        msg += `¡Qué hermoso~ 🌸\n`;
+        msg += `╚═══════════════════════╝`;
 
         return m.reply(msg);
 
     } catch (error) {
         console.error('Error en save:', error);
-        return m.reply(`❌ Error: ${error.message}`);
+        return m.reply(`❌ Oops... error: ${error.message}`);
     }
 };
 
@@ -135,4 +139,3 @@ handler.command = /^(guardar|save|claim|c|reclamar)$/i;
 handler.group = true;
 
 export default handler;
-
