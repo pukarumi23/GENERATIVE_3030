@@ -44,7 +44,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     users[senderId].exp += evento.exp;
   }
 
-  let img = 'https://raw.githubusercontent.com/Brauliovh3/HATSUNE-MIKU/main/Contenido/1745558209798.jpeg';
+  let img = 'https://e1.pxfuel.com/desktop-wallpaper/375/643/desktop-wallpaper-fantasy-cave-cave-thumbnail.jpg';
   let info = `╔═══════════════════════════╗
 ║ 🗡️ *¡AVENTURA EN MAZMORRAS!* 🗡️
 ╠═══════════════════════════╣
