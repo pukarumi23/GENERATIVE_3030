@@ -46,7 +46,7 @@ let handler = async (m, { conn }) => {
 ║                           ║
 ╚═══════════════════════════╝`;
 
-  await conn.sendFile(m.chat, img, 'yuki.jpg', info, fkontak);
+  await conn.sendFile(m.chat, img, 'src/mineria.wepb', info, fkontak);
   await m.react('⛏️');
   
   user.health -= 50;
