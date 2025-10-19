@@ -1,4 +1,20 @@
-import { promises as fs } from 'fs';
+import fs from 'fs'
+import path from 'path'
+
+const dbPath = path.join(process.cwd(), 'src', 'database')
+const databaseFilePath = path.join(dbPath, 'incadatabase.json')
+
+function loadDatabase() {
+  if (!fs.existsSync(databaseFilePath)) {
+    return { users: {} }
+  }
+  try {
+    return JSON.parse(fs.readFileSync(databaseFilePath, 'utf-8'))
+  } catch (error) {
+    console.error('❌ Error al cargar database:', error)
+    return { users: {} }
+  }
+}
 
 global.db = global.db || {};
 global.db.inca = global.db.inca || {
@@ -362,7 +378,7 @@ let handler = async (m, { conn }) => {
             const remainingTime = 900000 - timeDiff;
             const minutes = Math.floor(remainingTime / 60000);
             const seconds = Math.floor((remainingTime % 60000) / 1000);
-            return m.reply(`⏰ El oráculo del Inca dice que debes esperar ${minutes}m ${seconds}s para consultar nuevamente los designios del Tahuantinsuyu.`);
+            return m.reply(`🌸 ¡Ey! Ya invocaste hace poco~ Espera *${minutes}m ${seconds}s* para invocar de nuevo 💕`);
         }
     }
 
@@ -384,12 +400,11 @@ let handler = async (m, { conn }) => {
 
     
     const rarityColors = {
-         'comun': '🌾',
-         'poco comun': '🪶', 
-         'raro': '⛰️',       
-         'epico': '🗿',       
-         'legendario': '🌞',  
-         'mitico': '👑' 
+         'común': '🌾',
+         'rara': '🪶', 
+         'épica': '🗿',       
+         'ultra rara': '⛰️',  
+         'Legendaria': '🌞'
     };
 
     const rarityProbs = {
@@ -401,22 +416,30 @@ let handler = async (m, { conn }) => {
     };
 
     const rarityNames = {
-        'común': 'HATUN RUNA',
-        'rara': 'CURACA',
-        'épica': 'AUQUI',
-        'ultra rara': 'INCA',
-        'Legendaria': 'HUACA DIVINA'
+        'común': 'COMÚN',
+        'rara': 'RARA',
+        'épica': 'ÉPICA',
+        'ultra rara': 'ULTRA RARA',
+        'Legendaria': 'LEGENDARIA'
     };
 
     
-    let message = `🏔️ ¡ORÁCULO DEL TAHUANTINSUYU! 🏔️\n\n`;
-    message += `👤 Consultante: @${userId.split('@')[0]}\n`;
-    message += `${rarityColors[selectedPersonaje.rarity]} Rango: ${rarityNames[selectedPersonaje.rarity]} (${rarityProbs[selectedPersonaje.rarity]})\n`;
-    message += `⚱️ Los dioses han hablado...\n\n`;
-    message += `🌟 ¡Has invocado a:\n`;
+    let message = `✨💖 ¡INVOCACIÓN! 💖✨\n\n`;
+    message += `╔═══════════════════╗\n`;
+    message += `║ 🎲 RESULTADO      ║\n`;
+    message += `╚═══════════════════╝\n\n`;
+    message += `👤 Invocador: @${userId.split('@')[0]}\n`;
+    message += `${rarityColors[selectedPersonaje.rarity]} Rareza: *${rarityNames[selectedPersonaje.rarity]}* (${rarityProbs[selectedPersonaje.rarity]})\n\n`;
+    message += `╔═══════════════════╗\n`;
+    message += `║ 🌟 PERSONAJE     ║\n`;
+    message += `╚═══════════════════╝\n\n`;
     message += `${selectedPersonaje.name}\n\n`;
     message += `📜 "${selectedPersonaje.description}"\n\n`;
-    message += `💎 Usa .guardar o .coleccion para preservar este encuentro sagrado en tu ushnu personal!`;
+    message += `╔═══════════════════╗\n`;
+    message += `║ 💡 CONSEJO        ║\n`;
+    message += `╚═══════════════════╝\n\n`;
+    message += `🌸 Usa *.guardar* para añadirlo a tu colección~\n`;
+    message += `💕 Usa *.coleccion* para ver todos tus personajes ✨`;
 
    
     await conn.sendMessage(m.chat, { 
@@ -436,7 +459,7 @@ handler.before = async (m, { conn }) => {
         const userId = m.sender;
         
         if (!global.db.inca.personajes[userId]) {
-            return m.reply('🏺 No tienes ningún personaje reciente para guardar. Usa .invocar primero.');
+            return m.reply('🥺 ¡Uy! No tienes ningún personaje para guardar. Usa *.invocar* primero~');
         }
 
         if (!global.db.inca.collection[userId]) {
@@ -449,7 +472,7 @@ handler.before = async (m, { conn }) => {
         const yaExiste = global.db.inca.collection[userId].some(p => p.name === personaje.name);
         
         if (yaExiste) {
-            return m.reply(`🏺 Ya tienes a ${personaje.name} en tu colección sagrada.`);
+            return m.reply(`💕 Ya tienes a *${personaje.name}* en tu colección~`);
         }
 
         global.db.inca.collection[userId].push({
@@ -460,7 +483,7 @@ handler.before = async (m, { conn }) => {
 
         delete global.db.inca.personajes[userId]; 
 
-        return m.reply(`✅ ${personaje.name} ha sido añadido a tu colección del Tahuantinsuyu!\n🏺 Colección actual: ${global.db.inca.collection[userId].length} personajes`);
+        return m.reply(`✨💖 ¡Guardado! 💖✨\n\n*${personaje.name}* fue añadido a tu colección!\n\n💎 Colección actual: *${global.db.inca.collection[userId].length} personajes*\n\n🌸 ¡Sigue coleccionando más! ✨`);
     }
 }
 
@@ -472,5 +495,3 @@ handler.group = true
 handler.cooldown = 900000
 
 export default handler
-
-
