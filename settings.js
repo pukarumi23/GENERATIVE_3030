@@ -40,7 +40,7 @@ global.sessions = 'Sessions'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.packname = '💖Ｋ𝓲𝓽𝓪𝓰𝓪𝔀𝓪_ʙᴏᴛ🎀'
+global.packname = '💞𝘬𝘪𝘵𝘢𝘨𝘢𝘸𝘢_𝘣𝘰𝘵🌷'
 global.botname ='꧁✨𝒦𝒾𝓉𝒶𝑔𝒶𝓌𝒶_𝒝𝑜𝓉✨꧂'
 global.wm = '🌸𝓚𝓲𝓽𝓪𝓰𝓪𝔀𝓪♡ʙᴏᴛ💗'
 global.author = '✧･ﾟCHASKI･ﾟ✧'
