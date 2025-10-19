@@ -1,43 +1,59 @@
 const baseCoinReward = 10000;
 
 var handler = async (m, { conn }) => {
-
     let user = global.db.data.users[m.sender] || {};
     user.halloween = user.halloween || 0;
-
+    
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const isOctober = currentDate.getMonth() === 9;
-
     const cooldown = 365 * 24 * 60 * 60 * 1000; // 1 año en milisegundos
     let timeRemaining = user.halloween + cooldown - currentDate.getTime();
-
+    
     if (!isOctober) {
-        return m.reply(`🎃 ¡Solo puedes reclamar tu regalo de Halloween en octubre! Vuelve en octubre de ${currentYear}.`);
-    }
+        return m.reply(`🎃 *¡Solo en octubre~!* 🎃
 
+❌ Lo siento cariño... Solo tengo regalos de Halloween en octubre 👻
+
+📅 Vuelve en octubre de ${currentYear} para tu sorpresa especial ✨`);
+    }
+    
     if (timeRemaining > 0) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo de Halloween este año! Vuelve en:\n *${msToTime(timeRemaining)}*`);
-    }
+        return m.reply(`⏳ *¡Ya reclamaste tu regalo!* ⏳
 
+👻 Ya disfrutaste de la magia de Halloween este año...
+
+${msToTime(timeRemaining)} para volver a intentar 🎃✨`);
+    }
+    
     let coinReward = pickRandom([5, 10, 15, 20]);
     let candyReward = pickRandom([5, 10, 15, 20]);
     let expReward = pickRandom([2000, 3000, 4000, 5000]);
     let giftReward = pickRandom([2, 3, 4, 5]);
-
+    
     user.coin = (user.coin || 0) + coinReward;
     user.candies = (user.candies || 0) + candyReward;
     user.exp = (user.exp || 0) + expReward;
     user.gifts = (user.gifts || 0) + giftReward;
-
-    m.reply(`
-\`\`\`🎃 ¡Feliz Halloween! ¡Disfruta de tu regalo de Halloween! 👻\`\`\`
-
-💸 *${moneda}* : +${coinReward}
-🍬 *Dulces* : +${candyReward}
-✨ *Experiencia* : +${expReward}
-🎃 *Regalos de Halloween* : +${giftReward}`);
-
+    
+    m.reply(`╔═══════════════════════════╗
+║ 🎃 *¡FELIZ HALLOWEEN!* 🎃  ║
+╠═══════════════════════════╣
+║                           ║
+║ 👻 ¡Tu noche especial~!
+║ Aquí está tu sorpresa...
+║
+║ 💸 Monedas: +${coinReward} ${moneda}
+║ 🍬 Dulces: +${candyReward}
+║ 🌟 Experiencia: +${expReward} XP
+║ 🎃 Regalos: +${giftReward}
+║
+║ 💖 ¡Qué suerte tienes~!
+║ La noche de brujas es 
+║ especial para ti ✨
+║                           ║
+╚═══════════════════════════╝`);
+    
     user.halloween = new Date().getTime();
 }
 
