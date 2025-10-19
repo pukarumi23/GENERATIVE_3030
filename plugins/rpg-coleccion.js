@@ -65,7 +65,7 @@ let handler = async (m, { conn }) => {
     const db = loadDatabase()
 
     if (!db.users?.[userId]?.quipu || db.users[userId].quipu.length === 0) {
-      return m.reply('📝 Tu quipu está vacío. Usa .invocar para obtener personajes ancestrales.')
+      return m.reply('🌸 ¡Uy! Tu colección está vacía~ Usa .invocar para conseguir personajes 💕')
     }
 
     const collection = db.users[userId].quipu
@@ -82,12 +82,12 @@ let handler = async (m, { conn }) => {
 
     
     const summaryOrder = [
-      { key: 'mitico', label: 'mitico 👑' },
-      { key: 'legendario', label: 'legendario 🌞' },
-      { key: 'epico', label: 'epico 🗿' },
-      { key: 'raro', label: 'raro ⛰️' },
-      { key: 'poco comun', label: 'poco comun 🪶' },
-      { key: 'comun', label: 'comun 🌾' },
+      { key: 'mitico', label: 'Mítico 👑' },
+      { key: 'legendario', label: 'Legendario 🌞' },
+      { key: 'epico', label: 'Épico 🗿' },
+      { key: 'raro', label: 'Raro ⛰️' },
+      { key: 'poco comun', label: 'Poco Común 🪶' },
+      { key: 'comun', label: 'Común 🌾' },
     ]
 
     
@@ -98,17 +98,17 @@ let handler = async (m, { conn }) => {
       }
     })
 
-    let message = `╭━━━━『🏔️ *COLECCIÓN DEL TAHUANTINSUYU* 🏔️』━━━━╮\n\n`
+    let message = `✨💖 TU COLECCIÓN 💖✨\n\n`
 
-    message += `❯🏺 *RESUMEN DE QUIPU* 🏺 ❮\n\n`
-    message += `┌──『 Rareza 』─────『 Cantidad 』───┐\n`
+    message += `╔═══════════════════════╗\n`
+    message += `║ 📊 RESUMEN POR RAREZA ║\n`
+    message += `╚═══════════════════════╝\n\n`
+    
     for (const { key, label } of summaryOrder) {
       const count = rarityCount[key] ?? 0
-      message += `│  ${label.padEnd(16)}│ ${String(count).padEnd(3)} │ ${createBar(count, 10)} │\n`
+      message += `${label.padEnd(18)} ${String(count).padStart(3)} ${createBar(count, 10)}\n`
     }
-    message += `└───────────────────────────────┘\n\n`
-
-    message += `📜 Total de personajes en tu quipu: ${collection.length}\n\n`
+    message += `\n💎 Total de personajes: *${collection.length}*\n\n`
 
     const rarityEmojis = {
       comun: '🌾',
@@ -128,24 +128,26 @@ let handler = async (m, { conn }) => {
     })
 
     
-    for (const { key } of summaryOrder) {
+    for (const { key, label } of summaryOrder) {
       const group = groupedByRarity[key]
       if (group?.length > 0) {
-        message += `╭─『 ${rarityEmojis[key]} ${key.toUpperCase()} 』\n`
+        message += `╔═══════════════════╗\n`
+        message += `║ ${rarityEmojis[key]} ${label.toUpperCase()}\n`
+        message += `╚═══════════════════╝\n`
         group.forEach((p, i) => {
           const displayName = p?.name || p?.nombre || p?.id || 'Sin nombre'
-          message += `│ ${(i + 1).toString().padStart(2)}. ${displayName}\n`
+          message += `  ${(i + 1).toString().padStart(2)}. ${displayName}\n`
         })
-        message += `╰────────────\n`
+        message += `\n`
       }
     }
 
-    message += `\n╰━━━━『 FIN DEL QUIPU SAGRADO 』━━━━╯`
+    message += `🌸 ¡Sigue coleccionando más personajes! ✨`
 
     return conn.reply(m.chat, message, m)
   } catch (error) {
     console.error(error)
-    return m.reply('💙 Error al mostrar la colección. Intenta nuevamente.')
+    return m.reply('🥺 ¡Uy! Hubo un error al mostrar tu colección. Inténtalo de nuevo~ 💕')
   }
 }
 
