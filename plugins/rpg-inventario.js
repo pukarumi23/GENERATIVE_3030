@@ -3,35 +3,47 @@ import moment from 'moment-timezone';
 
 let handler = async (m, { conn, usedPrefix }) => {
     let who = m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
-
+    
     if (!(who in global.db.data.users)) {
-        return conn.reply(m.chat, `🎤💙 El usuario no se encuentra en mi base de datos del mundo virtual. ✨🎵`, m);
+        return conn.reply(m.chat, `💔 Este usuario no está en mi base de datos... ¡Qué pena! ✨`, m);
     }
     
-    let img = 'https://raw.githubusercontent.com/Brauliovh3/HATSUNE-MIKU/main/Contenido/1745557972839.jpeg';
+    let img = 'https://i.pinimg.com/736x/eb/b6/71/ebb6714af14d500c73ffa9ede2e47197.jpg';
     let user = global.db.data.users[who];
     let name = conn.getName(who);
-
-    let premium = user.premium ? '✅' : '❌';
-
-    let text = `╭━〔 Inventario de ${name} 〕⬣\n` +
-               `┋ 💸 *${moneda} en Cartera:* ${user.coin || 0}\n` +  
-               `┋ 🏦 *${moneda} en Banco:* ${user.bank || 0}\n` + 
-               `┋ ♦️ *Esmeraldas:* ${user.emerald || 0}\n` + 
-               `┋ 🔩 *Hierro:* ${user.iron || 0}\n` +  
-               `┋ 🏅 *Oro:* ${user.gold || 0}\n` + 
-               `┋ 🕋 *Carbón:* ${user.coal || 0}\n` +  
-               `┋ 🪨 *Piedra:* ${user.stone || 0}\n` +  
-               `┋ ✨ *Experiencia:* ${user.exp || 0}\n` + 
-               `┋ ❤️ *Salud:* ${user.health || 100}\n` + 
-               `┋ 💎 *Diamantes:* ${user.diamond || 0}\n` +   
-               `┋ 🍬 *Dulces:* ${user.candies || 0}\n` + 
-               `┋ 🎁 *Regalos:* ${user.gifts || 0}\n` + 
-               `┋ 🎟️ *Tokens:* ${user.joincount || 0}\n` +  
-               `┋ ⚜️ *Premium:* ${premium}\n` + 
-               `┋ ⏳ *Última Aventura:* ${user.lastAdventure ? moment(user.lastAdventure).fromNow() : 'Nunca'}\n` + 
-               `┋ 📅 *Fecha:* ${new Date().toLocaleString('id-ID')}\n` +
-               `╰━━━━━━━━━━━━⬣`;
+    let premium = user.premium ? '✅ Sí~ 💖' : '❌ No';
+    
+    let text = `╔═══════════════════════════╗
+║ 🎀 *INVENTARIO DE ${name}* 🎀
+╠═══════════════════════════╣
+║
+║ 💰 *DINERO:*
+║ ├─ Cartera: ${user.coin || 0} ${moneda}
+║ ├─ Banco: ${user.bank || 0} ${moneda}
+║ └─ Total: ${(user.coin || 0) + (user.bank || 0)} ${moneda}
+║
+║ 💎 *RECURSOS:*
+║ ├─ Esmeraldas: ${user.emerald || 0} ♦️
+║ ├─ Hierro: ${user.iron || 0} 🔩
+║ ├─ Oro: ${user.gold || 0} 🏅
+║ ├─ Carbón: ${user.coal || 0} ⬛
+║ └─ Piedra: ${user.stone || 0} 🪨
+║
+║ ⭐ *ESPECIALES:*
+║ ├─ Diamantes: ${user.diamond || 0} 💎
+║ ├─ Dulces: ${user.candies || 0} 🍬
+║ ├─ Regalos: ${user.gifts || 0} 🎁
+║ └─ Tokens: ${user.joincount || 0} 🎟️
+║
+║ 📊 *ESTADÍSTICAS:*
+║ ├─ Experiencia: ${user.exp || 0} ✨
+║ ├─ Salud: ${user.health || 100} ❤️
+║ ├─ Premium: ${premium}
+║ └─ Última aventura: ${user.lastAdventure ? moment(user.lastAdventure).fromNow() : 'Nunca'}
+║
+║ 📅 ${new Date().toLocaleString('es-PE')}
+║
+╚═══════════════════════════╝`;
 
     await conn.sendFile(m.chat, img, 'yuki.jpg', text, fkontak);
 }
