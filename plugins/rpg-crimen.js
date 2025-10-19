@@ -1,14 +1,12 @@
 let cooldowns = {}
-
 let handler = async (m, { conn, text, command, usedPrefix }) => {
 let users = global.db.data.users
 let senderId = m.sender
 let senderName = conn.getName(senderId)
-
 let tiempo = 5 * 60
 if (cooldowns[m.sender] && Date.now() - cooldowns[m.sender] < tiempo * 1000) {
 let tiempo2 = segundosAHMS(Math.ceil((cooldowns[m.sender] + tiempo * 1000 - Date.now()) / 1000))
-m.reply(`${emoji3} Ya has cometido un Crimen recientemente, espera ⏱️ *${tiempo2}* para cometer tu próximo Crimen y evitar ser atrapado.`)
+m.reply(`🌸 ¡Ey! Ya cometiste un crimen hace poco~ Espera ⏱️ *${tiempo2}* antes de intentarlo otra vez para no ser atrapada 💕`)
 return
 }
 cooldowns[m.sender] = Date.now()
@@ -26,7 +24,21 @@ case 0:
 users[senderId].coin += amountTaken
 users[randomUserId].coin -= amountTaken
 conn.sendMessage(m.chat, {
-text: `${emoji} ¡Lograste cometer tu crimen con exito!, acabas de robar *${amountTaken} ${moneda} 💸* a @${randomUserId.split("@")[0]}\n\nSe suman *+${amountTaken} ${moneda} 💸* a ${senderName}.`,
+text: `✨💖 ¡CRIMEN EXITOSO! 💖✨
+
+╔═══════════════════╗
+║ 🎉 ¡LO LOGRASTE!  ║
+╚═══════════════════╝
+
+🥷 Acabas de robar *${amountTaken} ${moneda} 💸* a @${randomUserId.split("@")[0]}
+
+╔═══════════════════╗
+║ 💰 RECOMPENSA     ║
+╚═══════════════════╝
+
+💕 *${senderName}* ganó *+${amountTaken} ${moneda} 💸*
+
+🌸 ¡Qué astuta! Pero ten cuidado~ ✨`,
 contextInfo: { 
 mentionedJid: [randomUserId],
 }}, { quoted: m })
@@ -34,29 +46,56 @@ break
 case 1:
 let amountSubtracted = Math.min(Math.floor(Math.random() * (senderCoin - minAmount + 1)) + minAmount, maxAmount)
 users[senderId].coin -= amountSubtracted
-conn.reply(m.chat, `${emoji2} No fuiste cuidadoso y te atraparon mientras cometias tu cirme, se restaron *-${amountSubtracted} ${moneda} 💸* a ${senderName}.`, m)
+conn.reply(m.chat, `😢💔 ¡OH NO! 💔😢
+
+╔═══════════════════╗
+║ 🚨 TE ATRAPARON   ║
+╚═══════════════════╝
+
+🥺 ¡Ay no! No fuiste cuidadosa y te atraparon~
+
+╔═══════════════════╗
+║ 💸 MULTA          ║
+╚═══════════════════╝
+
+😭 *${senderName}* perdió *-${amountSubtracted} ${moneda} 💸*
+
+🌸 ¡La próxima ten más cuidado! ✨`, m)
 break
 case 2:
 let smallAmountTaken = Math.min(Math.floor(Math.random() * (randomUserCoin / 2 - minAmount + 1)) + minAmount, maxAmount)
 users[senderId].coin += smallAmountTaken
 users[randomUserId].coin -= smallAmountTaken
 conn.sendMessage(m.chat, {
-text: `${emoji} Lograste cometer tu crimen con exito, pero te descubrieron y solo lograste tomar *${smallAmountTaken} ${moneda} 💸* de @${randomUserId.split("@")[0]}\n\nSe suman *+${smallAmountTaken} ${moneda} 💸* a ${senderName}.`,
+text: `⚠️💕 ¡CRIMEN PARCIAL! 💕⚠️
+
+╔═══════════════════╗
+║ 😰 CASI TE ATRAPAN║
+╚═══════════════════╝
+
+🥷 Lograste robar algo, pero casi te descubren~
+
+Solo tomaste *${smallAmountTaken} ${moneda} 💸* de @${randomUserId.split("@")[0]}
+
+╔═══════════════════╗
+║ 💰 RECOMPENSA     ║
+╚═══════════════════╝
+
+💕 *${senderName}* ganó *+${smallAmountTaken} ${moneda} 💸*
+
+🌸 ¡Uff! Estuvo cerca~ ✨`,
 contextInfo: { 
 mentionedJid: [randomUserId],
 }}, { quoted: m })
 break
 }
 global.db.write()}
-
 handler.tags = ['economy']
 handler.help = ['crimen']
 handler.command = ['crimen', 'crime']
 handler.register = true
 handler.group = true
-
 export default handler
-
 function segundosAHMS(segundos) {
 let horas = Math.floor(segundos / 3600)
 let minutos = Math.floor((segundos % 3600) / 60)
