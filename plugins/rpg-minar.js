@@ -12,7 +12,7 @@ let handler = async (m, { conn }) => {
   let coal = pickRandom([20, 5, 7, 8, 88, 40, 50, 80, 70, 60, 100, 120, 600, 700, 64]);
   let stone = pickRandom([200, 500, 700, 800, 900, 4000, 300]);
   
-  let img = 'https://img.freepik.com/foto-gratis/renderizacion-personaje-anime-abeja_23-2150963630.jpg?semt=ais_hybrid&w=740&q=80';
+  let img = 'https://i.pinimg.com/736x/f3/06/74/f306747956519bb215187702c5af9676.jpg';
   let time = user.lastmiming + 600000;
   
   if (new Date() - user.lastmiming < 600000) {
