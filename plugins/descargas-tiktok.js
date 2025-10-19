@@ -2,27 +2,34 @@ import fetch from 'node-fetch';
 
 var handler = async (m, { conn, args, usedPrefix, command }) => {
     if (!args[0]) {
-        return conn.reply(m.chat, `${emoji} Por favor, ingresa un enlace de TikTok.`, m);
+        return conn.reply(m.chat, `💋 *Necesito un enlace~* 🎵\n\nPasa el link de TikTok que quieres descargar.\nEjemplo: *${usedPrefix}${command} https://...*`, m);
     }
-
+    
     try {
-        await conn.reply(m.chat, `${emoji} Espere un momento, estoy descargando su video...`, m);
-
+        await conn.reply(m.chat, `⏳ *Un momentito~* ✨\n\nEstoy descargando tu video... Casi listo 💫`, m);
+        
         const tiktokData = await tiktokdl(args[0]);
-
+        
         if (!tiktokData || !tiktokData.data || !tiktokData.data.play) {
-            return conn.reply(m.chat, "Error: No se pudo obtener el video.", m);
+            return conn.reply(m.chat, `❌ *Ay no...* 💔\n\nNo pude descargar ese video. Verifica que el enlace sea válido~ 😔`, m);
         }
-
+        
         const videoURL = tiktokData.data.play;
-
+        
         if (videoURL) {
-            await conn.sendFile(m.chat, videoURL, "tiktok.mp4", `${emoji} Aquí tienes ฅ^•ﻌ•^ฅ`, m);
+            await conn.sendFile(m.chat, videoURL, "tiktok.mp4", `╔═══════════════════╗
+║ 🎵 *¡VIDEO DESCARGADO!* 🎵
+╠═══════════════════╣
+║
+║ ✨ Aquí tienes tu video~
+║ ¡Que lo disfrutes! 💖
+║
+╚═══════════════════╝`, m);
         } else {
-            return conn.reply(m.chat, "No se pudo descargar.", m);
+            return conn.reply(m.chat, `❌ *Algo salió mal...* 💔\n\nNo pude obtener el video. Intenta de nuevo~ ✨`, m);
         }
     } catch (error1) {
-        return conn.reply(m.chat, `Error: ${error1.message}`, m);
+        return conn.reply(m.chat, `⚠️ *Error en la descarga* 💔\n\n${error1.message}\n\nIntenta con otro enlace~ ✨`, m);
     }
 };
 
