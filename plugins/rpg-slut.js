@@ -8,7 +8,7 @@ let senderName = conn.getName(senderId)
 let tiempo = 5 * 60
 if (cooldowns[m.sender] && Date.now() - cooldowns[m.sender] < tiempo * 1000) {
 let tiempo2 = segundosAHMS(Math.ceil((cooldowns[m.sender] + tiempo * 1000 - Date.now()) / 1000))
-m.reply(`${emoji3} Debes esperar *${tiempo2}* para usar *#slut* de nuevo.`)
+m.reply(`${emoji3} Uf, tan ansioso~ 💋\nEspera *${tiempo2}* para volver a usar *#slut*, mi cliente caliente~`)
 return
 }
 cooldowns[m.sender] = Date.now()
@@ -26,7 +26,7 @@ case 0:
 users[senderId].coin += amountTaken
 users[randomUserId].coin -= amountTaken
 conn.sendMessage(m.chat, {
-text: `${emoji} ¡Se la chupaste a @${randomUserId.split("@")[0]} por *${amountTaken} ${moneda}* lo dejaste bien seco\n\nSe suman *+${amountTaken} ${moneda}* a ${senderName}.`,
+text: `✨ *~Uf, qué técnica más húmeda~* ✨\n\nLe diste una mamada que dejó temblando a @${randomUserId.split("@")[0]} 💦\n*+${amountTaken} ${moneda}* para ti, ${senderName}-kun~ ¿Quieres repetir? 😘`,
 contextInfo: { 
 mentionedJid: [randomUserId],
 }}, { quoted: m })
@@ -34,14 +34,14 @@ break
 case 1:
 let amountSubtracted = Math.min(Math.floor(Math.random() * (senderCoin - minAmount + 1)) + minAmount, maxAmount)
 users[senderId].coin -= amountSubtracted
-conn.reply(m.chat, `${emoji} No fuiste cuidadoso y le rompiste la verga a tu cliente, se te restaron *-${amountSubtracted} ${moneda}* a ${senderName}.`, m)
+conn.reply(m.chat, `💢 *~Ay, qué torpe~* 💢\n\nRomperle la verga al cliente no es sexy, ${senderName}-kun~ 😣\nSe te escaparon *-${amountSubtracted} ${moneda}* de las manos... 💸`, m)
 break
 case 2:
 let smallAmountTaken = Math.min(Math.floor(Math.random() * (randomUserCoin / 2 - minAmount + 1)) + minAmount, maxAmount)
 users[senderId].coin += smallAmountTaken
 users[randomUserId].coin -= smallAmountTaken
 conn.sendMessage(m.chat, {
-text: `${emoji} Le diste unos sentones y te pagaron *${smallAmountTaken} ${moneda}* de @${randomUserId.split("@")[0]} lo dejaste paralitico\n\nSe suman *+${smallAmountTaken} ${moneda}* a ${senderName}.`,
+text: `🔥 *~Esos sentones paralizantes~* 🔥\n\nDejaste a @${randomUserId.split("@")[0] completamente seco~ 💫\nToma tus *+${smallAmountTaken} ${moneda}*, ${senderName}-kun~ ¿Verdad que soy la mejor? 💋`,
 contextInfo: { 
 mentionedJid: [randomUserId],
 }}, { quoted: m })
@@ -51,7 +51,7 @@ global.db.write()}
 
 handler.tags = ['rpg']
 handler.help = ['slut']
-handler.command = ['slut', 'protituirse']
+handler.command = ['slut', 'prostituirse']
 handler.register = true
 handler.group = true
 
