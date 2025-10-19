@@ -51,8 +51,8 @@ global.etiqueta = '◇𝑲𝑰𝑻𝑨𝑮𝑨𝑾𝑨_𝑩𝑶𝑻◈'
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.moneda = '🪙 Intis'
-global.welcom1 = 'bienvenido'
-global.welcom2 = 'adios '
+global.welcom1 = '💖 ¡Konnichiwaa~! 💖 🎀 Bienvenid@ a este rinconcito súper kawaii~ 🌸Aquí se viene a brillar, divertirse y mostrar tu mejor estilo, ¿ok~? 💅✨ 🌸 Relájate, sé tú mism@ y disfruta como protagonista de anime~ 🎀'
+global.welcom2 = '🌸✨ ¡Sayonaraa~! ✨🌸 💖 Gracias por estar aquí, fue súper lindo tener tu presencia, ¡le diste un toque especial al lugar! 💖 🎀 El escenario queda esperando por ti, así que no tardes en volver, ¿ok~? 🎀'
 global.banner = 'https://files.catbox.moe/psffj2.jpg'
 global.avatar = 'https://files.catbox.moe/psffj2.jpg'
 
