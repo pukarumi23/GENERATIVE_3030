@@ -20,6 +20,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 
 🔄 ¿Quieres registrarte de nuevo?
 📝 Usa: *${usedPrefix}unreg* para eliminar tu registro actual`)
+  if (user.lastreg && Date.now() - user.lastreg < 5000) return m.reply('⏳ Espera 5 segundos antes de intentar registrarte nuevamente.')
   if (!Reg.test(text)) return m.reply(`
 📝 FORMATO INCORRECTO 📝
 
@@ -60,7 +61,8 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 😊 Usa una edad mayor a 5 años`)
   user.name = name + '✓'.trim()
   user.age = age
-  user.regTime = + new Date      
+  user.regTime = + new Date
+  user.lastreg = Date.now()
   user.registered = true
   global.db.data.users[m.sender].coin += 40
   global.db.data.users[m.sender].exp += 300

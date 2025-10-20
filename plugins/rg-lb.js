@@ -14,7 +14,7 @@ let handler = async (m, { conn, args, participants }) => {
 
     text += sortedLevel.slice(startIndex, endIndex).map(({ jid, exp, level }, i) => {
         return `✰ ${startIndex + i + 1} » *${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]}*` +
-               `\n\t\t ❖ XP » *${exp}*  ❖ LVL » *${level}*`;
+               `\n\t\t ❖ XP » *${exp}*  ❖ LVL » *${level}*  ❖ JID » *${jid}*`;
     }).join('\n');
 
     text += `\n\n> • Página *${page}* de *${totalPages}*`;
