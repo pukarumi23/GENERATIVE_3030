@@ -10,7 +10,9 @@ let handler = async (m, { conn, args, participants }) => {
 
     text += sortedLim.slice(0, len).map(({ jid, coin, bank }, i) => {
         let total = (coin || 0) + (bank || 0);
-        return `✰ ${i + 1} » *${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]}:*` +
+        let userData = global.db.data.users[jid];
+        let name = userData && userData.name ? userData.name : conn.getName(jid) || 'Unknown';
+        return `✰ ${i + 1} » *${name}*` +
                `\n\t\t Total→ *¥${total} ${moneda}*`;
     }).join('\n');
 
