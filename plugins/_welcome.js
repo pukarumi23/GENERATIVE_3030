@@ -22,7 +22,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
       
       if (buttonId === 'ver_canal_button') {
         console.log('💖 Botón de canal detectado en welcome')
-        const canalUrl = 'https://whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o'
+        const canalUrl = 'https://whatsapp.com/channel/0029Vb5rzPf3rZZXl2DI830G'
         await conn.reply(m.chat, `💖 *¡Únete a nuestro canal oficial!*\n\n${canalUrl}\n\n✨ ¡Te esperamos para más contenido increíble!`, m)
         return true
       }
