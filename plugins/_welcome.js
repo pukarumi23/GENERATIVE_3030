@@ -45,7 +45,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
     if (!chat.welcome) return true
 
     
-    const canalUrl = 'https://whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o'
+    const canalUrl = 'https://whatsapp.com/channel/0029Vb5rzPf3rZZXl2DI830G'
     const channelId = global.canalIdM?.[0] || '120363315369913363@newsletter'
     const channelName = global.canalNombreM?.[0] || '💖✨ KITAGAWA CHANNEL ✨💖'
     const groupSize = (participants || []).length
@@ -68,7 +68,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
        
         if (!ppBuffer) {
           try {
-            const defaultResponse = await fetch('https://i.pinimg.com/736x/30/42/b8/3042b89ced13fefda4e75e3bc6dc2a57.jpg')
+            const defaultResponse = await fetch('https://i.pinimg.com/736x/e7/a1/e4/e7a1e45b061ec73eb163770c750497cd.jpg')
             ppBuffer = await defaultResponse.buffer()
           } catch (e) {
             ppBuffer = null
