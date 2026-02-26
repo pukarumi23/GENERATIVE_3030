@@ -2,33 +2,33 @@ import fs from 'fs';
 import { watchFile, unwatchFile } from 'fs'
 import { fileURLToPath } from 'url'
 
-global.owner = ['51988514570']
+global.owner = ['51939508653']
 global.botNumber = ''
 
 global.sessionName = 'Sessions/Owner'
 global.version = '^2.0 - Latest'
-global.dev = "© 🄿🄾🅆🄴🅁🄴🄳 (ㅎㅊDEPOOLㅊㅎ)"
+global.dev = "© 🄿🄾🅆🄴🅁🄴🄳 CHASKI"
 global.links = {
 api: 'https://rest.alyabotpe.xyz',
-channel: "https://www.whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o",
-github: "https://github.com/Brauliovh3/HATSUNE-MIKU",
-gmail: "brauliovh3@gmail.com"
+channel: "https://whatsapp.com/channel/0029VbC04aQ6mYPDkbiMte0u",
+github: "https://github.com/pukarumi23/kitagawa",
+gmail: "glitchgarden449@gmail.com"
 }
 
 global.miku = { 
   contextInfo: { 
     isForwarded: true, 
     forwardedNewsletterMessageInfo: { 
-      newsletterJid: "120363315369913363@newsletter", 
+      newsletterJid: "120363425300401364@newsletter", 
       serverMessageId: 100, 
-      newsletterName: "💙 HATSUNE MIKU CHANNEL💙"
+      newsletterName: "KITAGAWA"
     },
     externalAdReply: {
       mediaUrl: null,
-      description: '🎵 Hatsune Miku, la Diva Virtual del Futuro 🎵',
+      description: '🌱Lo mejor🌿',
       previewType: "PHOTO",
-      thumbnailUrl: global.banner || 'https://i.pinimg.com/736x/30/42/b8/3042b89ced13fefda4e75e3bc6dc2a57.jpg',
-      sourceUrl: global.channel || 'https://www.whatsapp.com/channel/0029VajYamSIHphMAl3ABi1o',
+      thumbnailUrl: global.banner || 'https://i.pinimg.com/736x/bb/d4/0c/bbd40c72e90f5410c0f8667ae93246fa.jpg',
+      sourceUrl: global.channel || 'https://whatsapp.com/channel/0029VbC04aQ6mYPDkbiMte0u',
       mediaType: 1,
       renderLargerThumbnail: false
     }
@@ -36,9 +36,9 @@ global.miku = {
 }
 
 global.mess = {
-socket: '💙 Este comando solo puede ser ejecutado por un Socket.',
-admin: '💙 Este comando solo puede ser ejecutado por los Administradores del Grupo.',
-botAdmin: '💙 Este comando solo puede ser ejecutado si el Socket es Administrador del Grupo.'
+socket: '🔶 Este comando solo puede ser ejecutado por un Socket.',
+admin: '🔶 Este comando solo puede ser ejecutado por los Administradores del Grupo.',
+botAdmin: '🔶 Este comando solo puede ser ejecutado si el Socket es Administrador del Grupo.'
 }
 
 global.APIs = {
