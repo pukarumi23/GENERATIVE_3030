@@ -12,10 +12,6 @@ let musicProcess = null
 let musicStarted = false
 import {tmpdir} from 'os'
 import {format} from 'util'
-import boxen from 'boxen'
-import P from 'pino'
-import pino from 'pino'
-import Pino from 'pino'
 import path, { join, dirname } from 'path'
 import {Boom} from '@hapi/boom'
 import {makeWASocket, protoType, serialize} from './lib/simple.js'
