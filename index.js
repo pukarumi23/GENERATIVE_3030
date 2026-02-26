@@ -6,7 +6,6 @@ import {createRequire} from 'module'
 import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import fs, {readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSync, rmSync, watch} from 'fs'
-import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
 import chalk from 'chalk'
