@@ -7,9 +7,6 @@ import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import fs, {readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSync, rmSync, watch} from 'fs'
 import {spawn} from 'child_process'
-import lodash from 'lodash'
-import chalk from 'chalk'
-import syntaxerror from 'syntax-error'
 
 let musicProcess = null
 let musicStarted = false
