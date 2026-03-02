@@ -127,8 +127,8 @@ Si deseas ejecutar el bot en Termux (Android), sigue estos pasos sencillos:
 
 <div align="center">
   <h2>💫 Editor y Propietario</h2>
-  <a href="https://github.com/Brauliovh3">
-    <img src="https://github.com/Brauliovh3.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
+  <a href="https://github.com/pukarumi23">
+    <img src="https://github.com/pukarumi23.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
   </a>
   
   <p><i>© Kitagawa / POR (CHASKI</i></p>
