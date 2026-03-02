@@ -5,7 +5,7 @@ export default {
   category: 'downloader',
   run: async (client, m, args, usedPrefix, command) => {
     if (!args.length) {
-      return m.reply(`💙 Por favor, ingresa un término de búsqueda o enlace de TikTok.`)
+      return m.reply(`🧡 Por favor, ingresa un término de búsqueda o enlace de TikTok.`)
     }
     
     await m.react('⏳')
@@ -19,7 +19,7 @@ export default {
       const json = await res.json()
       if (!json.status) {
         await m.react('❌')
-        return m.reply('💙 No se encontró contenido válido en TikTok.')
+        return m.reply('🧡 No se encontró contenido válido en TikTok.')
       }
       if (isUrl) {
         const { title, duration, dl, author, stats, created_at, type } = json.data
@@ -30,14 +30,6 @@ export default {
         const caption = `💙🌱 *TIKTOK DOWNLOAD* 🌱💙
 
 💙 *Título:* ${title || 'Sin título'}
-🌱 *Autor:* ${author?.nickname || author?.unique_id || 'Desconocido'}
-💙 *Duración:* ${duration || 'N/A'}
-🌱 *Likes:* ${(stats?.likes || 0).toLocaleString()}
-💙 *Comentarios:* ${(stats?.comments || 0).toLocaleString()}
-🌱 *Vistas:* ${(stats?.views || stats?.plays || 0).toLocaleString()}
-💙 *Compartidos:* ${(stats?.shares || 0).toLocaleString()}
-🌱 *Fecha:* ${created_at || 'N/A'}
-
 💙🌱 *HATSUNE MIKU BOT* 🌱💙`.trim()
         if (type === 'image') {
           const medias = dl.map(url => ({ type: 'image', data: { url }, caption }))
