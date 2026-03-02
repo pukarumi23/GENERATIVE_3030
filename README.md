@@ -1,11 +1,11 @@
 <div align="center">
   
-# 💙 HATSUNE MIKU CHANNEL 💙
+# 🧡MARIN KITAGAWA🧡
 
-![Hatsune Miku Banner](https://i.pinimg.com/736x/0c/1e/f8/0c1ef8e804983e634fbf13df1044a41f.jpg)
+![Marin kitagawa](https://i.pinimg.com/736x/32/35/e8/3235e8538385684ae50586adac4a719a.jpg)
 
-[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/Brauliovh3/HATSUNE-MIKU)
-[![Author](https://img.shields.io/badge/Author-(ㅎㅊDEPOOLㅊㅎ)-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
+[![Bot Status](https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%21ff0000&colorB=%21017e40&style=for-the-badge)](https://github.com/pukarumi23/kitagawa)
+[![Author](https://img.shields.io/badge/Author-CHASKI-turquoise.svg?style=for-the-badge&logo=github)](https://qu.ax/HWNA.jpg)
 
 </div>
 
@@ -20,7 +20,7 @@
 
 ## ✨ Acerca del Bot
 
-¡Hatsune Miku WhatsApp Bot es una herramienta de automatización rica en funciones que trae el encanto de Hatsune Miku a tu experiencia de WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
+¡Kitagawa WhatsApp Bot es una herramienta de automatización rica en funciones que trae el encanto de Kitagawa a tu experiencia de WhatsApp! Este bot está en desarrollo activo con nuevas características siendo añadidas regularmente.
 
 <div align="center">
   <img src="https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif" width="60" height="60">
@@ -81,11 +81,11 @@ Si deseas ejecutar el bot en Termux (Android), sigue estos pasos sencillos:
     ```
 3. **Clona este repositorio**
     ```sh
-    git clone https://github.com/Brauliovh3/HATSUNE-MIKU.git
+    git clone https://github.com/pukarumi23/kitagawa.git
     ```
  4. **Ingresar a la carpeta proyecto**
     ```sh
-    cd HATSUNE-MIKU
+    cd kitagawa
     ```
 5. **Instala las dependencias**
     ```sh
@@ -131,12 +131,12 @@ Si deseas ejecutar el bot en Termux (Android), sigue estos pasos sencillos:
     <img src="https://github.com/Brauliovh3.png" width="200" height="200" style="border-radius: 50%;" alt="(ㅎㅊDEPOOLㅊㅎ)">
   </a>
   
-  <p><i>© Hatsune Miku / POR (ㅎㅊDEPOOLㅊㅎ)</i></p>
+  <p><i>© Kitagawa / POR (CHASKI</i></p>
 </div>
 
 <div align="center">
   
-  ### 🎵 ¡Trayendo la magia de Miku a tu WhatsApp! 🎵
+  ## 🔥 ¡La vibra más alegre y auténtica llega a tu WhatsApp! 🔥
   
-  ![](https://img.shields.io/badge/Hecho_con-💙-blue?style=for-the-badge)
+  ![](https://img.shields.io/badge/Hecho_con-🧡-blue?style=for-the-badge)
 </div>
