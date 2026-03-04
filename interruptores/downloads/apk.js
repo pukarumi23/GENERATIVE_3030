@@ -31,7 +31,7 @@ export default {
 🧡 *Última actualización:* ${lastup}
 🔥 *Tamaño:* ${size}
 
-🧡 *HATSUNE MIKU BOT* 🧡`
+🧡 *KITAGAWA BOT* 🧡`
       const sizeBytes = parseSize(size)
       if (sizeBytes > 524288000) {
         await m.react('❌')
