@@ -5,10 +5,10 @@ export default {
   category: 'downloader',
   run: async (client, m, args, usedPrefix, command) => {
     if (!args[0]) {
-      return m.reply('🧡 Por favor, Ingrese un enlace de Facebook.', m. global.miku)
+      return m.reply('🧡 Ingresa un enlace de Facebook.', global.miku)
     }
     if (!args[0].match(/facebook\.com|fb\.watch|video\.fb\.com/)) {
-      return m.reply('🧡 El enlace es invalido, envía un link de Facebook válido', m. global.miku)
+      return m.reply('🧡 Enlace inválido, envía un link de Facebook válido.', global.miku)
     }
     
     await m.react('⏳')
@@ -17,30 +17,34 @@ export default {
       const data = await getFacebookMedia(args[0])
       if (!data) {
         await m.react('❌')
-        return m.reply('🧡 No se pudo obtener el contenido.', m. global.miku)
+        return m.reply('🧡 No se pudo obtener el contenido.', global.miku)
       }
-      const caption = `🧡 *FACEBOOK DOWNLOAD* d
-
-${data.title ? `🧡 *Título:* ${data.title}\n` : ''}${data.resolution ? `🏵️ *Resolución:* ${data.resolution}\n` : ''}${data.format ? `🧡 *Formato:* ${data.format}\n` : ''}${data.duration ? `🏵️ *Duración:* ${data.duration}
-
-🧡 *KITAGAWA* 🧡`
+      
+      const caption = `╭━━━━━━━━━━━━━━━╮
+┃ 🧡 *FACEBOOK DOWNLOAD*
+┃━━━━━━━━━━━━━━━${data.title ? `\n┃ 📌 ${data.title}` : ''}${data.resolution ? `\n┃ 🎬 ${data.resolution}` : ''}${data.duration ? `\n┃ ⏱️ ${data.duration}` : ''}
+╰━━━━━━━━━━━━━━━╯`
+      
       if (data.type === 'video') {
-        await client.sendMessage(m.chat, { video: { url: data.url }, caption, mimetype: 'video/mp4', fileName: 'fb.mp4' }, { quoted: m })
+        await client.sendMessage(m.chat, { 
+          video: { url: data.url }, 
+          caption,
+          mimetype: 'video/mp4',
+          ...global.miku
+        }, { quoted: m })
       } else if (data.type === 'image') {
-        await client.sendMessage(m.chat, { image: { url: data.url }, caption }, { quoted: m })
+        await client.sendMessage(m.chat, { 
+          image: { url: data.url }, 
+          caption,
+          ...global.miku
+        }, { quoted: m })
       } else {
         throw new Error('Contenido no soportado.')
       }
       await m.react('✅')
     } catch (e) {
       await m.react('❌')
-      await m.reply(`🧡 *ERROR* 🧡
-
-🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
-
-🏵️ *Error:* ${e.message}
-
-🧡 Inténtalo de nuevo o contacta soporte.`, m. global.miku)
+      await m.reply(`🧡 *ERROR*\n\nOcurrió un error: ${e.message}`, global.miku)
     }
   }
 }
