@@ -25,12 +25,13 @@ export default {
         const { title, duration, dl, author, stats, created_at, type } = json.data
         if (!dl || (Array.isArray(dl) && dl.length === 0)) {
           await m.react('❌')
-          return m.reply('💙 Enlace inválido o sin contenido descargable.')
+          return m.reply('🧡 Enlace inválido o sin contenido descargable.')
         }
-        const caption = `💙🌱 *TIKTOK DOWNLOAD* 🌱💙
+        const caption = `🧡🏵️ *TIKTOK DOWNLOAD* 🏵️🧡
 
-💙 *Título:* ${title || 'Sin título'}
-💙🌱 *HATSUNE MIKU BOT* 🌱💙`.trim()
+🧡 *Título:* ${title || 'Sin título'}
+
+🧡🏵️ *KITAGAWA BOT* 🏵️🧡`.trim()
         if (type === 'image') {
           const medias = dl.map(url => ({ type: 'image', data: { url }, caption }))
           await client.sendAlbumMessage(m.chat, medias, { quoted: m })
@@ -87,21 +88,14 @@ export default {
         const validResults = json.data?.filter(v => v.dl)
         if (!validResults || validResults.length < 2) {
           await m.react('❌')
-          return m.reply('💙 Se requieren al menos 2 resultados válidos con contenido.')
+          return m.reply('🧡 Se requieren al menos 2 resultados válidos con contenido.')
         }
         const medias = validResults.filter(v => typeof v.dl === 'string' && v.dl.startsWith('http')).map(v => {
-            const caption = `💙🌱 *TIKTOK SEARCH* 🌱💙
+            const caption = `🧡🏵️ *TIKTOK SEARCH* 🔥🧡
 
-💙 *Título:* ${v.title || 'Sin título'}
-🌱 *Autor:* ${v.author?.nickname || 'Desconocido'} ${v.author?.unique_id ? `@${v.author.unique_id}` : ''}
-💙 *Duración:* ${v.duration || 'N/A'}
-🌱 *Likes:* ${(v.stats?.likes || 0).toLocaleString()}
-💙 *Comentarios:* ${(v.stats?.comments || 0).toLocaleString()}
-🌱 *Vistas:* ${(v.stats?.views || 0).toLocaleString()}
-💙 *Compartidos:* ${(v.stats?.shares || 0).toLocaleString()}
-🌱 *Audio:* ${v.music?.title || `[${v.author?.nickname || 'No disponible'}] original sound - ${v.author?.unique_id || 'unknown'}`}
+🧡 *Título:* ${v.title || 'Sin título'}
 
-💙🌱 *HATSUNE MIKU BOT* 🌱💙`.trim()
+🧡🏵️ *KITAGAWA BOT* 🏵️🧡`.trim()
             return { type: 'video', data: { url: v.dl }, caption }
           }).slice(0, 10)
         await client.sendAlbumMessage(m.chat, medias, { quoted: m })
@@ -109,13 +103,13 @@ export default {
       }
     } catch (e) {
       await m.react('❌')
-      await m.reply(`💙🌱 *ERROR* 🌱💙
+      await m.reply(`🧡🏵️ *ERROR* 🏵️🧡
 
-💙 Ocurrió un error al ejecutar *${usedPrefix + command}*
+🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
 
-🌱 *Error:* ${e.message}
+🏵️ *Error:* ${e.message}
 
-💙 Inténtalo de nuevo o contacta soporte.`)
+🧡 Inténtalo de nuevo o contacta soporte.`)
     }
   },
 }
