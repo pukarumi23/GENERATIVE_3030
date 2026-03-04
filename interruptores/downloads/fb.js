@@ -22,8 +22,8 @@ export default {
       
       const caption = `╭━━━━━━━━━━━━━━━╮
 ┃ 🧡 *FACEBOOK DOWNLOAD*
-┃━━━━━━━━━━━━━━━${data.title ? `\n┃ 📌 ${data.title}` : ''}${data.resolution ? `\n┃ 🎬 ${data.resolution}` : ''}${data.duration ? `\n┃ ⏱️ ${data.duration}` : ''}
-╰━━━━━━━━━━━━━━━╯`
+┃${data.title ? `\n┃ 📌 ${data.title}` : ''}${data.resolution ? `\n┃ 🎬 ${data.resolution}` : ''}${data.duration ? `\n┃ ⏱️ ${data.duration}` : ''}
+╰━━`
       
       if (data.type === 'video') {
         await client.sendMessage(m.chat, { 
