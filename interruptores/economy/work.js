@@ -7,18 +7,18 @@ export default {
     const user = chat.users[m.sender]
     const botId = client.user.id.split(':')[0] + '@s.whatsapp.net'
     const monedas = db.settings[botId].currency
-    if (chat.adminonly || !chat.economy) return m.reply(`🎤 Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`)
+    if (chat.adminonly || !chat.economy) return m.reply(`🍁 Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`)
     const cooldown = 3 * 60 * 1000
     user.lastwork = user.lastwork || 0
     if (Date.now() < user.lastwork) {
       const tiempoRestante = formatTime(user.lastwork - Date.now())
-      return client.reply(m.chat, `💙 Debes esperar *${tiempoRestante}* para usar *${usedPrefix + command}* de nuevo.`, m)
+      return client.reply(m.chat, `🧡 Debes esperar *${tiempoRestante}* para usar *${usedPrefix + command}* de nuevo.`, m)
     }
     user.lastwork = Date.now() + cooldown
     const rsl = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000
     user.coins = user.coins || 0
     user.coins += rsl
-    await client.sendMessage(m.chat, { text: `🎤 ${pickRandom(trabajo)} *¥${rsl.toLocaleString()} ${monedas}*.`, }, { quoted: m })
+    await client.sendMessage(m.chat, { text: `⛏️ ${pickRandom(trabajo)} *¥${rsl.toLocaleString()} ${monedas}*.`, }, { quoted: m })
   }
 }
 
