@@ -5,10 +5,10 @@ export default {
   category: 'downloader',
   run: async (client, m, args, usedPrefix, command) => {
     if (!args[0]) {
-      return m.reply('💙 Por favor, Ingrese un enlace de Facebook.', m. global.miku)
+      return m.reply('🧡 Por favor, Ingrese un enlace de Facebook.', m. global.miku)
     }
     if (!args[0].match(/facebook\.com|fb\.watch|video\.fb\.com/)) {
-      return m.reply('💙 El enlace es invalido, envía un link de Facebook válido', m. global.miku)
+      return m.reply('🧡 El enlace es invalido, envía un link de Facebook válido', m. global.miku)
     }
     
     await m.react('⏳')
@@ -17,13 +17,13 @@ export default {
       const data = await getFacebookMedia(args[0])
       if (!data) {
         await m.react('❌')
-        return m.reply('💙 No se pudo obtener el contenido.', m. global.miku)
+        return m.reply('🧡 No se pudo obtener el contenido.', m. global.miku)
       }
-      const caption = `💙 *FACEBOOK DOWNLOAD* 💙
+      const caption = `🧡 *FACEBOOK DOWNLOAD* d
 
-${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.resolution ? `🌱 *Resolución:* ${data.resolution}\n` : ''}${data.format ? `💙 *Formato:* ${data.format}\n` : ''}${data.duration ? `🌱 *Duración:* ${data.duration}\n` : ''}💙 *Enlace:* ${args[0]}
+${data.title ? `🧡 *Título:* ${data.title}\n` : ''}${data.resolution ? `🏵️ *Resolución:* ${data.resolution}\n` : ''}${data.format ? `🧡 *Formato:* ${data.format}\n` : ''}${data.duration ? `🏵️ *Duración:* ${data.duration}
 
-💙 *HATSUNE MIKU* 💙`
+🧡 *KITAGAWA* 🧡`
       if (data.type === 'video') {
         await client.sendMessage(m.chat, { video: { url: data.url }, caption, mimetype: 'video/mp4', fileName: 'fb.mp4' }, { quoted: m })
       } else if (data.type === 'image') {
@@ -34,13 +34,13 @@ ${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.resolution ? `🌱 
       await m.react('✅')
     } catch (e) {
       await m.react('❌')
-      await m.reply(`💙 *ERROR* 💙
+      await m.reply(`🧡 *ERROR* 🧡
 
-💙 Ocurrió un error al ejecutar *${usedPrefix + command}*
+🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
 
-🌱 *Error:* ${e.message}
+🏵️ *Error:* ${e.message}
 
-💙 Inténtalo de nuevo o contacta soporte.`, m. global.miku)
+🧡 Inténtalo de nuevo o contacta soporte.`, m. global.miku)
     }
   }
 }
