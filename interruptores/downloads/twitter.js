@@ -5,10 +5,10 @@ export default {
   category: 'downloader',
   run: async (client, m, args, usedPrefix, command) => {
     if (!args[0]) {
-      return m.reply('💙 Por favor, ingrese un enlace de Twitter/X.', m, global.miku)
+      return m.reply('🧡 Por favor, ingrese un enlace de Twitter/X.', m, global.miku)
     }
     if (!args[0].match(/(twitter|x)\.com\/\w+\/status\//)) {
-      return m.reply('💙 El enlace no parece válido. Asegúrate de que sea de Twitter/X.', m, global.miku)
+      return m.reply('🧡 El enlace no parece válido. Asegúrate de que sea de Twitter/X.', m, global.miku)
     }
     
     await m.react('⏳')
@@ -17,13 +17,13 @@ export default {
       const data = await getTwitterMedia(args[0])
       if (!data) {
         await m.react('❌')
-        return m.reply('💙 No se pudo obtener el contenido.', m, global.miku)
+        return m.reply('🧡 No se pudo obtener el contenido.', m, global.miku)
       }
-      const caption = `💙 *TWITTER DOWNLOAD* 💙
+      const caption = `🧡 *TWITTER DOWNLOAD* 🧡
 
-${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.author ? `🌱 *Autor:* ${data.author}\n` : ''}${data.date ? `💙 *Fecha:* ${data.date}\n` : ''}${data.duration ? `🌱 *Duración:* ${data.duration}\n` : ''}${data.resolution ? `💙 *Resolución:* ${data.resolution}\n` : ''}${data.views ? `🌱 *Vistas:* ${data.views}\n` : ''}${data.likes ? `💙 *Likes:* ${data.likes}\n` : ''}${data.comments ? `🌱 *Comentarios:* ${data.comments}\n` : ''}${data.retweets ? `💙 *Retweets:* ${data.retweets}\n` : ''}🌱 *Enlace:* ${args[0]}
+${data.title ? `🧡 *Título:* ${data.title}\n` : ''}${data.author ? `🏵️ *Autor:* ${data.author}\n` : ''}${data.date ? `🧡 *Fecha:* ${data.date}\n` : ''}${data.duration ? `🏵️ *Duración:* ${data.duration}\n` : ''}${data.resolution ? `🧡 *Resolución:* ${data.resolution}\n` : ''}${data.views ? `🏵️ *Vistas:* ${data.views}\n` : ''}${data.likes ? `🧡 *Likes:* ${data.likes}\n` : ''}${data.comments ? `🏵️ *Comentarios:* ${data.comments}\n` : ''}${data.retweets ? `🧡 *Retweets:* ${data.retweets}\n` : ''}🏵️ *Enlace:* ${args[0]}
 
-💙 *HATSUNE MIKU* 💙`
+🧡 *KITAGAWA BOT* 🧡`
       if (data.type === 'video') {
         await client.sendMessage(m.chat, { video: { url: data.url }, caption, mimetype: 'video/mp4', fileName: 'twitter.mp4' }, { quoted: m })
       } else if (data.type === 'image') {
@@ -34,13 +34,13 @@ ${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.author ? `🌱 *Aut
       await m.react('✅')
     } catch (e) {
       await m.react('❌')
-      await m.reply(`💙 *ERROR* 💙
+      await m.reply(`🧡 *ERROR* 🧡
 
-💙 Ocurrió un error al ejecutar *${usedPrefix + command}*
+🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
 
-🌱 *Error:* ${e.message}
+🏵️ *Error:* ${e.message}
 
-💙 Inténtalo de nuevo o contacta soporte.`)
+🧡 Inténtalo de nuevo o contacta soporte.`)
     }
   }
 }
