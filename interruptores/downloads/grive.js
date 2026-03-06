@@ -5,11 +5,11 @@ export default {
   category: 'downloader',
   run: async (client, m, args, usedPrefix, command) => {
     if (!args[0]) {
-      return m.reply('💙 Por favor, ingresa un link de Google Drive..')
+      return m.reply('🧡 Por favor, ingresa un link de Google Drive..')
     }
     const url = args[0]
     if (!url.match(/drive\.google\.com\/(file\/d\/|open\?id=|uc\?id=)/)) {
-      return m.reply('💙 La URL no parece válida de Google Drive.')
+      return m.reply('🧡 La URL no parece válida de Google Drive.')
     }
     
     await m.react('⏳')
@@ -18,28 +18,28 @@ export default {
       const result = await gdriveScraper(url)
       if (!result.status) {
         await m.react('❌')
-        return m.reply('💙 No se pudo obtener el archivo. Intenta con otro enlace.')
+        return m.reply('🧡 No se pudo obtener el archivo. Intenta con otro enlace.')
       }
       const { fileName, fileSize, mimetype, downloadUrl } = result.data
-      const caption = `💙 *GOOGLE DRIVE DOWNLOAD* 💙
+      const caption = `🧡 *GOOGLE DRIVE DOWNLOAD* 🧡
 
-💙 *Nombre:* ${fileName}
-🌱 *Tamaño:* ${fileSize}
-💙 *Tipo:* ${mimetype}
-🌱 *Enlace:* ${url}
+🧡 *Nombre:* ${fileName}
+🏵️ *Tamaño:* ${fileSize}
+🧡 *Tipo:* ${mimetype}
+🏵️ *Enlace:* ${url}
 
-💙 *HATSUNE MIKU BOT* 💙`
+🧡 *KITAGAWA BOT* 🧡`
      await client.sendMessage(m.chat, { document: { url: downloadUrl }, mimetype, fileName, caption }, { quoted: m })
      await m.react('✅')
     } catch (e) {
       await m.react('❌')
-      return m.reply(`🌱 *ERROR* 💙
+      return m.reply(`🏵️ *ERROR* 🧡
 
-💙 Ocurrió un error al ejecutar *${usedPrefix + command}*
+🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
 
-🌱 *Error:* ${e.message}
+🏵️ *Error:* ${e.message}
 
-💙 Inténtalo de nuevo o contacta soporte.`, m. global.miku)
+🧡 Inténtalo de nuevo o contacta soporte.`, m. global.miku)
     }
   }
 }
