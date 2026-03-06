@@ -7,7 +7,7 @@ export default {
     const text = args.join(' ')
     const isPinterestUrl = /^https?:\/\//.test(text)
     if (!text) {
-      return m.reply('💙 Por favor, ingresa un término de búsqueda o un enlace de Pinterest.', m, global.miku)
+      return m.reply('🧡 Por favor, ingresa un término de búsqueda o un enlace de Pinterest.', m, global.miku)
     }
     
     await m.react('⏳')
@@ -17,13 +17,13 @@ export default {
         const data = await getPinterestDownload(text)
         if (!data) {
           await m.react('❌')
-          return m.reply('💙 No se pudo obtener el contenido.')
+          return m.reply('🧡 No se pudo obtener el contenido.')
         }
-        const caption = `💙 *PINTEREST DOWNLOAD* 💙
+        const caption = `🧡 *PINTEREST DOWNLOAD* 🧡
 
-${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.description ? `🌱 *Descripción:* ${data.description}\n` : ''}${data.author ? `💙 *Autor:* ${data.author}\n` : ''}${data.username ? `🌱 *Usuario:* ${data.username}\n` : ''}${data.followers ? `💙 *Seguidores:* ${data.followers}\n` : ''}${data.uploadDate ? `🌱 *Fecha:* ${data.uploadDate}\n` : ''}${data.likes ? `💙 *Likes:* ${data.likes}\n` : ''}${data.comments ? `🌱 *Comentarios:* ${data.comments}\n` : ''}${data.views ? `💙 *Vistas:* ${data.views}\n` : ''}${data.saved ? `🌱 *Guardados:* ${data.saved}\n` : ''}${data.format ? `💙 *Formato:* ${data.format}\n` : ''}🌱 *Enlace:* ${text}
+${data.title ? `🧡 *Título:* ${data.title}\n` : ''}${data.description ? 🏵️ *Descripción:* ${data.description}\n` : ''}${data.author ? `🧡 *Autor:* ${data.author}\n` : ''}${data.username ? 🏵️ *Usuario:* ${data.username}\n` : ''}${data.followers ? `🧡 *Seguidores:* ${data.followers}\n` : ''}${data.uploadDate ? 🏵️ *Fecha:* ${data.uploadDate}\n` : ''}${data.likes ? `🧡 *Likes:* ${data.likes}\n` : ''}${data.comments ? 🏵️ *Comentarios:* ${data.comments}\n` : ''}${data.views ? `🧡 *Vistas:* ${data.views}\n` : ''}${data.saved ? 🏵️ *Guardados:* ${data.saved}\n` : ''}${data.format ? `🧡 *Formato:* ${data.format}\n` : ''}🌱 *Enlace:* ${text}
 
-💙 *HATSUNE MIKU* 💙`
+🧡 *HATSUNE MIKU* 🧡`
         if (data.type === 'video') {
           await client.sendMessage(m.chat, { video: { url: data.url }, caption, mimetype: 'video/mp4', fileName: 'pin.mp4' }, { quoted: m })
         } else if (data.type === 'image') {
@@ -36,24 +36,24 @@ ${data.title ? `💙 *Título:* ${data.title}\n` : ''}${data.description ? `🌱
         const results = await getPinterestSearch(text)
         if (!results || results.length === 0) {
           await m.react('❌')
-          return m.reply(`💙 No se encontraron resultados para *${text}*.`)
+          return m.reply(`🧡 No se encontraron resultados para *${text}*.`)
         }
-        const medias = results.slice(0, 10).map(r => ({ type: r.type === 'video' ? 'video' : 'image', data: { url: r.image }, caption: `💙🌱 *PINTEREST SEARCH* 🌱💙
+        const medias = results.slice(0, 10).map(r => ({ type: r.type === 'video' ? 'video' : 'image', data: { url: r.image }, caption: `🧡🌱 *PINTEREST SEARCH* 🌱🧡
 
-${r.title ? `💙 *Título:* ${r.title}\n` : ''}${r.description ? `🌱 *Descripción:* ${r.description}\n` : ''}${r.name ? `💙 *Autor:* ${r.name}\n` : ''}${r.username ? `🌱 *Usuario:* ${r.username}\n` : ''}${r.followers ? `💙 *Seguidores:* ${r.followers}\n` : ''}${r.likes ? `🌱 *Likes:* ${r.likes}\n` : ''}${r.created_at ? `💙 *Fecha:* ${r.created_at}\n` : ''}
-💙 *HATSUNE MIKU BOT* 💙` }))
+${r.title ? `🧡 *Título:* ${r.title}\n` : ''}${r.description ? 🏵️ *Descripción:* ${r.description}\n` : ''}${r.name ? `🧡 *Autor:* ${r.name}\n` : ''}${r.username ? 🏵️ *Usuario:* ${r.username}\n` : ''}${r.followers ? `🧡 *Seguidores:* ${r.followers}\n` : ''}${r.likes ? 🏵️ *Likes:* ${r.likes}\n` : ''}${r.created_at ? `🧡 *Fecha:* ${r.created_at}\n` : ''}
+🧡 *KITAGAWA BOT* 🧡` }))
         await client.sendAlbumMessage(m.chat, medias, { quoted: m })
         await m.react('✅')
       }
     } catch (e) {
       await m.react('❌')
-      await m.reply(`💙 *ERROR* 💙
+      await m.reply(`🧡 *ERROR* 🧡
 
-💙 Ocurrió un error al ejecutar *${usedPrefix + command}*
+🧡 Ocurrió un error al ejecutar *${usedPrefix + command}*
 
 🌱 *Error:* ${e.message}
 
-💙 Inténtalo de nuevo o contacta soporte.`)
+🧡 Inténtalo de nuevo o contacta soporte.`)
     }
   }
 }
